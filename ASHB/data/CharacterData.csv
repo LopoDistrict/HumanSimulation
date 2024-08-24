@@ -1,2 +1,2 @@
-id,age,genealogy,health,happiness,stress,mentalHealth,desire,loneliness,boredom,anger,hygiene
-7tecjpz5z2n,0,X,150,80,12,100,0,7,25,10,100
+id,age,health,happiness,stress,mentalHealth,desire,loneliness,boredom,anger,hygiene,sex,bday,couple
+2ewvai19,0,150,80,12,100,0,7,25,10,100,M,0,no

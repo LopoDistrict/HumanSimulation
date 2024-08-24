@@ -24,7 +24,7 @@ def calcul_bohneur(c, v):
 v= 80
 b = []
 for i in range(100):
-    v = calcul_bohneur(0, v)
+    v = calcul_bohneur(10, v)
     b.append(v)
 
 print(b)
