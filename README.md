@@ -1,5 +1,8 @@
 # HumanSimulation
 /!\ This project is under Construction /!\  
+About this project I had a lot of ideas i count putting them to the github readme file
+but for now there's a lot to do like: reinforcment intelligence, syncing with a clock the c++ and the python, creating emotions and actions for entity
+I added a lot of new features to the projet, when I will finish debugging the main part, I will put a clear repo + instruction help and more.
 
 # Main idea
 The main idea is to create a simulation of humans and population.
