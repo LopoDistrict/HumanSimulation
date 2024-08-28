@@ -75,7 +75,7 @@ def randmId():
 
 
 
-"""
+
 def create_new_character(x, y):
     print(type(x))
     print(type(y))
@@ -94,3 +94,53 @@ try:
 except Exception as e:
     print('there was an error in moving all the entities')
     print( e)
+
+
+def get_model(id, line):
+    path = "../../data/memory/model/" + id + ".dmem"    
+    result = ""
+    with open(path) as file:
+        return file.readlines()[line]
+
+def get_line_equivalent(id, line):
+    lineFile = str(get_model(id, line))
+    path = "../../data/memory/model/" + id + ".dmem"
+    value = ""    
+    for i in lineFile:
+        if i == "=":
+            return value
+        value += i
+    
+def get_value(id, line):
+    value = get_line_equivalent(id, line)
+    model = get_model(id, line)
+    return model[len(value)+1:] 
+
+print(get_model('0kfpdq75', 1))
+print(get_line_equivalent('0kfpdq75', 1))
+print(get_value('0kfpdq75', 1))     
+"""
+
+def get_value_char(id, ind, path):
+    with open(path) as file:
+        result = ""
+        for line in file:
+            if id in line:
+                return line.split(',')[ind]
+        
+#print(get_value_char("0kfpdq75", 2, "../data/TempChar.csv"))
+
+
+def modify_model_mov(id, path, value, l):
+    with open(path, 'r') as file:
+        lines = file.readlines()
+        
+        lines[l] = value + '\n'
+        with open(path, "w") as filew:
+            filew.writelines(lines)
+        
+        #filew.write(file.readlines()[l])
+
+
+modify_model_mov('0kfpdq75',  "../data/memory/model/0kfpdq75"  + ".dmem", "mvt=NE15" , 2)
+        

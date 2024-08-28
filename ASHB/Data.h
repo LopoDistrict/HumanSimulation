@@ -13,6 +13,7 @@
 
 
 
+
 class Data {
 public:
     Data(); 
@@ -20,8 +21,8 @@ public:
     std::string randmId();
     void start_desire(const std::string& id);
     void solitude(const std::string& id);
-    int get_index(const std::string& id, std::string path="./data/CharacterData.csv");
-    std::string get_value_char(const std::string& id, int value_ind, std::string path="./data/CharacterData.csv");
+    int get_index(const std::string& id, std::string path = "./data/CharacterData.csv");
+    std::string get_value_char(const std::string& id, int value_ind, std::string path = "./data/CharacterData.csv");
     std::vector<std::vector<float>> eval(const std::string& str);
     void bonheur(const std::string& id, float constant);
     bool age_update(const std::string& id, int day);
@@ -32,7 +33,7 @@ public:
     std::string get_model(const std::string& id, int line);
     bool disease(const std::string& id);
     void mentalhealth(const std::string& id, float constant);
-    void update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path="./data/CharacterData.csv");
+    void update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path = "./data/CharacterData.csv");
     void Hygiene(const std::string& id);
     std::string get_position(const std::string& id, int value_ind);
     bool procreation(const std::string& id);
@@ -40,7 +41,7 @@ public:
     void modify_desire(const std::string& idA, const std::string& idB, const std::string& constant);
     std::string get_desire_couple(const std::string& idA, const std::string& idB);
     std::string get_desire_single(const std::string& idA, const std::string& idB);
-    void desire(const std::string& id, float constant, bool alr=false);
+    void desire(const std::string& id, float constant, bool alr = false);
     std::vector<std::string> get_couple_list(const std::string& id);
     
     std::string get_couple(const std::string& id);

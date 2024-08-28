@@ -10,6 +10,7 @@
 #include "calculation_software/movement.h"
 #include <string_view>
 #include "calculation_software/reinforcement_intelligence/model.h"
+#include "calculation_software/calculation.h"
 
 
 //faire en sorte d'inclure le mental health
@@ -95,7 +96,7 @@
         int tick; //on doit definir tick ou doit etre def par l'user
         int day = 0;
         Data obj; // Create an object of Data
-        movement mov_obj;
+        //movement mov_obj;
         model mod_obj;
         std::string time_selection = "play";
         while(true){   
@@ -125,14 +126,14 @@
                     //pas de couple ici
                 }else{
                     std::string idB = obj.get_couple(row[0]);
+                    std::vector<std::string> couples_list;
                     if (obj.point(row[0]) != "not"){
                         //ici row[0] = id, cherche a créer un couple avec une
                         //autre personne
                         obj.modify_desire(row[0], idB, std::to_string(-num_generator(2, 9)));
                         hap_const = -num_generator(2, 9);
-                    }
-                    std::vector couples_list;
-                    else if (obj.get_couple_list(row[0]).size() > 1){
+                    
+                        }else if (obj.get_couple_list(row[0]).size() > 1){
                         couples_list = obj.get_couple_list(row[0]);
                         //ici row[0] a plus d'un couple, don il/elle a trompé
                         for (int i=0; i<couples_list.size(); i++){
@@ -152,8 +153,7 @@
 
                 //movement
                 
-                mov_obj.single_char_movement(row[0]);
-                
+                single_char_movement(row[0]);
                 
                 
 
@@ -223,8 +223,6 @@
 
  
 int main() {
-    Data obj; 
-    // Your code here
     main_loop();
     return 0;
 }

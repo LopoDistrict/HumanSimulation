@@ -10,6 +10,10 @@
 #include "Data.h"
 
 
+Data::Data() {
+    // Initialize any members if needed
+}
+
 
 // ne pas oublier de creer une lib pour tout ce qui est de roll
 // random etc
@@ -134,8 +138,8 @@ void eraseFileLine(std::string path, std::string eraseLine) {
             std::string tree_parent = "TreeNode('X', TreeNode([" + idA + ", " + idB + "], []))";
             std::ofstream file_gen("./data/memory/gen.mem", std::ios::app);  // Use double quotes for string literals
             file_gen << tree_parent << std::endl;
-            desire(idA, + 4.0, true);
-            desire(idB, + 4.0, true);
+            desire(idA, 4.0, true);
+            desire(idB, 4.0, true);
             bonheur(idA, 8.0);  // Note: Changed from bohneur to bonheur
             bonheur(idB, 8.0);
             std::cout << "new couple" << idA << "  " << idB << std::endl;
@@ -238,7 +242,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
     return "";
 }
 
-    void Data::desire(const std::string& id,float constant ,bool alr=false ){
+    void Data::desire(const std::string& id, float constant, bool alr){
         //alr: si deja un couple -> n'a pas besoin de tester si doit
         //start_couple
         std::string idB = point(id);
@@ -249,11 +253,11 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                 //le desire a marché donc on start un couple
                 start_couple(id, idB);
             } else {
-                modify_desire(id, idB, sum_desire/4);
+                modify_desire(id, idB, std::to_string(sum_desire/4));
                 //ici le test n'as pas marché mais on continue d'augmenter le desir
             }
         }
-        modify_desire(id, idB, num_generator(1, 4) + constant);
+        modify_desire(id, idB, std::to_string(num_generator(1, 4) + constant));
         //bonheur peut faire baisser un desir
 
     }
@@ -287,6 +291,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 
     void Data::solitude(const std::string& id) {
         // Update solitude stats in the file based on presence
+        std::cout << "tool function definition: Data::solitude" << std::endl;
         std::ifstream mailleFile("./data/temp/presence.asb");
         if (!mailleFile.is_open()) {
             std::cerr << "Error opening file." << std::endl;
@@ -335,7 +340,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         float old_s = stof(get_value_char(id, 6));
         
         if (old_s >= 50 && not alr){
-            double Fdesire(std::string id, bool alr = false) {
+            double (std::string id, bool alr = false) {
             std::ifstream pointer("./data/memory/couple.mem");
             std::string line;
             while (std::getline(pointer, line)) {
@@ -368,7 +373,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
    }
 */
 
-   int Data::get_index(const std::string& id, std::string path="./data/CharacterData.csv") {
+   int Data::get_index(const std::string& id, std::string path) {
         std::cout << "tool function definition: get_index" << std::endl;
         std::cout << id << std::endl;
         std::ifstream file(path);
@@ -391,11 +396,11 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         return -1;
     }
 
-    std::string Data::get_value_char(const std::string& id, int value_ind, std::string path="./data/CharacterData.csv") {
+    std::string Data::get_value_char(const std::string& id, int value_ind, std::string path) {
         std::cout << "tool function definition: get_value_char" << std::endl;
         std::cout << id << std::endl;
         std::cout << value_ind << std::endl;
-        std::ifstream file("./data/CharacterData.csv");
+        std::ifstream file(path);
         std::string line;
         while (getline(file, line)) {
             std::vector<std::string> row;
@@ -412,26 +417,58 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         return "Error: bad id/value";
     }
 
-        std::string Data::get_position(const std::string& id, int value_ind) {
-        std::cout << "tool function definition: get_position" << std::endl;
-        std::cout << id << std::endl;
-        std::cout << value_ind << std::endl;
-        std::ifstream file("./data/TempChar.csv");
-        std::string line;
-        while (getline(file, line)) {
-            std::vector<std::string> row;
-            std::string word;
-            std::stringstream ss(line);
-            while (std::getline(ss, word, ',')) {
-                row.push_back(word);
+/*
+std::string get_value_char(const std::string& id, int ind, const std::string& path) {
+    std::ifstream file(path);
+    std::string result;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        if (line.find(id) != std::string::npos) {
+            size_t pos = 0;
+            int count = 0;
+            while ((pos = line.find(',')) != std::string::npos) {
+                if (count == ind) {
+                    return line.substr(0, pos);
+                }
+                line.erase(0, pos + 1);
+                count++;
             }
-            if (row[0] == id) {
-                std::cout << row[value_ind] << std::endl;
-                return row[value_ind];
+            if (count == ind) {
+                return line; // return the last element if it's the one we want
             }
         }
-        return "Error: bad id/value";
     }
+    return ""; // return empty string if not found
+}
+*/
+    std::string Data::get_position(const std::string& id, int value_ind) {
+    std::ifstream file("./data/TempChar.csv");
+    
+    //if (!file.is_open()) {
+    //    return "Error: could not open file";
+    //}
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
+        std::vector<std::string> row;
+        
+        while (std::getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }
+
+        if (row[0] == id) {
+            file.clear();  // clear the error state of the stream
+            file.seekg(0); // reset the file pointer to the beginning
+            return row[value_ind];
+        }
+    }
+
+    return "Error: bad id/value";
+}
+
 
     // Function to evaluate a string and return a vector of vector of floats
     std::vector<std::vector<float>> Data::eval(const std::string& str) {
@@ -580,10 +617,10 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
     std::vector<std::string> result;
 
     // Check if the file is open
-    if (!file.is_open()) {
-        std::cerr << "Error opening the file!" << std::endl;
-        return {};
-    }
+    //if (!file.is_open() && !file) {
+    //    std::cerr << "Error opening the file!" << std::endl;
+    //    return {};
+    //}
 
     // Read each line from the file
     while (std::getline(file, line)) {
@@ -674,7 +711,7 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
     }
 
 
-    void Data::update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path="./data/CharacterData.csv") {
+    void Data::update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path) {
         std::cout << "tool function definition: update_csv_cell" << std::endl;
         std::cout << row_index << std::endl;
         std::cout << col_index << std::endl;
