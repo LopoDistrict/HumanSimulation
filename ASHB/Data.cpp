@@ -9,6 +9,12 @@
 #include <algorithm>
 #include "Data.h"
 
+//get_value_char + update_csv + get_index
+//nv argu = path -> càd que nous devons changer
+//dans ce fichier tout les appels de fonctions liées à ces trois méthodes en 
+//ajoutant leur path (ou checker si le path est bon car argument constant
+//prédefini -> faire une compilation et un run :)mo )
+
 
 Data::Data() {
     // Initialize any members if needed
