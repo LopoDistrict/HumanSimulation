@@ -8,9 +8,9 @@ I added a lot of new features to the projet, when I will finish debugging the ma
 The main idea is to create a simulation of humans and population.
 Inspired by Conway's Game of Life, I'm trying to make an artificial simulation of all the behaviors a human (character) can have in a population.
 
-# Exemple of 3d rendering of all entities of the simulation
 
-[![3D Entity Rendering](https://github.com/LopoDistrict/HumanSimulation/blob/main/preview.PNG)](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/2024-08-31%2000-33-22.mp4)
+# Exemple of 3D entity rendering using OpenGL
+https://github.com/user-attachments/assets/28e5fc58-88b2-4121-bd8d-0b422cd757c0
 
 
 
