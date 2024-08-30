@@ -10,7 +10,7 @@ Inspired by Conway's Game of Life, I'm trying to make an artificial simulation o
 
 # Exemple of 3d rendering of all entities of the simulation
 
-[![Watch the video](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/preview.png)](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/2024-08-31%2000-33-22.mp4)
+[![3D Entity Rendering](https://github.com/LopoDistrict/HumanSimulation/blob/main/preview.PNG)](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/2024-08-31%2000-33-22.mp4)
 
 
 
