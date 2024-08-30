@@ -10,9 +10,9 @@ Inspired by Conway's Game of Life, I'm trying to make an artificial simulation o
 
 # Exemple of 3d rendering of all entities of the simulation
 
-<video width="320" height="240" controls>
-  <source src="2024-08-31 00-33-22.mp4" type="video/mp4">
-</video>
+[![Watch the video](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/preview.png)](https://raw.githubusercontent.com/LopoDistrict/HumanSimulation/blob/main/2024-08-31%2000-33-22.mp4)
+
+
 
 # Detail
 This project is still in beta and most things will be modified in the future. In order to create this simulation 
