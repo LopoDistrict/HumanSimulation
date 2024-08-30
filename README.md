@@ -9,8 +9,9 @@ The main idea is to create a simulation of humans and population.
 Inspired by Conway's Game of Life, I'm trying to make an artificial simulation of all the behaviors a human (character) can have in a population.
 
 # Exemple of 3d rendering of all entities of the simulation
+
 <video width="320" height="240" controls>
-  <source src="3D_rendering" type="video/mp4">
+  <source src="2024-08-31 00-33-22.mp4" type="video/mp4">
 </video>
 
 # Detail
