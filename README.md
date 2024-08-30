@@ -8,6 +8,11 @@ I added a lot of new features to the projet, when I will finish debugging the ma
 The main idea is to create a simulation of humans and population.
 Inspired by Conway's Game of Life, I'm trying to make an artificial simulation of all the behaviors a human (character) can have in a population.
 
+# Exemple of 3d rendering of all entities of the simulation
+<video width="320" height="240" controls>
+  <source src="3D_rendering" type="video/mp4">
+</video>
+
 # Detail
 This project is still in beta and most things will be modified in the future. In order to create this simulation 
 I have taken into account several development factors in 2 categories:
