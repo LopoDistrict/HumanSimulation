@@ -13,7 +13,6 @@
 #include "calculation.h"
 
 //check Data.cpp en tête
-
 //bug: lors de deplacement negatif Ouest sud etc
 //tout la coordonnées devient négatives alors que mov la variable
 //devrait simplement soustraitre la valeur deja presente mais bug 
@@ -304,7 +303,7 @@ void single_char_movement(const std::string& id) {
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv")))),"./data/TempChar.csv");
     }
 }
-
+/*
 int main(int argc, char* argv[]){
     std::cout << "movement.cpp" << std::endl;
     std::string id = argv[1];

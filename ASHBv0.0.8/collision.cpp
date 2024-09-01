@@ -5,21 +5,21 @@
 #include <cmath>
 #include <sstream>
 #include <tuple>
-//#include "collision.h"
+#include "collision.h"
 
-collision::collision{
-    int width = get_simulation_param(0);
-    int height = get_simulation_param(1);
-    std::vector<std::vector<std::vector<int>>> mesh;  // Corrected type
+collision::collision() {  // Corrected constructor definition
+    width = get_simulation_param(0);
+    height = get_simulation_param(1);
+    mesh.resize(height, std::vector<std::vector<int>>(width)); // Initialize mesh with dimensions
 }
-    void collision::tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
-        std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
-        if (file_stream.is_open()) {
-            file_stream << std::get<0>(values) << "," << std::get<1>(values) << "," << std::get<2>(values) << "," << std::get<3>(values) << "\n";
-            file_stream.close();
-        }
-    }
 
+void collision::tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
+    std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
+    if (file_stream.is_open()) {
+        file_stream << std::get<0>(values) << "," << std::get<1>(values) << "," << std::get<2>(values) << "," << std::get<3>(values) << "\n";
+        file_stream.close();
+    }
+}
     void collision::tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
         std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
         if (file_stream.is_open()) {
@@ -119,7 +119,7 @@ collision::collision{
         tempWrite("./data/temp/presence", presence);
     }
 
-
+/*
 int main() {
     collision collision;
     
@@ -128,3 +128,4 @@ int main() {
     
     return 0;
 }
+*/

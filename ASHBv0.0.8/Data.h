@@ -44,6 +44,7 @@ public:
     void desire(const std::string& id, float constant, bool alr = false);
     std::vector<std::string> get_couple_list(const std::string& id);
     float Fbonheur(float c);
+    void write_logs(const std::string& val);
     
     std::string get_couple(const std::string& id);
 };

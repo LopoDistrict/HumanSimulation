@@ -58,6 +58,7 @@ class Cellule{
                 //malade
                 base_hygiene -= 3.35 * (get_neighbour(id).size() * 1.0);
             }else{
+
                 base_hygiene += 2.86;
             }
         update_csv_cell(get_index(id), 10, std::to_string(base_hygiene));
@@ -87,7 +88,7 @@ class Cellule{
 
                     if (get_value_char(current_id, 11) != gender) {
                         // Determine if idA starts desiring idB in its maille
-                        if (roll_random(60, 0, 250)) { // Simplified condition
+                        if (roll_random(20, 0, 310)) { // Simplified condition
                             std::cout << "desire started: " << id << std::endl;
                             std::cout << maille[i][j] << std::endl;
                             // Start a real attraction, so we remember the pointer
@@ -139,7 +140,7 @@ void eraseFileLine(std::string path, std::string eraseLine) {
     void Data::start_couple(const std::string& idA, const std::string& idB) {
         // Combine the values and convert to float
         float average = stof((get_value_char(idA, 1) + get_value_char(idB, 1))) / 2.0;
-        if (average >= 16) {
+        if (average >= 17) { 
             std::string tree_parent = "TreeNode('X', TreeNode([" + idA + ", " + idB + "], []))";
             std::ofstream file_gen("./data/memory/gen.mem", std::ios::app);  // Use double quotes for string literals
             file_gen << tree_parent << std::endl;
@@ -266,6 +267,16 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         //bonheur peut faire baisser un desir
 
     }
+
+    void Data::write_logs(const std::string& val) {
+        std::ofstream logsFile("./data/logs/logs.txt", std::ios::app);
+        if (logsFile.is_open()) {
+            auto now = std::chrono::system_clock::now();
+            std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+            logsFile << "<" << std::ctime(&now_c) << "> " << val << "\n";
+        }
+    }
+
 
 
     bool Data::procreation(const std::string& id){
@@ -589,12 +600,13 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
 
 
-    bool Data::age_update(const std::string& id, int day){
+    bool Data::age_update(const std::string& id, int day){ // 365 jours == trop long
+        // nouvelle année toute les 30 jours (valeurs a faire varier)
         std::cout << id << std::endl;
         std::cout << day << std::endl;
         std::string current_age = get_value_char(id, 12);
         std::cout << current_age << std::endl;
-        if (stoi(current_age) * 365 + stoi(get_value_char(id, 1)) >= stoi(current_age) * 365 + day){
+        if (stoi(current_age) * 365 + stoi(get_value_char(id, 1)) >= stoi(current_age) * 30 + day){
             return true;
         }
         return false;

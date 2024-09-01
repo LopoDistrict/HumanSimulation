@@ -50,7 +50,7 @@ void sample_initVector()
 
     bool roll_random(int tranche, int begin, int end){
         int rolling = num_generator(begin, end);
-        if (rolling < tranche){
+        if (rolling >= tranche){
             return true;
         }return false;
 

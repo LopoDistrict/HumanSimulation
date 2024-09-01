@@ -1,8 +1,0 @@
-<2024-09-01 01:59:16.832955> GUI created char: (400, 400, 410, 410)
-<2024-09-01 01:59:16.832955> new character added 2gqqkg13
-<2024-09-01 01:59:19.476169> Error occured while running clock.exe: terminate called after throwing an instance of 'std::logic_error'
-  what():  basic_string: construction from null is not valid
-terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-01 01:59:24.154676> Error occured while running clock.exe: 

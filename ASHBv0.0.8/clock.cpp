@@ -7,12 +7,12 @@
 #include "calculation_software/rand.h"
 #include <algorithm>
 #include "Data.h"
-#include "calculation_software/movement.h"
+#include "calculation_software/calculation.h"
 #include <string_view>
 #include "calculation_software/reinforcement_intelligence/model.h"
 #include "calculation_software/calculation.h"
 #include <cstdlib>
-//#include "collision.h"
+#include "collision.h"
 
 
 //check la note en tete movement.cpp
@@ -25,6 +25,14 @@
 //actuellement en constant à et n'influe sur aucune stats
 //ligne 113
 //Fait :)
+    void CreateTempPosition(const std::string& id, float x, float y, const std::string& gen) {
+        std::ofstream fileTemp("./data/TempChar.csv", std::ios::app);
+        if (fileTemp.is_open()) {
+            fileTemp << id << "," << x << "," << y << "," << gen << "\n";
+            fileTemp.close();
+        }
+    }
+
         void sickness(const std::string& id){
         
         /*
@@ -149,7 +157,7 @@
                         //ici row[0] = id, cherche a créer un couple avec une
                         //autre personne
                         obj.modify_desire(row[0], idB, std::to_string(-num_generator(2, 9)));
-                        hap_const = -num_generator(5, 16);
+                        hap_const = -num_generator(6, 16);
                     
                         }else if (obj.get_couple_list(row[0]).size() > 1){
                         couples_list = obj.get_couple_list(row[0]);
@@ -159,11 +167,17 @@
                         }
                         //on reduit le desire de tout les couples auquelles row[0] est(-) ou
                         //est entrain de créer (>)  
-                        hap_const = -num_generator(7, 17) -(couples_list.size());
+                        hap_const = -num_generator(5, 16) -(couples_list.size());
 
                     }else{  
+
                         if(obj.procreation(row[0])){
-                            hap_const = num_generator(9, 18);
+                            hap_const = num_generator(13, 24);
+                            CreateTempPosition(obj.randmId, stoi(obj.get_value_char(row[0], 1, "./data/TempChar.csv")) + num_generator(3, 5)
+                            , obj.get_value_char(row[0], 2, "./data/TempChar.csv") + num_generator(3, 5), row[0]);
+                            //pour x,y on recup la position des parents et on lui ajoute qql pixel
+                            //pour gen on recup simplement le parent pour l'instant
+                            // pour recuperer la famille entiere -> prendre le script des arbres 
                         }
                     }             
                 }   
@@ -178,7 +192,7 @@
                 // it need to be the absolute path to folder calculation software
                 //unless it movement.cpp will not work => all movement
 
-                std::string comm_str = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement3.exe " + row[0];
+                std::string comm_str = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement5.exe " + row[0];                
                 //Change this value    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 //
                 std::cout << comm_str << std::endl;
@@ -192,12 +206,12 @@
                     std::cout << "entity is sick" << std::endl;
                     
                     if (stoi(obj.get_value_char(row[0], 2)) <= 65){
-                        obj.bonheur(row[0], -num_generator(3, 6) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
+                        obj.bonheur(row[0], -num_generator(3, 7) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
                     }else{
-                        obj.bonheur(row[0], -num_generator(2, 3) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
+                        obj.bonheur(row[0], -num_generator(3, 4) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
                     }                    
                 }else{
-                    obj.bonheur(row[0], num_generator(5, 11) + hap_const);
+                    obj.bonheur(row[0], num_generator(6, 12) + hap_const);
                 }
                  
 
@@ -210,27 +224,40 @@
 
                     //stress depend du bonheur
                     if (stoi(obj.get_value_char(row[0],3)) <= 40){
-                         obj.stress(row[0], 5 + stoi(obj.get_value_char(row[0],3))/10);
+                         obj.stress(row[0], num_generator(2,6) + stoi(obj.get_value_char(row[0],3))/10);
                     } else{
-                        obj.stress(row[0], 5 + stoi(obj.get_value_char(row[0],3))/15);
+                        obj.stress(row[0], num_generator(2,6) + stoi(obj.get_value_char(row[0],3))/15);
                     }
                 }else{
                      obj.stress(row[0], - (99 - stoi(obj.get_value_char(row[0], 6)))/10);
                 }
+                
+                
+                //quand l'hygiene est bas la vie baisse
+
+                if ( stoi(obj.get_value_char(row[0],10)) <= 30 ){
+                    obj.health(row[0], -num_generator(4,9));
+
+                } else if ( stoi(obj.get_value_char(row[0],10)) <= 0){
+                    obj.health(row[0], -num_generator(7,13));
+                }
+                
 
 
                 
                 if (obj.disease(row[0]) == true){ 
-                    std::cout << "this character: " << row[0] << "is now sick" << std::endl;
+                    obj.write_logs("this character: "+ row[0] +"is now sick")
+                    //std::cout << "this character: " << row[0] << "is now sick" << std::endl;
                     sickness(row[0]);
                 }
                 if(stoi(obj.get_value_char(row[0], 7)) >= 25){
-                    obj.mentalhealth(row[0], -num_generator(1, 3));
+                    obj.mentalhealth(row[0], -num_generator(1, 5));
                 }else if (stoi(obj.get_value_char(row[0], 7)) >= 50){
-                    obj.mentalhealth(row[0], -num_generator(3,5));
+                    obj.mentalhealth(row[0], -num_generator(3 ,8));
                 }else if (stoi(obj.get_value_char(row[0], 7)) >= 70){
-                    obj.mentalhealth(row[0], -num_generator(4, 11));
+                    obj.mentalhealth(row[0], -num_generator(4, 12));
                 }
+
 
 
                 
@@ -238,11 +265,11 @@
                 obj.solitude(row[0]);
                 obj.Hygiene(row[0]);
 
-                //collision coll_obj;
-                //coll_obj.presence();
+                collision collision;
+                collision.presence();
 
                 //if(obj.procreation(row[0]) == true){
-                    //procreation reussi
+              //procreation reussi
                 //}
 
                 //faire les émotions après
@@ -260,10 +287,8 @@
     }
 
  
-int main() {
-    
-        main_loop();
-    
+int main() {    
+        main_loop();    
     
     return 0;
 }
