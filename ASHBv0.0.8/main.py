@@ -9,10 +9,13 @@ import datetime
 import time
 import subprocess 
 from data_ui_manager import *
-from sync_clock import *
+#from sync_clock import *
 import shutil
-#def settings():
+import threading
+from multiprocessing import Process
 
+
+#tout est un bon sauf que le mouvement ne s'update pas sur le GUI a corrigé
 
 
 
@@ -24,13 +27,19 @@ def begin_param():
     time.sleep(1)
     print('loading parameters')
     time.sleep(1)
+
     print('tropical (hot), arid (hot+dry), oceanic (fresh), continental (cold + freezing)')
-    climateCondition = input('Climate Condition: ')
+
+    climateCondition = input('Climate Condition : ')
+
+    while climateCondition not in ['tropical', 'arid', 'oceanic', 'continental']:
+        print('tropical (hot), arid (hot+dry), oceanic (fresh), continental (cold + freezing)')
+        climateCondition = input('Climate Condition (respect the proposition): ')
     
     # tropical (hot), arid (hot+dry), oceanic (fresh), continental (cold + freezing)
 
     
-    print('v0.0.6-ASHB Build test')
+    print('v0.0.8-ASHB Build test')
     print(Fore.GREEN + "loading into the simulation...")
     print(' ')
     print('Parameters')
@@ -51,6 +60,7 @@ def begin_param():
      './Data.h', './clock.cpp','./calculation_software/reinforcment_intelligence/model.h', './calculation_software/reinforcment_intelligence/model.cpp',
       './data/logs/logs.txt', './prog_clock.exe', ''
      )
+
     #assert type(height) == "<class 'int'>" and type(width) == "<class 'int'>", "Enter 2 int please."
     #besoin de
     print(' ')
@@ -96,8 +106,9 @@ def begin_param():
     csvwriter2.writerow(['id', 'xposition', 'yposition', 'gen'])
 
     print("calculating the mesh") 
+    
     try: 
-        result = subprocess.run(["./collision.exe"], check=True, capture_output=True, text=True) 
+        result = subprocess.run(["./temp.exe"], check=True, capture_output=True, text=True) 
         print("Output:", result.stdout)  # Print standard output 
         print("Errors:", result.stderr)    # Print standard error (if any) 
         print("calculation finished sucessfully")
@@ -121,7 +132,8 @@ def begin_param():
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
     
-    
+    file_logs = open("./data/logs/logs.txt", "w")
+    file_logs.close()
     file.close()
     genFile.close()
     char.close()    
@@ -134,11 +146,14 @@ def begin_param():
 class Simulation(tk.Tk):
     def __init__(self, height, width, color):
         super().__init__()
-        self.title("DebugVersion0.0.7")
+        self.title("DebugVersion0.0.8")
         self.resizable(False, False)
         
         self.day = 0
         self.time = 1 
+        
+        
+        
         #0.5: slow, 1: normal, 2: fast, 4: fast_forward
         #8: ultra fast
         #gerer avec clock.py
@@ -149,31 +164,44 @@ class Simulation(tk.Tk):
         
         # Bind the configure event to the create_grid method
         self.bind('<Configure>', self.create_grid)
-        self.edit()
+
+        subprocess.Popen(['python', 'sync_clock.py']) #remove shell=true 
+        
+
+        input_thread = threading.Thread(target=self.edit)
+        input_thread.daemon = True  # Daemonize thread
+        input_thread.start()
+        self.start_background_task()
+        
+
+        #thread = threading.Thread(target=self.movement)
+        #thread.daemon = True  # This allows the thread to exit when the main program does
+        #thread.start()
+        
         
         # Example of creating a new character (rectangle)
         #self.bind('<Button-1>', self.create_new_character(40, 40))
         #self.bind('<Button-1>', self.create_new_character(60, 40))
         #self.bind('<Button-1>', self.create_new_character(40, 60))
-        self.canvas.create_oval(height/2, width/2, height/2+5, width/2+5, fill="red", outline="red")
+        #self.canvas.create_oval(height/2, width/2, height/2+5, width/2+5, fill="red", outline="red")
         #center point
+        #self.setup(self.edit, self.start_clock)
 
 
-    def create_new_character(self,posx, posy, event=None):
+    def create_new_character(self,posx, posy, cmd, event=None):
         try:
             self.canvas.create_oval(posx, posy, posx+10, posy+10, fill="white", outline="red")
-            print("[", Fore.GREEN + "+","] ", "Character artifiaclly created sucessfully")
-            write_logs(f"GUI created char: {posx, posy, posx+10, posy+10}")
+            if cmd == True:
+                print("[", Fore.GREEN + "+","] ", "Character artifiaclly created sucessfully")
+                write_logs(f"GUI created char: {posx, posy, posx+10, posy+10}")
         
         except:
             print(Fore.RED + 'Error', ': Artificial char. creation failed')
     
-
-
-    def mainloop(self):
-        start_clock(1)
-        #on commence tjr avec un tick de 1, a part changement des param de base
-
+    def start_background_task(self):
+        thread = threading.Thread(target=self.movement)
+        thread.daemon = True  # Daemonize thread to exit when main program exits
+        thread.start()
 
     def randmId(self):
         letters = "abcdefghijklmnopqrstuvwxyz"
@@ -188,24 +216,26 @@ class Simulation(tk.Tk):
 
 
  
-    def movement(self):
+    def movement(self):         
         #pour l'instant je n'ai pas de solution viable 
         #pour faire en sorte de bouger toute les entités
         #donc nous sommes obligés de tous les enlever et lrécupérer le fichier modifié
         #pour les replacés
-        self.canvas.delete('all') 
-        self.create_grid()
-        try:
-            with open("data/TempChar.csv", "r") as file:
-                file_get_pos = csv.reader(file)
-                next(file_get_pos)
-                for line in file_get_pos:
-                    self.create_new_character(int(line[1])+10, int(line[2])+10)
-            print("[", Fore.GREEN + "+","]",'all entity was moved sucessfully')
+        while True:
+            time.sleep(4)
+            self.canvas.delete('all') 
+            self.create_grid()
+            try:
+                with open("data/TempChar.csv", "r") as file:
+                    file_get_pos = csv.reader(file)
+                    next(file_get_pos)
+                    for line in file_get_pos:
+                        self.create_new_character(int(line[1])+10, int(line[2])+10, False)
+                #print("[", Fore.GREEN + "+","]",'all entity was moved sucessfully') debbug
 
-        except Exception as e:
-            print('there was an error in moving all the entities')
-            print(Fore.RED + 'Error: ', e)
+            except Exception as e:
+                #print('there was an error in moving all the entities')
+                print(Fore.RED + 'Error: ', e)
 
 
     def CreateCharStasts(self, id, values=None):
@@ -253,10 +283,6 @@ class Simulation(tk.Tk):
         
 
 
-    def time(self):
-        self.day += self.time
-
-
     def get_info_Id(self, id):
         csv_file = csv.reader(open('./data/CharacterData.csv', "r"), delimiter=",")
         for row in csv_file:
@@ -302,11 +328,24 @@ class Simulation(tk.Tk):
 
     def delete_grid(self, event=None):
         self.canvas.delete('grid_line')  # Will only remove the grid_line
+
+    
+    def runInParallel(*fns):
+        proc = []
+        for fn in fns:
+            p = Process(target=fn)
+            p.start()
+            proc.append(p)
+        for p in proc:
+            p.join()
+
+        runInParallel(func1, func2)
+
     
 
-
-    def edit(self):
-        while 1:
+    def edit(self):     
+        
+        while 1:            
             command = input('>')
             if command == 'nc' or command == "newcharacter":
                 #creation d'un nouveau char artificiellement
@@ -315,7 +354,7 @@ class Simulation(tk.Tk):
                 if x < 0 or x > self.canvas.winfo_width() or y < 0 or y > self.canvas.winfo_height():
                     print(Fore.RED + "Error",": Out of Bounds -> x in ", (0, self.canvas.winfo_width()), "y in", (0, self.canvas.winfo_height()))
                 else:
-                    self.create_new_character(x, y)
+                    self.create_new_character(x, y, True)
                     id = self.randmId()
                     self.CreateTempPosition(id, x, y, 'x')
                     self.CreateCharStasts(id)
@@ -333,7 +372,7 @@ class Simulation(tk.Tk):
                     self.get_info_Id(id)
 
             elif command == 'mvt' : #debug
-                self.movement()
+                self.movement(4)
 
                 
             elif command == "exit":

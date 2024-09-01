@@ -4,7 +4,7 @@ import csv
 
 
 
-class 4:
+class Collision:
     def __init__(self, height, width):
         self.height = height
         self.width = width
@@ -99,6 +99,6 @@ class 4:
 
 
 if __name__ == "__main__":
-    l = Collision(400, 400)
-    l.separate()
+    l = Collision(800, 800)
+    
     l.presence()

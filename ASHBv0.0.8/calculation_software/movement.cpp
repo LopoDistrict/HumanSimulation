@@ -197,19 +197,19 @@ void single_char_movement(const std::string& id) {
     std::string dir = "";
 
     if (age <= 35) {
-        mov += num_generator(5, 40);
+        mov += num_generator(9, 23);
     } else if (age <= 65) {
-        mov += num_generator(3, 25);
+        mov += num_generator(9, 15);
     } else {
-        mov += num_generator(1, 13);
+        mov += num_generator(4, 8);
     }
 
     if (climate == "tropical") {
-        mov -= num_generator(0, 2);
+        mov -= num_generator(1, 4);
     } else if (climate == "arid") {
-        mov -= num_generator(2, 4);
+        mov -= num_generator(3, 8);
     } else if (climate == "continental") {
-        mov -= num_generator(1, 3);
+        mov -= num_generator(3, 6);
     }
 
     std::cout << "error -3" << std::endl;
@@ -230,7 +230,7 @@ void single_char_movement(const std::string& id) {
             std::cout << "error -3 ap get_value(id, 2)" << std::endl;
         }
         std::cout << "error -3 av" << std::endl;
-        mov += num_generator(3, 18);
+        mov += num_generator(5, 11);
         std::cout << "error -3 ap" << std::endl;
     std::cout << "error -2" << std::endl;
     } else {
@@ -242,7 +242,7 @@ void single_char_movement(const std::string& id) {
             dir = get_random_direction();
             std::cout << "dir4: " << dir << std::endl;
         }
-        mov += num_generator(1, 9);
+        mov += num_generator(3, 8);
     }
     std::cout << "error -1" << std::endl;
 
@@ -312,7 +312,7 @@ int main(int argc, char* argv[]){
     std::cout << "id" << id<< std::endl;
     single_char_movement(id);
 }
-
+// main a enlever quand compile collision.cpp
 
 
 /*

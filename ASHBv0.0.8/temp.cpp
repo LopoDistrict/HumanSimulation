@@ -5,14 +5,16 @@
 #include <cmath>
 #include <sstream>
 #include <tuple>
-//#include "collision.h"
 
-collision::collision{
+
+
+class MyClass {
+public:
     int width = get_simulation_param(0);
     int height = get_simulation_param(1);
     std::vector<std::vector<std::vector<int>>> mesh;  // Corrected type
-}
-    void collision::tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
+
+    void tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
         std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
         if (file_stream.is_open()) {
             file_stream << std::get<0>(values) << "," << std::get<1>(values) << "," << std::get<2>(values) << "," << std::get<3>(values) << "\n";
@@ -20,7 +22,7 @@ collision::collision{
         }
     }
 
-    void collision::tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
+    void tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
         std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
         if (file_stream.is_open()) {
             for (const auto& row : presence) {
@@ -33,7 +35,7 @@ collision::collision{
         }
     }
 
-    int collision::get_simulation_param(int line) {
+    int get_simulation_param(int line) {
         std::cout << "Tool function definition: get_simulation_param" << std::endl;
         std::cout << line << std::endl;
 
@@ -52,7 +54,7 @@ collision::collision{
     }
 
 
-    void collision::separate() {
+    void separate() {
         const std::string fileObj = "./data/temp/tempSeparation.asb";
         std::ofstream flux(fileObj.c_str());
         if (flux) {
@@ -81,7 +83,7 @@ collision::collision{
         }
     }
 
-    void collision::presence() {
+    void presence() {
         int num = 0; // Keeps track of the number of people in a mesh
         std::vector<std::vector<std::string>> presence;
         std::vector<std::string> tempChar;
@@ -118,13 +120,13 @@ collision::collision{
         csv_file.close();
         tempWrite("./data/temp/presence", presence);
     }
-
+};
 
 int main() {
-    collision collision;
+    MyClass myClass;
     
-    collision.separate();
-    collision.presence();
+    myClass.separate();
+    myClass.presence();
     
     return 0;
 }

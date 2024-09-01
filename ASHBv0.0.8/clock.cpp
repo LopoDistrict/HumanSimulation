@@ -12,6 +12,7 @@
 #include "calculation_software/reinforcement_intelligence/model.h"
 #include "calculation_software/calculation.h"
 #include <cstdlib>
+//#include "collision.h"
 
 
 //check la note en tete movement.cpp
@@ -135,7 +136,7 @@
                 //on doit exporter les fonctions puis les appriquées
                 
 
-                int hap_const = 3;
+                int hap_const = 5;
                 if (obj.get_value_char(row[0], 13) == "no"){ // tente desire
                     obj.start_desire(row[0]);
                     //pas de couple ici
@@ -177,26 +178,26 @@
                 // it need to be the absolute path to folder calculation software
                 //unless it movement.cpp will not work => all movement
 
-                std::string comm_str = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement2.exe " + row[0];
+                std::string comm_str = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement3.exe " + row[0];
                 //Change this value    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 //
                 std::cout << comm_str << std::endl;
                 std::cout << "id supposable" << row[0] << std::endl;
 //
                 int result = system(comm_str.c_str());
-                
+
                 
                 std::cout << "hap const" << hap_const << std::endl;
                 if(is_sick(row[0])){
                     std::cout << "entity is sick" << std::endl;
                     
                     if (stoi(obj.get_value_char(row[0], 2)) <= 65){
-                        obj.bonheur(row[0], -num_generator(2, 6) -stoi(obj.get_value_char(row[0],3))/num_generator(8, 12) + hap_const);
+                        obj.bonheur(row[0], -num_generator(3, 6) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
                     }else{
-                        obj.bonheur(row[0], -num_generator(1, 2) -stoi(obj.get_value_char(row[0],3))/num_generator(8, 12) + hap_const);
+                        obj.bonheur(row[0], -num_generator(2, 3) -stoi(obj.get_value_char(row[0],3))/num_generator(9, 12) + hap_const);
                     }                    
                 }else{
-                    obj.bonheur(row[0], num_generator(4, 10) + hap_const);
+                    obj.bonheur(row[0], num_generator(5, 11) + hap_const);
                 }
                  
 
@@ -205,7 +206,7 @@
 
                 
                 if (is_sick(row[0])){
-                    obj.health(row[0], -3.4 - (99 - stoi(obj.get_value_char(row[0], 6)))/10); //vie
+                    obj.health(row[0], -num_generator(2,5) - (99 - stoi(obj.get_value_char(row[0], 6)))/10); //vie
 
                     //stress depend du bonheur
                     if (stoi(obj.get_value_char(row[0],3)) <= 40){
@@ -236,6 +237,9 @@
                 start_infection(row[0]);
                 obj.solitude(row[0]);
                 obj.Hygiene(row[0]);
+
+                //collision coll_obj;
+                //coll_obj.presence();
 
                 //if(obj.procreation(row[0]) == true){
                     //procreation reussi

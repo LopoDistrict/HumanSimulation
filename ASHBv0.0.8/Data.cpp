@@ -87,7 +87,7 @@ class Cellule{
 
                     if (get_value_char(current_id, 11) != gender) {
                         // Determine if idA starts desiring idB in its maille
-                        if (roll_random(40, 0, 200)) { // Simplified condition
+                        if (roll_random(60, 0, 250)) { // Simplified condition
                             std::cout << "desire started: " << id << std::endl;
                             std::cout << maille[i][j] << std::endl;
                             // Start a real attraction, so we remember the pointer
@@ -254,7 +254,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         if (!alr && idB != "not"){
             //le desir est reciproque donc on test si il ont desir haut
             int sum_desire = stoi(get_desire_single(id, idB) + get_desire_single(idB, id));
-            if(roll_random(sum_desire, 80, 200)){
+            if(roll_random(sum_desire, 70, 200)){
                 //le desire a marché donc on start un couple
                 start_couple(id, idB);
             } else {
@@ -515,11 +515,11 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         // le bohneur baisse plus lentement qu'il croit
         
         if (c <= 0){
-            float nv = 0.31 * c;
+            float nv = 0.30 * c;
             std::cout << "calculation.cpp -nv" << nv << std::endl;
             return nv;
         } else{
-            float nv = 0.18 * c;
+            float nv = 0.21 * c;
             std::cout << "calculation.cpp nv" << nv << std::endl;
             return nv;
         }

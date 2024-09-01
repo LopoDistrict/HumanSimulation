@@ -5,6 +5,7 @@ import pyqtgraph as pg
 import pyqtgraph.opengl as gl
 from random import randint
 import csv
+import random
 
 class Graph3D(QtWidgets.QWidget):
     def __init__(self):
@@ -23,7 +24,10 @@ class Graph3D(QtWidgets.QWidget):
         # Set up the 3D graph
         self.graph_items = []
         self.setup_graph()
-        
+    
+
+    def get_rand_color(self):
+        return (random.uniform(0.1, 0.9),random.uniform(0.1, 0.9),random.uniform(0.1, 0.9),random.uniform(0.1, 0.9))
 
     def get_couple(self, id):
         #return l'id pointé
@@ -63,7 +67,7 @@ class Graph3D(QtWidgets.QWidget):
 
         print(visited)
         print(edges)
-        print(np.random.randint(1,8, size=(len(visited), 3)))
+        print(np.random.randint(1,15, size=(len(visited), 3)))
         
         
         pos = np.array(np.random.randint(1,8, size=(len(visited), 3))) #len visited )        
@@ -71,14 +75,14 @@ class Graph3D(QtWidgets.QWidget):
 
         # Add nodes (spheres) to the view
         for p in pos:
-            node = gl.GLScatterPlotItem(pos=np.array([p]), size=8, color=(1, 1, 1, 1))
+            node = gl.GLScatterPlotItem(pos=np.array([p]), size=8, color=(self.get_rand_color()))
             self.view.addItem(node)
             self.graph_items.append(node)
         
         # Add edges (lines) to the view
         #edges = [(0, 1), (0, 2)]
         for edge in edges:
-            line = gl.GLLinePlotItem(pos=pos[list(edge)], color=(1, 1, 1, 1), width=2, antialias=True)
+            line = gl.GLLinePlotItem(pos=pos[list(edge)], color=(self.get_rand_color()), width=2, antialias=True)
             self.view.addItem(line)
             self.graph_items.append(line)
 
