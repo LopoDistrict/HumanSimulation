@@ -25,13 +25,16 @@ def start_clock(tick):
         try: 
             result = subprocess.run(["./clock3.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
+            write_logs(result.stdout)
             #print("Errors:", result.stderr)    # Print standard error (if any) 
             #print("calculation finished sucessfully")
         except subprocess.CalledProcessError as e: 
             #print("An error occurred while running the clock.exe file.") 
             #print("Return Code:", e.returncode) 
-            #print("Output:", e.output) 
+            #print("Output:", e.output)
+            write_logs(e.output) 
             #print("Error Output:", e.stderr)
+            write_logs(e.stderr)
             write_logs(f"Error occured while running clock.exe: {e.stderr}")
         time.sleep(tick)
 

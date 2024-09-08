@@ -22,7 +22,7 @@ std::string get_simulation_param(int line);
 std::string get_majority_direction(const std::string& id);
 std::string get_random_direction();
 bool out_of_border(int speed, int height, int width, int positionX, int positionY);
-void modify_model_mov(const std::string& id, const std::string& path, const std::string& value);
+void modify_model_mov(const std::string& id, const std::string& path, const std::string& value, int l);
 void update_csv_cell_modified(int row_index, int col_index, const std::string& new_value);
 
 

@@ -12,19 +12,80 @@
 #include "calculation_software/reinforcement_intelligence/model.h"
 #include "calculation_software/calculation.h"
 #include <cstdlib>
-#include "collision.h"
+#include <tuple>
+//#include "collision.h"
 
 
 //check la note en tete movement.cpp
 
+void tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
+    std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
+    if (file_stream.is_open()) {
+        file_stream << std::get<0>(values) << "," << std::get<1>(values) << "," << std::get<2>(values) << "," << std::get<3>(values) << "\n";
+        file_stream.close();
+    }
+}
+    void tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
+        std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
+        if (file_stream.is_open()) {
+            for (const auto& row : presence) {
+                for (const auto& cell : row) {
+                    file_stream << cell << " ";
+                }
+                file_stream << "\n";
+            }
+            file_stream.close();
+        }
+    }
 
+void presence() {
+        width = get_simulation_param(0);
+        height = get_simulation_param(1);
+        mesh.resize(height, std::vector<std::vector<int>>(width));
+        int num = 0; // Keeps track of the number of people in a mesh
+        std::vector<std::vector<std::string>> presence;
+        std::vector<std::string> tempChar;
 
+        std::ifstream csv_file("./data/TempChar.csv");
+        std::string line;
+        std::getline(csv_file, line); // Skip the header row
+
+        for (const auto& row : mesh) {
+            for (const auto& cell : row) {
+                csv_file.clear();
+                csv_file.seekg(0, std::ios::beg);
+                std::getline(csv_file, line); // Skip the header row
+                while (std::getline(csv_file, line)) {
+                    std::stringstream ss(line);
+                    std::string cellValue;
+                    std::vector<std::string> csvRow;
+                    while (std::getline(ss, cellValue, ',')) {
+                        csvRow.push_back(cellValue);
+                    }
+                    if (std::stoi(csvRow[1]) >= cell[0] && std::stoi(csvRow[1]) <= cell[1] && std::stoi(csvRow[2]) >= cell[2] && std::stoi(csvRow[2]) <= cell[3]) {
+                        tempChar.push_back(csvRow[0]);
+                        num++;
+                    }
+                }
+                if (tempChar.size() > 1) {
+                    presence.push_back(tempChar);
+                }
+                tempChar.clear();
+                num = 0;
+            }
+        }
+
+        csv_file.close();
+        tempWrite("./data/temp/presence", presence);
+    }
 
 //faire en sorte d'inclure le mental health
 //dans d'autre stats comme consequence est cause
 //actuellement en constant à et n'influe sur aucune stats
 //ligne 113
 //Fait :)
+
+
     void CreateTempPosition(const std::string& id, float x, float y, const std::string& gen) {
         std::ofstream fileTemp("./data/TempChar.csv", std::ios::app);
         if (fileTemp.is_open()) {

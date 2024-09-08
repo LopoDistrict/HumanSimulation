@@ -7,7 +7,7 @@ from colorama import init, Fore, Back, Style
 import os.path
 import datetime
 import time
-import subprocess 
+from subprocess import Popen, CREATE_NEW_CONSOLE
 from data_ui_manager import *
 #from sync_clock import *
 import shutil
@@ -132,34 +132,37 @@ def begin_param():
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
     
+
     file_logs = open("./data/logs/logs.txt", "w")
     file_logs.close()
+    print("[", Fore.GREEN + "+","] ", "Log file created")
+
+    cmd = input("Open a terminal to display logs? (Y/N) ")
+    
     file.close()
     genFile.close()
     char.close()    
-    c = Simulation(width+25, height+25, 'black')
+    c = Simulation(width+25, height+25, 'black', cmd)
     c.mainloop()
     
 
 
 
 class Simulation(tk.Tk):
-    def __init__(self, height, width, color):
+    def __init__(self, *args):
         super().__init__()
         self.title("DebugVersion0.0.8")
         self.resizable(False, False)
         
         self.day = 0
         self.time = 1 
-        
-        
-        
+                        
         #0.5: slow, 1: normal, 2: fast, 4: fast_forward
         #8: ultra fast
         #gerer avec clock.py
         
         # Create a canvas widget
-        self.canvas = tk.Canvas(self, height=height, width=width, bg=color)
+        self.canvas = tk.Canvas(self, height=args[1], width=args[1], bg=args[2])
         self.canvas.pack(fill=tk.BOTH, expand=True)
         
         # Bind the configure event to the create_grid method
@@ -167,7 +170,10 @@ class Simulation(tk.Tk):
 
         subprocess.Popen(['python', 'sync_clock.py']) #remove shell=true 
         
+        if args[3] == "Y" or args[3] == "y":
+            subprocess.Popen(['start', 'cmd', '/k', 'python', 'data/logs_cmd.py'], shell=True) 
 
+        
         input_thread = threading.Thread(target=self.edit)
         input_thread.daemon = True  # Daemonize thread
         input_thread.start()
