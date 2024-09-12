@@ -8,6 +8,7 @@
 #include "calculation_software/rand.h"
 #include <algorithm>
 #include "Data.h"
+#include <chrono>     
 
 //get_value_char + update_csv + get_index
 //nv argu = path -> càd que nous devons changer
@@ -183,6 +184,19 @@ std::string Data::point(const std::string& id) {
     return "not";
 }
 
+std::vector<std::string> Data::get_point_list(const std::string& id) {
+    std::ifstream file("./data/memory/couple.mem");
+    std::string line;
+    std::vector<std::string> point_list;
+    while (std::getline(file, line)) {
+        if (line.substr(0, 8) == id && line[8] == '>') {
+            point_list.push_back(line.substr(9, 8));
+        }
+
+    }
+    return point_list;
+}
+
 std::string Data::get_couple(const std::string& id) {
     std::ifstream file("./data/memory/couple.mem");
     std::string line;
@@ -279,8 +293,10 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 
 
 
-    bool Data::procreation(const std::string& id){
+    bool Data::procreation(const std::string& id, float const_breeding){
         //a finir avec la nv methode de procreation
+        //while prend tout les couples une personnes peut procréer 
+        //plusieurs fois
         std::ifstream couple("./data/memory/couple.mem");
         std::string line;
         while(std::getline(couple, line)){
@@ -289,7 +305,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                 std::string second_id = line.substr(8, 16);
                 if (stoi(get_desire_couple(id, second_id)) + num_generator(0, 25) >= 65){
                     //ils ont un taux de désir assez pour procréer
-                    if (roll_random(140, 0, 200) == true){
+                    if (roll_random(140+const_breeding, 0, 200) == true){
                         //la procreation a reussi
                         desire(id, 7.0, true);
                         return true;
@@ -727,7 +743,7 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
             }    
         }   
         std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;
-        return roll_random(0, 200-multiplicator_contaminated, 400);
+        return roll_random(200-multiplicator_contaminated, 0, 400);
         // a checker pour roll
     }
     

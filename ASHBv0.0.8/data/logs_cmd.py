@@ -13,9 +13,9 @@ def print_logs():
         while True:
             for line in log_file:
                 pass
-            if len(line.strip()) != 0 and line != linemoins:
-                print(line)
-                linemoins = line
+                if len(line.strip()) != 0 and line != linemoins:
+                    print(line)
+                    linemoins = line
 
 if __name__ == "__main__":
     print_logs()

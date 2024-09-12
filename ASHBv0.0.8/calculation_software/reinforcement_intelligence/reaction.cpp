@@ -24,25 +24,115 @@ reaction::reaction(){
 // - non provoquées
 
 //fonction conscientes déclenchées par L'IA
-void murder
-void discrimination //heritage
-void suicide //why not
-void breeding // reproduction peut peut etre augmenter la stats attendu
-void desir // le fait d'avoir du desir avec plusieurs femmes 
+void reaction::get_last_line(const std::string& path) {
+    boost::iostreams::mapped_file mmap("input.txt", boost::iostreams::mapped_file::readonly);
+    const char* f = mmap.const_data();
+    const char* l = f + mmap.size();
+    uintmax_t lineCount = 0;
+
+    while (f && f != l) {
+        if ((f = static_cast<const char*>(memchr(f, '\n', l - f)))) {
+            lineCount++;
+            f++; // Move past the newline character
+        }
+    }
+
+    std::cout << "Total lines: " << lineCount << std::endl;
+    return 0;
+}
+    std::string reaction::get_value_csv(int l, int value_ind, std::string path) {
+        std::cout << "tool function definition: get_value_char" << std::endl;
+        std::cout << id << std::endl;
+        std::cout << value_ind << std::endl;
+        std::ifstream file(path);
+        std::string line;
+        while (getline(file, line)) {
+            std::vector<std::string> row;
+            std::string word;
+            std::stringstream ss(line);
+            while (std::getline(ss, word, ',')) {
+                row.push_back(word);
+            }
+            if (row.size()-1 == l) {
+                std::cout << row[value_ind] << std::endl;
+                return row[value_ind];
+            }
+        }
+        return "Error: bad id/value";
+    }
+
+
+
+void reaction::murder(const std::string& id){
+    //horrible ligne -> s'en occupe plus tard
+    if (data_obj.get_couple(id) != "not"){
+        if(roll_random(75, 0, 100)){
+            //on roll pour savoir si l'entité veut tuer un ament/e
+            data_obj.eraseFileLine("./data/TempChar.csv", data_obj.get_index(data_obj.get_couple(id)));
+            data_obj.eraseFileLine("./data/CharacterData.csv", data_obj.get_index(data_obj.get_couple(id)));
+            std::cout << "Entity: " << data_obj.get_couple(id) << " has been killed by: "<< id << std::endl;
+        }
+    }else if (data_obj.point(id) != "not"){
+        if (roll_random(40, 0, 110)){
+            data_obj.eraseFileLine("./data/TempChar.csv", data_obj.get_index(data_obj.point(id)));
+            data_obj.eraseFileLine("./data/CharacterData.csv", data_obj.get_index(data_obj.point(id)));
+            std::cout << "Entity: " << data_obj.point(id) << " has been killed by: "<< id << std::endl;
+        }
+    }
+    else{
+        std::string killed = data_obj.get_value_csv(num_generator(1, get_last_line("./data/TempChar.csv")));
+        data_obj.eraseFileLine("./data/TempChar.csv", killed);
+        data_obj.eraseFileLine("./data/CharacterData.csv", killed);
+    }
+}
+
+void reaction::suicide(const std::string& id ){
+    data_obj.eraseFileLine("./data/TempChar.csv", id);
+    data_obj.eraseFileLine("./data/CharacterData.csv", id);
+    std::cout << "An entity: " << id << " has commited suicide." << std::endl;
+}
+
+void reaction::desire(const std::string& id){
+    std::vector<std::string> list_couple = data_obj.get_couple_list();
+    std::vector<std::string> list_point = data_obj.get_point_list();
+    for (int i=0; i<list_point.size();i++){
+        modify_desire(id, list_point[i], num_generator(11, 28)); 
+    }
+        for (int j=0; j<list_couple.size();j++){
+        modify_desire(id, list_couple[Ji], num_generator(3, 9)); 
+    }
+
+}
+
+void reaction::breeding(const std::string& id){
+    //on provoque (ou on augmente les chances) la procreation
+     //des entitées encouple avec l'entité désigné
+    data_obj.procreation(id, 20);
+}
+
+
+void discrimination //heritage 
+//a implementer ce week end 
+//void breeding // reproduction peut peut etre augmenter la stats attendu
+//void desire // le fait d'avoir du desir avec plusieurs femmes 
 void isolation // écart a la soupe initial
+
+void discrimination(const std::string& id){
+    
+}
 
 
 //fonction utile pour le fonctionnement de L'IA
-int get_old_stats(const& std::string id, int value){
+int reaction::get_old_stats(const std::string& id, int value){
     //appeler pour garder en mémoire l'ancienne stats pour comparer
     return data_obj.get_value_char(id, value);
 }
 
-std::string get_current_action(const& std::string id){
+std::string reaction::get_current_action(const std::string& id){
     return mod_obj.get_value(id, 6);
 }
 
-float result_RI(const& std::string id, float prec_stats, int ind, int mult_const){
+float reaction::result_RI(const std::string& id, float prec_stats, int ind, int mult_const){
     //le resultat est rendu selon un float de -10 a 10 
     //jugeant si une action/reaction a été efficaces
     float new_stats = stof(data_obj.get_value_char(id, ind));
@@ -51,13 +141,14 @@ float result_RI(const& std::string id, float prec_stats, int ind, int mult_const
     //mult_const = une constante qu'on ajoute pour les stats voulu en ++
 }
 
-bool is_sup_attended(const& std::string id){
+
+bool reaction::is_sup_attended(const std::string& id){
     //check si c'est une action en ++ 
     return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem").substr(2) == "++";
 }
 
 
-void get_value_choosed(const& std::string id){
+void reaction::get_value_choosed(const std::string& id){
 
     if (is_sup_attended()){
         return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem") - "++";
@@ -65,7 +156,8 @@ void get_value_choosed(const& std::string id){
     return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
 }  
 
-void reinforcement_intelligence(const& std::string id){
+
+void reaction::reinforcement_intelligence(const std::string& id){
     //mettre un moyen permettant de ne pas choisir aucune fonction
     //et agir en ne faisant rien de special. C'est a l'entité de choisir ce qu'il veut
     std::string get_action = mod_obj.get_value(id, 6, "../../data/memory/model/" + id + ".dmem");
@@ -93,7 +185,7 @@ void reinforcement_intelligence(const& std::string id){
 //il faudra les prendres en compte et agir avec clock.cpp 
 //ou utiliser une fonction ici qui prend en compte tout les cas et applique
 //les nv stats
-void reaction::Depression(const& std::string id){
+void reaction::Depression(const std::string& id){
     int multiplier = 0;
     if ( data_obj.get_value_char(id, 3) <= 30){
         std::vector<std::string> neigh = data_obj.get_neighbour(id):
@@ -109,7 +201,7 @@ void reaction::Depression(const& std::string id){
     }
 }
 
-void reaction::plain_joy(const& std::string id){
+void reaction::plain_joy(const std::string& id){
     int multiplier = 0;
     std::vector<std::string> neigh = data_obj.get_neighbour(id):
     for (int i=0;i<neigh.size();i++){
@@ -121,7 +213,7 @@ void reaction::plain_joy(const& std::string id){
     }
 }
 
-void reaction::crazyness(const& std::string id){
+void reaction::crazyness(const std::string& id){
     //folie se crée avec la solitude et la baisse de santé mentale
     if(roll_random(25, 0, 200 + 120-data_obj.get_value_char(id, 5) + data_obj.get_value_char(id, 7))){
         mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "unconcious=crazyness");
@@ -129,7 +221,7 @@ void reaction::crazyness(const& std::string id){
 }
 
 // declencher par le stress baisse le bonheur et la vie
-void anxiety(const& std::string id){
+void reaction::anxiety(const std::string& id){
     //anxieté se crée vec le stress et le bonheur en baisse
     if (roll_random(50, 0, 200 + stoi(data_obj.get_value_char(id, 4)) + 100 - stoi(data_obj.get_value_char(id, 3)))){
         mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "unconcious=anxiety");
@@ -137,7 +229,7 @@ void anxiety(const& std::string id){
 
 }
 /*
-void rage(const& std::string id){
+void rage(const std::string& id){
     int multiplier = 0;
 
 }

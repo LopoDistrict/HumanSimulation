@@ -104,11 +104,10 @@ def begin_param():
     print('stats fields: ', fields)    
     csvwriter.writerow(fields)
     csvwriter2.writerow(['id', 'xposition', 'yposition', 'gen'])
-
     print("calculating the mesh") 
     
     try: 
-        result = subprocess.run(["./temp.exe"], check=True, capture_output=True, text=True) 
+        result = subprocess.run(["./collision_deb.exe"]) 
         print("Output:", result.stdout)  # Print standard output 
         print("Errors:", result.stderr)    # Print standard error (if any) 
         print("calculation finished sucessfully")
