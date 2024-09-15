@@ -14,11 +14,11 @@
 //#include "calculation_software/calculation.h"
 #include <cstdlib>
 #include <tuple>
-//#include "collision.h"
+#include "collision.h"
 
 
 //check la note en tete movement.cpp
-
+/*
 void tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
     std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
     if (file_stream.is_open()) {
@@ -38,6 +38,7 @@ void tempWrite(std::string file, const std::tuple<std::string, std::string, std:
             file_stream.close();
         }
     }
+
 
 void presence() {
     
@@ -81,7 +82,7 @@ void presence() {
 
         csv_file.close();
         tempWrite("./data/temp/presence", presence);
-    }
+    }*/
 
 //faire en sorte d'inclure le mental health
 //dans d'autre stats comme consequence est cause
@@ -98,7 +99,7 @@ void presence() {
         }
     }
 
-        void sickness(const std::string& id){
+    void sickness(const std::string& id){
         
         /*
         string line ;
@@ -107,7 +108,7 @@ void presence() {
         std::ofstream model2(std::to_string("data/memory/model") + id + std::to_string(".dmem"));
         model2 << "disease=true" << std::endl;*/
 
-        std::ifstream file(std::string("data/memory/model") + id + std::string(".dmem"));
+        std::ifstream file(std::string("./data/memory/model/") + id + std::string(".dmem"));
         std::vector<std::string> data;
         std::string line;
 
@@ -122,10 +123,11 @@ void presence() {
 
         data[1] = "disease=true\n";
 
-        std::ofstream outFile(std::string("data/memory/model") +id + std::string(".dmem"));
+        std::ofstream outFile(std::string("./data/memory/model/") +id + std::string(".dmem"));
         for (const auto& str : data) {
             outFile << str << std::endl;
         }
+        
         outFile.close();
     }
 
@@ -204,6 +206,9 @@ void main_loop() {
         std::cout << row[0] << std::endl; // Output the first value of the current row
 
         int hap_const = 5;
+        obj.start_desire(row[0]); // on test quand m si on peut start un desire
+        //car de toute facon une entité peut develop des liens avec d'autres
+        //m si il est deja en couple
         if (obj.get_value_char(row[0], 13) == "no") {
             obj.start_desire(row[0]);
         } else {
@@ -226,10 +231,12 @@ void main_loop() {
                 }
             }
         }
-
-        std::string comm_str = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement5.exe " + row[0];
+        
+        std::string comm_str = "C:\\Users\\souno\\Desktop\\code\\ASHB.git\\HumanSimulation\\ASHBv0.0.8\\calculation_software\\movement5.exe " + row[0];
         int result = system(comm_str.c_str());
 
+
+        std::cout << "error point" << std::endl;
         // Additional logic for processing each row
         if (is_sick(row[0])) {
             if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
@@ -240,9 +247,10 @@ void main_loop() {
         } else {
             obj.bonheur(row[0], num_generator(6, 12) + hap_const);
         }
-
+        std::cout << "error point2" << std::endl;
         obj.age_update(row[0], day);
-
+        
+        std::cout << "error point3" << std::endl;
         if (is_sick(row[0])) {
             obj.health(row[0], -num_generator(2, 5) - (99 - stoi(obj.get_value_char(row[0], 6))) / 10);
             if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
@@ -254,16 +262,20 @@ void main_loop() {
             obj.stress(row[0], -(99 - stoi(obj.get_value_char(row[0], 6))) / 10);
         }
 
+
         if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
             obj.health(row[0], -num_generator(4, 9));
         } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
             obj.health(row[0], -num_generator(7, 13));
         }
+        
 
         if (obj.disease(row[0]) == true) {
             obj.write_logs("this character: " + row[0] + " is now sick");
             sickness(row[0]);
         }
+
+        
 
         if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
             obj.mentalhealth(row[0], -num_generator(1, 5));
@@ -272,15 +284,22 @@ void main_loop() {
         } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
             obj.mentalhealth(row[0], -num_generator(4, 12));
         }
+        std::cout << "error point7" << std::endl;
+        
         
 
         
         start_infection(row[0]);
         obj.solitude(row[0]);
         obj.Hygiene(row[0]);
-        std::string coll = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\collision.exe ";
-        int r = system(coll.c_str());
-        //presence();
+        //std::string coll = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\collision.exe ";
+        //int r = system(coll.c_str());
+        collision collision;
+        collision.width =  collision.get_param(0);
+        collision.height = collision.get_param(1);
+    
+        collision.separate();
+        collision.presence();
     }
 
     day += tick;

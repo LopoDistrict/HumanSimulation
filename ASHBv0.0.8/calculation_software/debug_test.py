@@ -144,3 +144,62 @@ def modify_model_mov(id, path, value, l):
 
 modify_model_mov('0kfpdq75',  "../data/memory/model/0kfpdq75"  + ".dmem", "mvt=NE15" , 2)
 """
+import os
+import random
+
+class Data:
+    def get_value_char(self, id, index):
+        # Placeholder for actual implementation
+        pass
+
+    def print_vector(self, vector):
+        for item in vector:
+            print(item)
+
+    def get_index(self, id):
+        # Placeholder for actual implementation
+        pass
+
+    def update_csv_cell(self, index, column, value):
+        # Placeholder for actual implementation
+        pass
+
+def roll_random(chance, min_val, max_val):
+    return random.randint(min_val, max_val) < chance
+
+def num_generator(length, num):
+    return ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=length))
+
+def start_desire(id):
+    obj = Data()
+    gender = obj.get_value_char(id, 11)
+    maille_file_path = "./data/temp/presence.asb"
+    maille = []
+
+    # Read lines from the file into the maille list
+    with open(maille_file_path, 'r') as maille_file:
+        maille = maille_file.readlines()
+
+    obj.print_vector(maille)
+
+    # Check if the id exists in maille
+    for line in maille:
+        if id in line[1:8]:
+            print("true")
+            current_id = line[10:18]
+            print("current_id", current_id)
+
+            if obj.get_value_char(current_id, 11) != gender:
+                if roll_random(20, 0, 300):
+                    print("desire started:", id)
+                    print(line[10:18])
+                    with open("./data/memory/couple.mem", 'a') as mem_file:
+                        mem_file.write(f"{id}>{current_id}{num_generator(2, 7)}\n")
+                    obj.update_csv_cell(obj.get_index(id), 13, "yes")
+
+def main():
+    start_desire("4cdtwa69")
+
+if __name__ == "__main__":
+    main()
+

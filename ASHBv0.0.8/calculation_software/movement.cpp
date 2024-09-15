@@ -30,7 +30,7 @@ void update_csv_cell_modified(int row_index, int col_index, const std::string& n
         std::cout << col_index << std::endl;
         std::cout << new_value << std::endl;
         // Read the CSV file
-        std::ifstream file("../data/TempChar.csv");
+        std::ifstream file("./data/TempChar.csv");
         std::vector<std::vector<std::string>> rows;
         std::string line;
 
@@ -79,6 +79,7 @@ std::string get_simulation_param(int line) {
     std::cout << result << std::endl;
     return result;
 }
+
 
 std::string get_random_direction() {
     std::vector<std::string> main_dir = {"NN", "NE", "EE", "SE", "SS", "SO", "OO", "NO"};
@@ -157,6 +158,7 @@ std::string get_majority_direction(const std::string& id) {
             max = x.second;
         }
     }
+    std::cout << "no error" << std::endl;
     std::string l = major_dir.empty() ? "null" : major_dir;
     std::cout << l << std::endl;
     return major_dir.empty() ? "null" : major_dir;
@@ -178,7 +180,7 @@ void modify_model_mov(const std::string& id, const std::string& path, const std:
 
     std::ofstream filew(path);
     for (const auto& line : lines) {
-        filew << line << std::endl;
+        filew << line ;
     }
     filew.close();
 }
@@ -310,6 +312,7 @@ int main(int argc, char* argv[]){
     //on recupere l'id passer en argument
     std::cout << "id" << id<< std::endl;
     single_char_movement(id);
+    return 0;
 }
 // main a enlever quand compile collision.cpp
 

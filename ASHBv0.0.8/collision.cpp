@@ -5,23 +5,29 @@
 #include <cmath>
 #include <sstream>
 #include <tuple>    
-//#include "collision.h"
+#include "collision.h"
 
+/*
 class collision {
 public:
     int width;
     int height;
     std::vector<std::vector<std::vector<int>>> mesh;  // Corrected type
+*/
+collision::collision(){
+    int width;
+    int height;
+    std::vector<std::vector<std::vector<int>>> mesh; 
+}
 
-
-void tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
+void collision::tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values) {
     std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
     if (file_stream.is_open()) {
         file_stream << std::get<0>(values) << "," << std::get<1>(values) << "," << std::get<2>(values) << "," << std::get<3>(values) << "\n";
         file_stream.close();
     }
 }
-    void tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
+    void collision::tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence) {
         std::ofstream file_stream(file + ".asb", std::ios::out | std::ios::app);
         if (file_stream.is_open()) {
             for (const auto& row : presence) {
@@ -34,7 +40,7 @@ void tempWrite(std::string file, const std::tuple<std::string, std::string, std:
         }
     }
 
-    int get_simulation_param(int line) {
+    int collision::get_param(int line) {
         std::cout << "Tool function definition: get_simulation_param" << std::endl;
         std::cout << line << std::endl;
 
@@ -53,17 +59,17 @@ void tempWrite(std::string file, const std::tuple<std::string, std::string, std:
     }
 
 
-    void separate() {
+    void collision::separate() {
         const std::string fileObj = "./data/temp/tempSeparation.asb";
         std::ofstream flux(fileObj.c_str());
         if (flux) {
-            int heightSliced = round(height / 15.0);
-            int widthSliced = round(width / 15.0);
+            int heightSliced = round(height / 12.0);
+            int widthSliced = round(width / 12.0);
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 12; i++) {
                 int tempHeight = i * heightSliced;
                 std::vector<std::vector<int>> row;
-                for (int j = 0; j < 15; j++) {
+                for (int j = 0; j < 12; j++) {
                     int tempWidth = j * widthSliced;
                     row.push_back({tempHeight, tempHeight + heightSliced, tempWidth, tempWidth + widthSliced});
                 }
@@ -82,46 +88,90 @@ void tempWrite(std::string file, const std::tuple<std::string, std::string, std:
         }
     }
 
-    void presence() {
-        int num = 0; // Keeps track of the number of people in a mesh
-        std::vector<std::vector<std::string>> presence;
-        std::vector<std::string> tempChar;
+    bool collsion::CheckWord(char* filename, char* search){
+    int offset; 
+    string line;
+    ifstream Myfile;
+    Myfile.open (filename);
 
-        std::ifstream csv_file("./data/TempChar.csv");
-        std::string line;
-        std::getline(csv_file, line); // Skip the header row
+    if (Myfile.is_open())
+    {
+        while (!Myfile.eof())
+        {
+            getline(Myfile,line);
+            if ((offset = line.find(search, 0)) != string::npos) 
+            {
+                cout << "found '" << search << "' in '" << line << "'" << endl;
+                Myfile.close();
+                return true;
+            }
+            else
+            {
+                cout << "Not found" << endl;
+            }
+        }
+        Myfile.close();
+    }
+    else
+        cout << "Unable to open this file." << endl;
 
-        for (const auto& row : mesh) {
-            for (const auto& cell : row) {
-                csv_file.clear();
-                csv_file.seekg(0, std::ios::beg);
-                std::getline(csv_file, line); // Skip the header row
-                while (std::getline(csv_file, line)) {
-                    std::stringstream ss(line);
-                    std::string cellValue;
-                    std::vector<std::string> csvRow;
-                    while (std::getline(ss, cellValue, ',')) {
-                        csvRow.push_back(cellValue);
-                    }
-                    if (std::stoi(csvRow[1]) >= cell[0] && std::stoi(csvRow[1]) <= cell[1] && std::stoi(csvRow[2]) >= cell[2] && std::stoi(csvRow[2]) <= cell[3]) {
+    return false;
+}
+void collision::presence() {
+    int num = 0; // Keeps track of the number of people in a mesh
+    std::vector<std::vector<std::string>> presence;
+    std::vector<std::string> tempChar;
+
+    // Step 1: Read existing entries from the CSV file into a set
+    std::unordered_set<std::string> existingEntries;
+    std::ifstream csv_file("./data/presence.csv");
+    std::string line;
+    while (std::getline(csv_file, line)) {
+        existingEntries.insert(line); // Assuming each line is a unique identifier
+    }
+    csv_file.close();
+
+    // Step 2: Process the TempChar CSV file
+    std::ifstream temp_csv_file("./data/TempChar.csv");
+    std::getline(temp_csv_file, line); // Skip the header row
+
+    for (const auto& row : mesh) {
+        for (const auto& cell : row) {
+            temp_csv_file.clear();
+            temp_csv_file.seekg(0, std::ios::beg);
+            std::getline(temp_csv_file, line); // Skip the header row
+            while (std::getline(temp_csv_file, line)) {
+                std::stringstream ss(line);
+                std::string cellValue;
+                std::vector<std::string> csvRow;
+                while (std::getline(ss, cellValue, ',')) {
+                    csvRow.push_back(cellValue);
+                }
+                // Check if the current entry is within the specified bounds
+                if (std::stoi(csvRow[1]) >= cell[0] && std::stoi(csvRow[1]) <= cell[1] &&
+                    std::stoi(csvRow[2]) >= cell[2] && std::stoi(csvRow[2]) <= cell[3]) {
+                    
+                    // Check if the entry already exists
+                    if (existingEntries.find(csvRow[0]) == existingEntries.end()) {
                         tempChar.push_back(csvRow[0]);
                         num++;
                     }
                 }
-                if (tempChar.size() > 1) {
-                    presence.push_back(tempChar);
-                }
-                tempChar.clear();
-                num = 0;
             }
+            if (tempChar.size() > 1) {
+                presence.push_back(tempChar);
+            }
+            tempChar.clear();
+            num = 0;
         }
-
-        csv_file.close();
-        tempWrite("./data/temp/presence", presence);
     }
-};
+
+    temp_csv_file.close();
+    tempWrite("./data/temp/presence", presence);
+}
 
 
+/*
 int main() {
     collision collision;
     collision.width =  collision.get_simulation_param(0);
@@ -132,3 +182,4 @@ int main() {
     
     return 0;
 }
+*/

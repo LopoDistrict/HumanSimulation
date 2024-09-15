@@ -23,7 +23,7 @@ def start_clock(tick):
     while 1:
         #print("New cycle started")
         try: 
-            result = subprocess.run(["./clock4.exe"], check=True, capture_output=True, text=True) 
+            result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
             #print("Errors:", result.stderr)    # Print standard error (if any) 

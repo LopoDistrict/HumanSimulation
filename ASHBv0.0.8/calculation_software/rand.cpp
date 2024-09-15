@@ -45,8 +45,7 @@ void sample_initVector()
     int num_generator(int num1, int num2){
         return BetterRand::genNrInInterval(num1, num2);
     }
-
-
+    
 
     bool roll_random(int tranche, int begin, int end){
         int rolling = num_generator(begin, end);

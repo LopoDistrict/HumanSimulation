@@ -36,7 +36,7 @@ public:
     void update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path = "./data/CharacterData.csv");
     void Hygiene(const std::string& id);
     std::string get_position(const std::string& id, int value_ind);
-    bool procreation(const std::string& id, , float const_breeding=0);
+    bool procreation(const std::string& id, float const_breeding=0);
     std::string point(const std::string& id);
     void modify_desire(const std::string& idA, const std::string& idB, const std::string& constant);
     std::string get_desire_couple(const std::string& idA, const std::string& idB);

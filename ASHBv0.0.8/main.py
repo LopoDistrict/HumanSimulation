@@ -106,16 +106,16 @@ def begin_param():
     csvwriter2.writerow(['id', 'xposition', 'yposition', 'gen'])
     print("calculating the mesh") 
     
-    try: 
-        result = subprocess.run(["./collision_deb.exe"]) 
-        print("Output:", result.stdout)  # Print standard output 
-        print("Errors:", result.stderr)    # Print standard error (if any) 
-        print("calculation finished sucessfully")
-    except subprocess.CalledProcessError as e: 
-        print("An error occurred while running the .exe file.") 
-        print("Return Code:", e.returncode) 
-        print("Output:", e.output) 
-        print("Error Output:", e.stderr)
+    #try: 
+    #    result = subprocess.run(["./collision_deb.exe"]) 
+    #    print("Output:", result.stdout)  # Print standard output 
+    #    print("Errors:", result.stderr)    # Print standard error (if any) 
+    #    print("calculation finished sucessfully")
+    #except subprocess.CalledProcessError as e: 
+    #    print("An error occurred while running the .exe file.") 
+    #    print("Return Code:", e.returncode) 
+    #    print("Output:", e.output) 
+    #    print("Error Output:", e.stderr)
 
     print("removing old model files")
 
@@ -246,7 +246,7 @@ class Simulation(tk.Tk):
     def CreateCharStasts(self, id, values=None):
         #values est une liste
         s = ['M', 'F']
-        stats = {'age': 0, 'health': 150, 'happiness': 80, 'stress': 12, 
+        stats = {'age': 15, 'health': 150, 'happiness': 80, 'stress': 12, 
         'mentalHealth':100, 'desire':0, 'loneliness': 7, 'boredom': 25, 'anger':10, 'hygiene':100, 
         'sex': s[random.randint(0,1)], 'bday': self.day, 'couple': 'no'}
         model = open('./data/memory/model/'+id+'.dmem', 'w')
