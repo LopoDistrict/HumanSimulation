@@ -9,6 +9,7 @@
 #include "../rand.h"
 #include "model.h"
 #include "../movement.h"
+#include <unordered_map>
 
 reaction::reaction(){
     Data data_obj;
@@ -22,6 +23,7 @@ reaction::reaction(){
 // 2 type d'action
 // - provoquées 
 // - non provoquées
+
 
 //fonction conscientes déclenchées par L'IA
 void reaction::get_last_line(const std::string& path) {
@@ -160,10 +162,14 @@ void reaction::get_value_choosed(const std::string& id){
 void reaction::reinforcement_intelligence(const std::string& id){
     //mettre un moyen permettant de ne pas choisir aucune fonction
     //et agir en ne faisant rien de special. C'est a l'entité de choisir ce qu'il veut
+        std::unordered_map<std::string, std::string> target_map{
+        {"hap", "3"}
+    };
     std::string get_action = mod_obj.get_value(id, 6, "../../data/memory/model/" + id + ".dmem");
     std::string get_searched_stats = mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
     std::vector<std::string> action = {"murder", "discrimination", "suicide", "breeding",
     "desir", "isolation"};
+    std::unor
     int const_action = stoi(mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6));    
     
     if (mod_obj.get_value(id, 6, "../../data/memory/model/" + id + ".dmem") != "null"){
@@ -173,7 +179,8 @@ void reaction::reinforcement_intelligence(const std::string& id){
             //efficace plus elle sera simplement remplacable (const_action)
             mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6);    
         }
-        int old_stats = get_old_stats(id, )
+        int old_stats = get_old_stats(id, target_map[get_value_choosed(id)]);
+        bool is_pp = is_sup_attended(id);
     }else {
         mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6);
     }
@@ -200,6 +207,7 @@ void reaction::Depression(const std::string& id){
         }
     }
 }
+
 
 void reaction::plain_joy(const std::string& id){
     int multiplier = 0;

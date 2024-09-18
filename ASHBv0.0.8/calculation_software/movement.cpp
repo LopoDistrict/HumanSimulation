@@ -164,23 +164,37 @@ std::string get_majority_direction(const std::string& id) {
     return major_dir.empty() ? "null" : major_dir;
 }
 
+
+
 void modify_model_mov(const std::string& id, const std::string& path, const std::string& value, int l) {
-    std::cout << "tool function: modify_model_mov" << std::endl;
-    std::cout << path << std::endl;
+    std::cout << "Tool function: modify_model_mov" << std::endl;
+    std::cout << "Path: " << path << std::endl;
+
     std::ifstream file(path);
     std::vector<std::string> lines;
     std::string line;
 
+    // Read all lines from the file
     while (std::getline(file, line)) {
         lines.push_back(line);
     }
     file.close();
 
+    // Check if the line index is valid
+    if (l < 0 || l >= lines.size()) {
+        std::cerr << "Error: Line index " << l << " is out of range." << std::endl;
+        return;
+    }
+
+    // Overwrite the specified line with the new value
     lines[l] = value;
 
     std::ofstream filew(path);
-    for (const auto& line : lines) {
-        filew << line ;
+    for (size_t i = 0; i < lines.size(); ++i) {
+        filew << lines[i];
+        if (i < lines.size() - 1) {
+            filew << std::endl; // Add newline for all lines except the last one
+        }
     }
     filew.close();
 }
