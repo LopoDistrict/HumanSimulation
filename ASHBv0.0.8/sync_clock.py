@@ -18,8 +18,12 @@ def increase_tick_rate(new_tick):
     
 
 def start_clock(tick):
+    day = 0
     #clock.cpp ne tourne qu'une seule fois
     #c'est dans ce fichier que nous devons le faire tourner au rythme souhaité
+    #TO:DO
+    #checker la frequence des ticks : day += 1 => vitesse clock definie par tick 
+    #OU day += tick vitesse clock definie par les ticks
     while 1:
         #print("New cycle started")
         try: 
@@ -36,7 +40,9 @@ def start_clock(tick):
             #print("Error Output:", e.stderr)
             write_logs(e.stderr)
             write_logs(f"Error occured while running clock.exe: {e.stderr}")
-        time.sleep(tick)
+        time.sleep(tick) 
+        day += tick #actualise day avec tick + write dans les param
+        rep_l("./data/temp/GenTempModule.asb", 3, day)
 
 
 if __name__ == "__main__":

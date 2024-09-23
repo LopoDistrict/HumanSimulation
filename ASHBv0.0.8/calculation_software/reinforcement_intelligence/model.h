@@ -10,8 +10,6 @@
 #include <algorithm>
 
 
-
-
 class model {
 public:
     model(); 

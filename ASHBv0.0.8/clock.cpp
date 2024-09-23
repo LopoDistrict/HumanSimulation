@@ -91,6 +91,32 @@ void presence() {
 //Fait :)
 
 
+    void immunity(const std::string& id){
+        //prepare l'immunité face au maladies
+        //TODO: optimize
+        if (is_sick(id)){
+            model mod_obj;
+            std::string im_val = mod_obj.get_value(id, 5, ("./data/memory/model/") + id + std::string(".dmem"));
+            if(im_val == "null"){
+                if(roll_random(50, 0, 250)){
+                    ch_mod(id, "immune");
+                    ch_mod("disease=null");
+                }else{
+                    ch_mod(id, num_generator(2, 5));
+                }
+            }else if (im_val == "immune"){
+                if(roll_random(200, 0, 250)){
+                    ch_mod("disease=null");
+                }
+            }else{
+                if(roll_random(50+stoi(im_val)*5), 0, 250){
+                    ch_mod(id, "immune");
+                    ch_mod("disease=null");
+                }
+            }
+        }
+    }
+
     void CreateTempPosition(const std::string& id, float x, float y, const std::string& gen) {
         std::ofstream fileTemp("./data/TempChar.csv", std::ios::app);
         if (fileTemp.is_open()) {
@@ -99,7 +125,10 @@ void presence() {
         }
     }
 
-    void sickness(const std::string& id){
+    
+
+
+    void ch_mod(const std::string& id, const std::string& value){
         
         /*
         string line ;
@@ -121,7 +150,7 @@ void presence() {
             std::cout << str << std::endl;
         }
 
-        data[1] = "disease=true\n";
+        data[1] = value + "\n";
 
         std::ofstream outFile(std::string("./data/memory/model/") +id + std::string(".dmem"));
         for (const auto& str : data) {
@@ -144,7 +173,7 @@ void presence() {
         if(std::stoi(obj.get_value_char(id, 10)) <= 20){
             if(roll_random(130, 50+(50 - stoi(obj.get_value_char(id, 10))), 200) == true){
                 //disease started
-                sickness(id);
+                ch_mod(id, "disease=true");
                 std::cout << "infection started: " << id << std::endl;
             }
         }
@@ -173,13 +202,14 @@ void presence() {
 
 
 
-void main_loop() {
-    std::cout << "clock starting" << std::endl;
-    int tick = 1; // Ensure tick is initialized, or prompt the user to initialize.
-    int day = 0;
+void main_loop() {    
     Data obj; // Create an object of Data
     model mod_obj;
+    collision collision;
     std::string time_selection = "play";
+    int day = collision.get_param(3);
+    //int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
+    std::cout << "clock starting: " << day << std::endl;
 
     if (time_selection == "pause") {
         return; // Exit the function if paused
@@ -206,7 +236,7 @@ void main_loop() {
         std::cout << row[0] << std::endl; // Output the first value of the current row
 
         int hap_const = 5;
-        obj.start_desire(row[0]); // on test quand m si on peut start un desire
+        
         //car de toute facon une entité peut develop des liens avec d'autres
         //m si il est deja en couple
         if (obj.get_value_char(row[0], 13) == "no") {
@@ -272,7 +302,7 @@ void main_loop() {
 
         if (obj.disease(row[0]) == true) {
             obj.write_logs("this character: " + row[0] + " is now sick");
-            sickness(row[0]);
+            ch_mod(row[0], "disease=true");
         }
 
         
@@ -289,24 +319,27 @@ void main_loop() {
         
 
         
-        start_infection(row[0]);
+        start_infection(row[0]); //on immunise apres le debut de l'infection
+        immunity(row[0]);
+
         obj.solitude(row[0]);
         obj.Hygiene(row[0]);
         //std::string coll = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\collision.exe ";
         //int r = system(coll.c_str());
-        collision collision;
+        
         collision.width =  collision.get_param(0);
         collision.height = collision.get_param(1);
     
         collision.separate();
         collision.presence();
+        obj.start_desire(row[0]); // on test quand m si on peut start un desire
     }
 
-    day += tick;
+    //day += tick;
     std::cout << "actual day " << day << std::endl;
     std::cout << "actual tick " << tick << std::endl;
 
-    std::cout << "the clock terminated successfully" << std::endl;
+    std::cout << "The clock terminated successfully" << std::endl;
     std::cout << "applying the result in the GUI/UI" << std::endl;
 }
  

@@ -117,32 +117,85 @@ void discrimination //heritage
 //a implementer ce week end 
 //void breeding // reproduction peut peut etre augmenter la stats attendu
 //void desire // le fait d'avoir du desir avec plusieurs femmes 
-void isolation // écart a la soupe initial
+void isolation() // écart a la soupe initial
+
+int reaction::upmov(const std::string& id){
+    //fonction inutile car un appel peut être fait
+    //temp juste pour reference 
+    //le int return est le nb de mvt en plus que l'entité va faire
+    return num_generator(1,3);
+
+}
 
 void discrimination(const std::string& id){
-    
+    //TODO
 }
 
 
 //fonction utile pour le fonctionnement de L'IA
 int reaction::get_old_stats(const std::string& id, int value){
     //appeler pour garder en mémoire l'ancienne stats pour comparer
-    return data_obj.get_value_char(id, value);
+    return stoi(data_obj.get_value_char(id, value));
 }
 
 std::string reaction::get_current_action(const std::string& id){
     return mod_obj.get_value(id, 6);
 }
 
-float reaction::result_RI(const std::string& id, float prec_stats, int ind, int mult_const){
-    //le resultat est rendu selon un float de -10 a 10 
-    //jugeant si une action/reaction a été efficaces
-    float new_stats = stof(data_obj.get_value_char(id, ind));
-    //pour obtenir le score d'evolution     
-    return (new_stats-prec_stats)/ (5 + mult_const); //  110 - 100 10/10
+float reaction::result_RI(const std::string& id, float p_stats, int ind, int mult_const, std::string action){
+    //resultat juge si une action/reaction a été efficaces
+    float new_stats = (stof(data_obj.get_value_char(id, ind))-p_stats)/ (5 + mult_const) //score evaluation 110 - 100 10/10
     //mult_const = une constante qu'on ajoute pour les stats voulu en ++
+    std::unordered_map<std::string, int> mem_action;
+    std::string mem_map = mod_obj.get-value(id, 8, "../../data/memory/model/" + id + ".dmem");
+    std::string item_map;
+    std::stringstream ssmap(mem_map);
+    std::stringstream ss(paction);
+    std::string item;
+    std::vector<std::string> tokens;
+    //TODO: a opti, utilise un vector pour transfert d'info
+    std::vector<std::string> temp;
+    while(std::getline(ssmap, item_map, ',')){ // mact=breeding,4,murder,10,desire,-5
+        temp.push_back(item_map);
+    }
+    for(int i=0;i<item_map.size();i++){
+        try{
+            mem_action.insert(std::make_pair(item_map[i], stoi(item_map[i+1])));
+        }catch{
+            std::cout << "finished getting, memory actions" << std::endl;
+        }
+    }
+    
+    if(!mem_action.find(action) == mem_action.end()){ // pas dans la map
+        mem_action.insert(std::make_pair(action, new_stats));        
+    } 
+    std::string wback;
+    for (const auto& x: mem_action){
+        wback += x.first + "," + x.second;
+    }
+    mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "mact="+wback, 8);
+    stoi(mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4));    
 }
 
+void reaction::tmp_stats(const std::string& id){
+    //recup les anciennes Stats de temp et les compare pour l'IA
+    std::string paction, pstats, sline, is_pp, ac;
+    paction(mod_obj.get_value(id, 7, "../../data/memory/model/" + id + ".dmem"));
+    
+
+    while (std::getline(ss, item, ',')) {
+        tokens.push_back(item);
+    }
+    pstats = tokens[0];
+    sline = tokens[1]
+    is_pp = tokens[2];
+    ac = tokens[3];
+    if(is_pp = "true"){
+        result_RI(id, pstats, sline, num_generator(8,13), ac);
+    }else{
+        result_RI(id, pstats, sline, 0, ac);
+    }
+}
 
 bool reaction::is_sup_attended(const std::string& id){
     //check si c'est une action en ++ 
@@ -152,7 +205,7 @@ bool reaction::is_sup_attended(const std::string& id){
 
 void reaction::get_value_choosed(const std::string& id){
 
-    if (is_sup_attended()){
+    if (is_sup_attended(id)){
         return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem") - "++";
     }
     return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
@@ -165,24 +218,31 @@ void reaction::reinforcement_intelligence(const std::string& id){
         std::unordered_map<std::string, std::string> target_map{
         {"hap", "3"}
     };
-    std::string get_action = mod_obj.get_value(id, 6, "../../data/memory/model/" + id + ".dmem");
+    std::string get_action = mod_obj.get_value(id, 4, "../../data/memory/model/" + id + ".dmem");
     std::string get_searched_stats = mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
     std::vector<std::string> action = {"murder", "discrimination", "suicide", "breeding",
-    "desir", "isolation"};
-    std::unor
-    int const_action = stoi(mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6));    
+    "desir", "isolation", "upmov"};
+
+    int old_stats = get_old_stats(id, target_map[get_value_choosed(id)]); //prend la value actuelle qui sera l'ancienne 
+    bool is_pp = is_sup_attended(id);
+
+    //save dans temp l'ancienne stats, ligne dans le csv, si pp, et l'action 
+    mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "tmp="+old_stats + "," + target_map[get_value_choosed(id)] + "," + is_pp + "," + get_action, 8);  
+    //dans une place temp on save toute les actions
+    //avant d'en associer de nouvelles
+
+    int const_action = stoi(mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4));    
     
-    if (mod_obj.get_value(id, 6, "../../data/memory/model/" + id + ".dmem") != "null"){
+    if (mod_obj.get_value(id, 4, "../../data/memory/model/" + id + ".dmem") != "null"){ //roll influencer par le nb action presente #8
         if (roll_random(90+const_action, 0, 135)){
             //on role pour savoir si nous reprenons l'action precedente
             //ou si nous cherchons une action efficace - moins ne action est 
             //efficace plus elle sera simplement remplacable (const_action)
-            mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6);    
-        }
-        int old_stats = get_old_stats(id, target_map[get_value_choosed(id)]);
-        bool is_pp = is_sup_attended(id);
+            mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4);    
+        }mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+get_action, 4);    
+                 
     }else {
-        mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "action="+action[num_generator(0,4)], 6);
+        mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4);
     }
 
 }

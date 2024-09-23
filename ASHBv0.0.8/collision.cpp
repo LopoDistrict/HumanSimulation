@@ -6,6 +6,7 @@
 #include <sstream>
 #include <tuple>    
 #include "collision.h"
+#include <unordered_set>
 
 /*
 class collision {
@@ -87,36 +88,37 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
             std::cout << "error opening the file" << std::endl;
         }
     }
-
+/*
     bool collsion::CheckWord(char* filename, char* search){
     int offset; 
-    string line;
-    ifstream Myfile;
+    std::string line;
+    std::ifstream Myfile;
     Myfile.open (filename);
 
     if (Myfile.is_open())
     {
         while (!Myfile.eof())
         {
-            getline(Myfile,line);
+            std::getline(Myfile,line);
             if ((offset = line.find(search, 0)) != string::npos) 
             {
-                cout << "found '" << search << "' in '" << line << "'" << endl;
+                std::cout << "found '" << search << "' in '" << line << "'" << std::endl;
                 Myfile.close();
                 return true;
             }
             else
             {
-                cout << "Not found" << endl;
+                std::cout << "Not found" << std::endl;
             }
         }
         Myfile.close();
     }
     else
-        cout << "Unable to open this file." << endl;
+        std::cout << "Unable to open this file." << std::endl;
 
     return false;
-}
+}*/
+
 void collision::presence() {
     int num = 0; // Keeps track of the number of people in a mesh
     std::vector<std::vector<std::string>> presence;

@@ -16,4 +16,14 @@ def print_logs():
 def write_logs(val):
     with open('./data/logs/logs.txt', "a") as logsFile:
         logsFile.write(f"<{datetime.datetime.now()}> {val}"+"\n")
-    
+
+
+def rep_l(file, line, value):
+    with open(file, 'r', encoding='utf-8') as file: 
+        data = file.readlines() 
+        
+    print(data) 
+    data[line] = value + "\n"
+        
+    with open(file, 'w', encoding='utf-8') as file: 
+        file.writelines(data) 

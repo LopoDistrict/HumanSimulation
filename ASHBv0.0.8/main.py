@@ -91,6 +91,7 @@ def begin_param():
     genFile.write(str(height) + "\n")
     genFile.write(str(width) + "\n")
     genFile.write(str(climateCondition) + "\n")
+    genFile.write(0 + "\n")#days
 
     char = open('./data/TempChar.csv','w',  newline='')
     print('./data/TempChar.csv')
@@ -251,11 +252,15 @@ class Simulation(tk.Tk):
         'sex': s[random.randint(0,1)], 'bday': self.day, 'couple': 'no'}
         model = open('./data/memory/model/'+id+'.dmem', 'w')
         print('./data/memory/model/'+id+'.dmem')
-        model.write('id=' + id + "\n")
-        model.write('disease=null' + "\n")
-        model.write('mvt=null' + "\n")
-        model.write('ir_target=hap++' + '\n')
-        model.write('mem_actions=null' + '\n')
+        model.write('id=' + id + "\n") #0
+        model.write('disease=null' + "\n") #1
+        model.write('mvt=null' + "\n") #2
+        model.write('ir_target=hap++' + '\n') #3
+        model.write('caction=null' + '\n') #4
+        model.write('paction=null' + '\n') #5
+        model.write('immunity=null' + '\n') #6
+        model.write('tmp=null' + '\n') #7
+        model.write('mact=null' + '\n') #8
         #si il ya diff val dans une ligne on les sépare par _
          
         model.close()

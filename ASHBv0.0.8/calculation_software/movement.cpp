@@ -209,6 +209,7 @@ void single_char_movement(const std::string& id) {
     std::string climate = get_simulation_param(2);
     int mov = 0;
     int age = std::stoi(Data_obj.get_value_char(id, 1, "./data/CharacterData.csv"));
+    std::cout << "error";
     std::string dir = "";
 
     if (age <= 35) {
@@ -235,8 +236,7 @@ void single_char_movement(const std::string& id) {
             dir = get_random_direction();
             std::cout << "error -3: == mvt=null" << std::endl;
         } else {
-            std::cout << "error -3 != mvt == null" << std::endl;
-            std::cout << "dir-1: " << dir << std::endl;            
+
 
             dir = model_obj.get_value(id, 2,  "./data/memory/model/").substr(0, 2);
             //on substr == slice car sinon on reprend toute la vitesse et la concatene
@@ -319,6 +319,7 @@ void single_char_movement(const std::string& id) {
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv")))),"./data/TempChar.csv");
     }
 }
+
 /*
 int main(int argc, char* argv[]){
     std::cout << "movement.cpp" << std::endl;
