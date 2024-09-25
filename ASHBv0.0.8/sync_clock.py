@@ -27,7 +27,7 @@ def start_clock(tick):
     while 1:
         #print("New cycle started")
         try: 
-            result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
+            result = subprocess.run(["./clock7_temp.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
             #print("Errors:", result.stderr)    # Print standard error (if any) 
@@ -42,7 +42,7 @@ def start_clock(tick):
             write_logs(f"Error occured while running clock.exe: {e.stderr}")
         time.sleep(tick) 
         day += tick #actualise day avec tick + write dans les param
-        rep_l("./data/temp/GenTempModule.asb", 3, day)
+        app_l("./data/temp/GenTempModule.asb", 4, str(day))
 
 
 if __name__ == "__main__":

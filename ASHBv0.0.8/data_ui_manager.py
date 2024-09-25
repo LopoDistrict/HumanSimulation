@@ -18,12 +18,19 @@ def write_logs(val):
         logsFile.write(f"<{datetime.datetime.now()}> {val}"+"\n")
 
 
-def rep_l(file, line, value):
-    with open(file, 'r', encoding='utf-8') as file: 
-        data = file.readlines() 
-        
-    print(data) 
-    data[line] = value + "\n"
-        
-    with open(file, 'w', encoding='utf-8') as file: 
-        file.writelines(data) 
+def app_l(file_path, line_number, value):
+    # Read the contents of the file
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+    
+    # Check if the line number is valid
+    if line_number < 1 or line_number > len(lines):
+        print("Error: Line number out of range.")
+        return
+    
+    # Append the value to the specified line
+    lines[line_number - 1] = value + '\n'
+    
+    # Write the modified contents back to the file
+    with open(file_path, 'w') as file:
+        file.writelines(lines)

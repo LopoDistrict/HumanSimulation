@@ -231,14 +231,14 @@ void single_char_movement(const std::string& id) {
     std::cout << "error -3" << std::endl;
     if (close_char.empty()) {
         std::cout << "error -3: nobody" << std::endl;
-        if (model_obj.get_model(id, 2,  "./data/memory/model/") == "mvt=null") {
+        if (model_obj.get_model(id, 2,  "./data/memory/model/" + id + ".dmem") == "mvt=null") {
             std::cout << "dir-2: " << dir << std::endl;
             dir = get_random_direction();
             std::cout << "error -3: == mvt=null" << std::endl;
         } else {
 
 
-            dir = model_obj.get_value(id, 2,  "./data/memory/model/").substr(0, 2);
+            dir = model_obj.get_value(id, 2,  "./data/memory/model/"+ id + ".dmem").substr(0, 2);
             //on substr == slice car sinon on reprend toute la vitesse et la concatene
             //ici on pveut juste la dir
             std::cout << "dir0" << dir << std::endl;

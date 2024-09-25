@@ -89,33 +89,12 @@ void presence() {
 //actuellement en constant à et n'influe sur aucune stats
 //ligne 113
 //Fait :)
-
-
-    void immunity(const std::string& id){
-        //prepare l'immunité face au maladies
-        //TODO: optimize
-        if (is_sick(id)){
-            model mod_obj;
-            std::string im_val = mod_obj.get_value(id, 5, ("./data/memory/model/") + id + std::string(".dmem"));
-            if(im_val == "null"){
-                if(roll_random(50, 0, 250)){
-                    ch_mod(id, "immune");
-                    ch_mod("disease=null");
-                }else{
-                    ch_mod(id, num_generator(2, 5));
-                }
-            }else if (im_val == "immune"){
-                if(roll_random(200, 0, 250)){
-                    ch_mod("disease=null");
-                }
-            }else{
-                if(roll_random(50+stoi(im_val)*5), 0, 250){
-                    ch_mod(id, "immune");
-                    ch_mod("disease=null");
-                }
-            }
-        }
+    bool is_sick(const std::string& id){ 
+        std::cout << "tool function is_sick" << std::endl;
+        Data obj;        
+        return obj.get_model(id, 1) != "disease=null";
     }
+
 
     void CreateTempPosition(const std::string& id, float x, float y, const std::string& gen) {
         std::ofstream fileTemp("./data/TempChar.csv", std::ios::app);
@@ -128,15 +107,14 @@ void presence() {
     
 
 
-    void ch_mod(const std::string& id, const std::string& value){
-        
+    void ch_mod(const std::string& id, const std::string& value){        
         /*
         string line ;
         std::ifstream model(std::to_string("data/memory/model") + id + std::to_string("".dmem"));
         std::getline(model, line);
         std::ofstream model2(std::to_string("data/memory/model") + id + std::to_string(".dmem"));
         model2 << "disease=true" << std::endl;*/
-
+        std::cout << "tool function ch_mod" << std::endl;
         std::ifstream file(std::string("./data/memory/model/") + id + std::string(".dmem"));
         std::vector<std::string> data;
         std::string line;
@@ -150,7 +128,7 @@ void presence() {
             std::cout << str << std::endl;
         }
 
-        data[1] = value + "\n";
+        data[1] = value ;
 
         std::ofstream outFile(std::string("./data/memory/model/") +id + std::string(".dmem"));
         for (const auto& str : data) {
@@ -160,10 +138,7 @@ void presence() {
         outFile.close();
     }
 
-    bool is_sick(const std::string& id){ 
-        Data obj;        
-        return obj.get_model(id, 1) != "disease=null";
-    }
+
 
 
 
@@ -171,7 +146,7 @@ void presence() {
     void start_infection(const std::string& id){
         Data obj; 
         if(std::stoi(obj.get_value_char(id, 10)) <= 20){
-            if(roll_random(130, 50+(50 - stoi(obj.get_value_char(id, 10))), 200) == true){
+            if(roll_random(130, 50+(50 - stoi(obj.get_value_char(id, 10))), 310) == true){
                 //disease started
                 ch_mod(id, "disease=true");
                 std::cout << "infection started: " << id << std::endl;
@@ -198,9 +173,34 @@ void presence() {
         std::cout << "Error: bad id/value" << std::endl;
     }
 
-
-
-
+    void immunity(const std::string& id){
+        //prepare l'immunité face au maladies
+        //TODO: optimize
+        model mod_obj;
+        std::cout << "Tool function: immunity" << std::endl;
+        if (is_sick(id)){            
+            std::cout << "./data/memory/model/" + id + ".dmem" << std::endl;
+            std::string im_val = mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem");
+            if(im_val == "null"){
+                if(roll_random(60, 0, 250)){
+                    ch_mod(id, "immune");
+                    ch_mod(id, "disease=null");
+                }else{
+                    ch_mod(id, std::to_string(num_generator(2, 5)));
+                }
+            }else if (im_val == "immune"){
+                if(roll_random(200, 0, 250)){
+                    ch_mod(id, "disease=null");
+                }
+            }else{
+                if(roll_random(60+stoi(im_val)*5, 0, 250)){
+                    ch_mod(id, "immune");
+                    ch_mod(id, "disease=null");
+                }
+            }
+        }
+    }
+    
 
 void main_loop() {    
     Data obj; // Create an object of Data
@@ -208,7 +208,7 @@ void main_loop() {
     collision collision;
     std::string time_selection = "play";
     int day = collision.get_param(3);
-    //int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
+    int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
     std::cout << "clock starting: " << day << std::endl;
 
     if (time_selection == "pause") {
@@ -297,6 +297,8 @@ void main_loop() {
             obj.health(row[0], -num_generator(4, 9));
         } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
             obj.health(row[0], -num_generator(7, 13));
+        }else if (stoi(obj.get_value_char(row[0], 2)) <= 100){
+            obj.health(row[0], num_generator(5, 9));
         }
         
 
@@ -340,7 +342,7 @@ void main_loop() {
     std::cout << "actual tick " << tick << std::endl;
 
     std::cout << "The clock terminated successfully" << std::endl;
-    std::cout << "applying the result in the GUI/UI" << std::endl;
+    std::cout << "applying the result in the TUI" << std::endl;
 }
  
 int main() {    

@@ -93,7 +93,7 @@ class Cellule{
                 std::vector<std::string> lpoint = get_point_list(id);
                 std::vector<std::string> lc = get_couple_list(id);
 
-                if (roll_random(120, 0, 200) && 
+                if (roll_random(84, 0, 230) && 
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
@@ -539,11 +539,11 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         // le bohneur baisse plus lentement qu'il croit
         
         if (c <= 0){
-            float nv = 0.30 * c;
+            float nv = 0.372 * c;
             std::cout << "calculation.cpp -nv" << nv << std::endl;
             return nv;
         } else{
-            float nv = 0.21 * c;
+            float nv = 0.197 * c;
             std::cout << "calculation.cpp nv" << nv << std::endl;
             return nv;
         }
@@ -645,10 +645,10 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         std::cout << constant << std::endl;
         //const maladie + emotion
         // + age (+le char est vieux + il est perd en health)
-        if (stoi(get_value_char(id, 2)) >= 50){
-            update_csv_cell(get_index(id), 3, std::to_string(stoi(get_value_char(id, 2)) - 2.0 + constant));            
+        if (stoi(get_value_char(id, 1)) >= 50){
+            update_csv_cell(get_index(id), 2, std::to_string(stoi(get_value_char(id, 2)) + constant));            
         }
-        update_csv_cell(get_index(id), 3, std::to_string(stof(get_value_char(id, 2)) + constant));
+        update_csv_cell(get_index(id), 2, std::to_string(stof(get_value_char(id, 2)) + constant));
     }
 
     void Data::print_vector(const std::vector<std::string>& vec) {
@@ -734,9 +734,9 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
         for (int i=0; i < neighbour.size(); i++){
             if (get_model(id, 1) != "disease=null"){
-                multiplicator_contaminated *= 8.4;
+                multiplicator_contaminated *= 6.3;
             }else{
-                multiplicator_contaminated *= 0.8;
+                multiplicator_contaminated *= 1.13;
             }    
         }   
         std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;

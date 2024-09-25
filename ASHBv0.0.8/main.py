@@ -91,7 +91,7 @@ def begin_param():
     genFile.write(str(height) + "\n")
     genFile.write(str(width) + "\n")
     genFile.write(str(climateCondition) + "\n")
-    genFile.write(0 + "\n")#days
+    genFile.write("0" + "\n")#days
 
     char = open('./data/TempChar.csv','w',  newline='')
     print('./data/TempChar.csv')
@@ -105,7 +105,10 @@ def begin_param():
     print('stats fields: ', fields)    
     csvwriter.writerow(fields)
     csvwriter2.writerow(['id', 'xposition', 'yposition', 'gen'])
-    print("calculating the mesh") 
+    print("calculating the mesh")
+    time.sleep(0.2)
+    print("[", Fore.GREEN + "+","] ","time clock setting choosed") 
+    print("day = tick = constant number")
     
     #try: 
     #    result = subprocess.run(["./collision_deb.exe"]) 
@@ -402,7 +405,7 @@ if __name__ == "__main__":
     time.sleep(0.2)
     print('Artificial Simulation')
     time.sleep(0.2)
-    print('client version: 0.0.7')
+    print('client version: 0.0.8')
     time.sleep(0.2)
     print('https://github.com/LopoDistrict/HumanSimulation')
     begin_param()

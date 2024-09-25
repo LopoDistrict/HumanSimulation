@@ -1,24 +1,3691 @@
-<2024-09-18 21:37:40.440094> clock starting
-actual day 1
-actual tick 1
-the clock terminated successfully
-applying the result in the GUI/UI
+<2024-09-25 21:46:18.846764> Tool function definition: get_simulation_param
+3
+0
+clock starting: 0
+actual day 0
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
 
-<2024-09-18 21:37:44.793524> clock starting
-actual day 1
-actual tick 1
-the clock terminated successfully
-applying the result in the GUI/UI
+<2024-09-25 21:46:23.030693> Tool function definition: get_simulation_param
+3
+4
+clock starting: 4
+actual day 4
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
 
-<2024-09-18 21:37:48.207819> GUI created char: (145, 258, 155, 268)
-<2024-09-18 21:37:48.247775> new character added 0tybcc62
-<Wed Sep 18 21:37:50 2024
-> this character: 0tybcc62 is now sick
-<2024-09-18 21:37:52.956221> GUI created char: (269, 147, 279, 157)
-<2024-09-18 21:37:53.011226> new character added 3nuxvu14
-<Wed Sep 18 21:38:17 2024
-> this character: 0tybcc62 is now sick
-<Wed Sep 18 21:38:19 2024
-> this character: 3nuxvu14 is now sick
-<Wed Sep 18 21:41:10 2024
-> this character: 0tybcc62 is now sick
+<2024-09-25 21:46:27.058759> GUI created char: (145, 140, 155, 150)
+<2024-09-25 21:46:27.160382> new character added 4uvnlw93
+<2024-09-25 21:46:31.558312> Tool function definition: get_simulation_param
+3
+8
+clock starting: 8
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir-2: 
+NN
+error -3: == mvt=null
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+140
+tool function definition: get_value_char
+4uvnlw93
+1
+145
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 174 (width: 500)
+New Y: 169 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE29
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 29
+tool function definition: get_value_char
+4uvnlw93
+2
+140
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+169
+tool function definition: get_value_char
+4uvnlw93
+1
+145
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+174
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+80
+tool function definition: get_value_char
+4uvnlw93
+3
+80
+4uvnlw93
+constant-5
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-1.97028
+nvstats bonheur: 78.0297
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+78.029716
+error point2
+4uvnlw93
+8
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+13
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+17.3877
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+18.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:46:31.564036> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:31.568600> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:46:36 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:46:38.023940> GUI created char: (159, 147, 169, 157)
+<2024-09-25 21:46:38.053750> new character added 8hjpit55
+<2024-09-25 21:46:39.573490> Tool function definition: get_simulation_param
+3
+12
+clock starting: 12
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+169
+tool function definition: get_value_char
+4uvnlw93
+1
+174
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 204 (width: 500)
+New Y: 199 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE30
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 30
+tool function definition: get_value_char
+4uvnlw93
+2
+169
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+199
+tool function definition: get_value_char
+4uvnlw93
+1
+174
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+204
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-13
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-5.00148
+nvstats bonheur: 131.999
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+131.998520
+error point2
+4uvnlw93
+12
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-12
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+12
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+138
+16.1898
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+17.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=null
+mvt=NE30
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:46:39.576043> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:39.578593> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:41.590119> GUI created char: (258, 369, 268, 379)
+<2024-09-25 21:46:41.636496> new character added 9pylar28
+<Wed Sep 25 21:46:44 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:46:47.282306> GUI created char: (256, 269, 266, 279)
+<2024-09-25 21:46:47.338162> new character added 0fhcub84
+<2024-09-25 21:46:48.338895> Tool function definition: get_simulation_param
+3
+16
+clock starting: 16
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+199
+tool function definition: get_value_char
+4uvnlw93
+1
+204
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 230 (width: 500)
+New Y: 225 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE26
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 26
+tool function definition: get_value_char
+4uvnlw93
+2
+199
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+225
+tool function definition: get_value_char
+4uvnlw93
+1
+204
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+230
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+constant-12
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-4.62258
+nvstats bonheur: 133.377
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+133.377426
+error point2
+4uvnlw93
+16
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-11
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+4uvnlw93
+14
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+139
+18.6219
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+19.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE26
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:46:48.343907> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:48.343907> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:46:53 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:46:55.883761> Tool function definition: get_simulation_param
+3
+20
+clock starting: 20
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+225
+tool function definition: get_value_char
+4uvnlw93
+1
+230
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 258 (width: 500)
+New Y: 253 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE28
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 28
+tool function definition: get_value_char
+4uvnlw93
+2
+225
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+253
+tool function definition: get_value_char
+4uvnlw93
+1
+230
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+258
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+4uvnlw93
+constant-10
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-3.86478
+nvstats bonheur: 135.135
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.135223
+error point2
+4uvnlw93
+20
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+12
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+16.1777
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+17.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE28
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:46:55.883906> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:55.888467> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:46:56.768615> GUI created char: (456, 359, 466, 369)
+<2024-09-25 21:46:56.864560> new character added 6mrxyk25
+<Wed Sep 25 21:47:01 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:47:03.860415> GUI created char: (10, 124, 20, 134)
+<2024-09-25 21:47:03.913772> new character added 3hrcmo33
+<2024-09-25 21:47:04.556657> Tool function definition: get_simulation_param
+3
+24
+clock starting: 24
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+253
+tool function definition: get_value_char
+4uvnlw93
+1
+258
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 285 (width: 500)
+New Y: 280 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE27
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 27
+tool function definition: get_value_char
+4uvnlw93
+2
+253
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+280
+tool function definition: get_value_char
+4uvnlw93
+1
+258
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+285
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-13
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-5.00148
+nvstats bonheur: 131.999
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+131.998520
+error point2
+4uvnlw93
+24
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+12
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+16.1777
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+17.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE27
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:04.556657> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:04.568810> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:47:11 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:47:13.879341> Tool function definition: get_simulation_param
+3
+28
+clock starting: 28
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+280
+tool function definition: get_value_char
+4uvnlw93
+1
+285
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 303 (width: 500)
+New Y: 298 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE18
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 18
+tool function definition: get_value_char
+4uvnlw93
+2
+280
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+298
+tool function definition: get_value_char
+4uvnlw93
+1
+285
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+303
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-13
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-5.00148
+nvstats bonheur: 131.999
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+131.998520
+error point2
+4uvnlw93
+28
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-14
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+134.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+136.000000
+4uvnlw93
+14
+tool function definition: get_value_char
+4uvnlw93
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+136
+18.5856
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+19.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE18
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:13.881878> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:13.881878> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:47:18 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:47:20.713344> Tool function definition: get_simulation_param
+3
+32
+clock starting: 32
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+298
+tool function definition: get_value_char
+4uvnlw93
+1
+303
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 333 (width: 500)
+New Y: 328 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE30
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 30
+tool function definition: get_value_char
+4uvnlw93
+2
+298
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+328
+tool function definition: get_value_char
+4uvnlw93
+1
+303
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+333
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+136.000000
+4uvnlw93
+constant-9
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-3.48588
+nvstats bonheur: 132.514
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+132.514114
+error point2
+4uvnlw93
+32
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+11
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+14.9677
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+15.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE30
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:20.713344> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:20.718422> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:22.088825> GUI created char: (25, 159, 35, 169)
+<2024-09-25 21:47:22.113688> new character added 6fqhij27
+<Wed Sep 25 21:47:25 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:47:26.500583> GUI created char: (20, 165, 30, 175)
+<2024-09-25 21:47:26.548832> new character added 8nnbuo20
+<2024-09-25 21:47:27.498594> Tool function definition: get_simulation_param
+3
+36
+clock starting: 36
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+328
+tool function definition: get_value_char
+4uvnlw93
+1
+333
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 357 (width: 500)
+New Y: 352 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE24
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 24
+tool function definition: get_value_char
+4uvnlw93
+2
+328
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+352
+tool function definition: get_value_char
+4uvnlw93
+1
+333
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+357
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-11
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-4.24368
+nvstats bonheur: 132.756
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+132.756317
+error point2
+4uvnlw93
+36
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+14
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+18.5977
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+19.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE24
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:27.500869> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:27.500869> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:35.414171> Tool function definition: get_simulation_param
+3
+40
+clock starting: 40
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+352
+tool function definition: get_value_char
+4uvnlw93
+1
+357
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 384 (width: 500)
+New Y: 379 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE27
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 27
+tool function definition: get_value_char
+4uvnlw93
+2
+352
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+379
+tool function definition: get_value_char
+4uvnlw93
+1
+357
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+384
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-11
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-4.24368
+nvstats bonheur: 132.756
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+132.756317
+error point2
+4uvnlw93
+40
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-11
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+4uvnlw93
+13
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+139
+17.4119
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+18.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:35.424462> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:35.424462> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:43.413504> Tool function definition: get_simulation_param
+3
+44
+clock starting: 44
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+379
+tool function definition: get_value_char
+4uvnlw93
+1
+384
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 411 (width: 500)
+New Y: 406 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE27
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 27
+tool function definition: get_value_char
+4uvnlw93
+2
+379
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+406
+tool function definition: get_value_char
+4uvnlw93
+1
+384
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+411
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+139.000000
+4uvnlw93
+constant-11
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-4.24368
+nvstats bonheur: 134.756
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+134.756317
+error point2
+4uvnlw93
+44
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-13
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+135.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+13
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+137
+17.3877
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+18.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:43.413504> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:43.418569> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:47:47 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:47:51.164159> Tool function definition: get_simulation_param
+3
+48
+clock starting: 48
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+406
+tool function definition: get_value_char
+4uvnlw93
+1
+411
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 437 (width: 500)
+New Y: 432 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE26
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 26
+tool function definition: get_value_char
+4uvnlw93
+2
+406
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+432
+tool function definition: get_value_char
+4uvnlw93
+1
+411
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+437
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+137.000000
+4uvnlw93
+constant-13
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-5.00148
+nvstats bonheur: 131.999
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+131.998520
+error point2
+4uvnlw93
+48
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-12
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+12
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+138
+16.1898
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+17.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE26
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:47:51.164159> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:47:51.169329> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:47:56 2024
+> this character: 4uvnlw93 is now sick
+<2024-09-25 21:48:01.310345> Tool function definition: get_simulation_param
+3
+52
+clock starting: 52
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+432
+tool function definition: get_value_char
+4uvnlw93
+1
+437
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 467 (width: 500)
+New Y: 462 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE30
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 30
+tool function definition: get_value_char
+4uvnlw93
+2
+432
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+462
+tool function definition: get_value_char
+4uvnlw93
+1
+437
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+467
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+constant-9
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-3.48588
+nvstats bonheur: 134.514
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+134.514114
+error point2
+4uvnlw93
+52
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-12
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+13
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+138
+17.3998
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+18.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+id=4uvnlw93
+disease=true
+mvt=NE30
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:48:01.310345> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:48:01.320684> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:48:10.679219> Tool function definition: get_simulation_param
+3
+56
+clock starting: 56
+4uvnlw93
+tool function definition: get_value_char
+4uvnlw93
+13
+no
+tool function : start_desire()
+tool function definition: get_value_char
+4uvnlw93
+11
+M
+tool function definition: print_vector
+The vector is empty.
+movement.cpp
+id4uvnlw93
+tool function: single_char_movement
+tool function definition: get_neighbour
+Tool function definition: get_simulation_param
+0
+500
+Tool function definition: get_simulation_param
+1
+500
+Tool function definition: get_simulation_param
+2
+oceanic
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+errorerror -3
+error -3: nobody
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 2
+dir0NE
+error -3 ap get_value(id, 2)
+error -3 av
+error -3 ap
+error -2
+error -1
+tool function definition: get_value_char
+4uvnlw93
+2
+462
+tool function definition: get_value_char
+4uvnlw93
+1
+467
+tool function: out_of_border
+x_factor: 1
+y_factor: 1
+New X: 499 (width: 500)
+New Y: 494 (height: 500)
+Out of border: false
+no error 0
+value: mvt=NE32
+Tool function: modify_model_mov
+Path: ./data/memory/model/4uvnlw93.dmem
+no error 1
+dir: NE
+mov: 32
+tool function definition: get_value_char
+4uvnlw93
+2
+462
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+2
+494
+tool function definition: get_value_char
+4uvnlw93
+1
+467
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+1
+499
+error point
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+constant-14
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-5.38038
+nvstats bonheur: 132.62
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+132.619614
+error point2
+4uvnlw93
+56
+tool function definition: get_value_char
+4uvnlw93
+12
+0
+0
+tool function definition: get_value_char
+4uvnlw93
+1
+15
+error point3
+tool function definition: get_model
+4uvnlw93
+1
+tool function definition: get_value_char
+4uvnlw93
+6
+0
+4uvnlw93
+-12
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+136.000000
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+4uvnlw93
+14
+tool function definition: get_value_char
+4uvnlw93
+3
+138.000000
+tool function definition: get_value_char
+4uvnlw93
+5
+100
+138
+18.6098
+tool function definition: get_index
+4uvnlw93
+1
+tool function definition: update_csv_cell
+1
+4
+19.000000
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_value_char
+4uvnlw93
+2
+150
+4uvnlw93
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+tool function definition: get_value_char
+4uvnlw93
+7
+7
+error point7
+tool function definition: get_value_char
+4uvnlw93
+10
+100
+tool function definition: get_model
+4uvnlw93
+1
+Tool function definition: get_value
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_line_equivalent
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+Tool function definition: get_model
+ID: 4uvnlw93
+Line number: 5
+
+<2024-09-25 21:48:10.684691> Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<2024-09-25 21:48:10.684691> Error occured while running clock.exe: Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: No '=' character found in the line
+Error: Could not open file at ./data/memory/model/4uvnlw93.dmem4uvnlw93.dmem
+Error: Value not found in model
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+
+<Wed Sep 25 21:51:18 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 21:56:20 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 21:59:17 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:22:33 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:40:06 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:40:08 2024
+> this character: 8hjpit55 is now sick
+<Wed Sep 25 22:40:10 2024
+> this character: 9pylar28 is now sick
+<Wed Sep 25 22:40:11 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:40:13 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:40:21 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:40:24 2024
+> this character: 8nnbuo20 is now sick
+<Wed Sep 25 22:41:58 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:42:24 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:42:27 2024
+> this character: 8hjpit55 is now sick
+<Wed Sep 25 22:42:29 2024
+> this character: 9pylar28 is now sick
+<Wed Sep 25 22:42:32 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:42:34 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:42:36 2024
+> this character: 3hrcmo33 is now sick
+<Wed Sep 25 22:42:39 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:42:41 2024
+> this character: 8nnbuo20 is now sick
+<Wed Sep 25 22:46:58 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:47:01 2024
+> this character: 8hjpit55 is now sick
+<Wed Sep 25 22:47:06 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:47:08 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:47:11 2024
+> this character: 3hrcmo33 is now sick
+<Wed Sep 25 22:47:15 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:47:19 2024
+> this character: 8nnbuo20 is now sick
+<Wed Sep 25 22:48:24 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:48:28 2024
+> this character: 8hjpit55 is now sick
+<Wed Sep 25 22:48:34 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:48:36 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:48:38 2024
+> this character: 3hrcmo33 is now sick
+<Wed Sep 25 22:48:39 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:48:42 2024
+> this character: 8nnbuo20 is now sick
+<Wed Sep 25 22:50:25 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:50:28 2024
+> this character: 8hjpit55 is now sick
+<Wed Sep 25 22:50:31 2024
+> this character: 9pylar28 is now sick
+<Wed Sep 25 22:50:33 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:50:35 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:50:38 2024
+> this character: 3hrcmo33 is now sick
+<Wed Sep 25 22:50:43 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:50:46 2024
+> this character: 8nnbuo20 is now sick
+<Wed Sep 25 22:54:22 2024
+> this character: 4uvnlw93 is now sick
+<Wed Sep 25 22:54:30 2024
+> this character: 9pylar28 is now sick
+<Wed Sep 25 22:54:35 2024
+> this character: 0fhcub84 is now sick
+<Wed Sep 25 22:54:40 2024
+> this character: 6mrxyk25 is now sick
+<Wed Sep 25 22:54:43 2024
+> this character: 3hrcmo33 is now sick
+<Wed Sep 25 22:54:47 2024
+> this character: 6fqhij27 is now sick
+<Wed Sep 25 22:54:52 2024
+> this character: 8nnbuo20 is now sick

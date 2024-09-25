@@ -21,7 +21,7 @@ std::string model::get_model(const std::string& id, int line, const std::string&
     std::cout << "Line number: " << line << std::endl;
 
     // Correctly concatenate the path
-    std::string file_path = path2 + id + ".dmem";
+    std::string file_path = path2;
     std::ifstream file(file_path);
     std::string result;
 
@@ -70,6 +70,7 @@ std::string model::get_line_equivalent(const std::string& id, int line, const st
     std::cerr << "Error: No '=' character found in the line" << std::endl;
     return "Error: No '=' found in line";
 }
+
 
 std::string model::get_value(const std::string& id, int line, const std::string& path2) {
     std::cout << "Tool function definition: get_value" << std::endl;
