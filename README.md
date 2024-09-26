@@ -14,6 +14,8 @@ https://github.com/user-attachments/assets/28e5fc58-88b2-4121-bd8d-0b422cd757c0
 
 
 
+
+
 # Detail
 This project is still in beta and most things will be modified in the future. In order to create this simulation 
 I have taken into account several development factors in 2 categories:
@@ -31,6 +33,9 @@ Humans are pretty random so I need to create a randomness algorithm close to hum
 
 In addition, characters are also driven by an important rule, the quest for hapyness - all characters seek to improve their hapyness stats at 
 every cost
+
+# Update
+I started working on an AI, for every entities. This ai will not be advanced and his model his close to machine learning (reinforcment intelligence more precisly) because of the fast and hug usage of ressources that could cause. At this point, the AI have some issues that I will fix, but this is not the most important. For now, optimization and adjustment on calculation and constant value need to be made. The more there is ticks and entities the more the simulation have trouble making it's job in time, that lead to some unexplicated behaviour, lags, bugs and sometimes crash (probably due to memory leak)
 
 # Project
 I may not finish this project entirely, it all came from an idea with a friend, but as a side project I could work on it. 
