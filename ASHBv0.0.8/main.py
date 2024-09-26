@@ -362,10 +362,18 @@ class Simulation(tk.Tk):
             command = input('>')
             if command == 'nc' or command == "newcharacter":
                 #creation d'un nouveau char artificiellement
+            
                 x = int(input ("X position(px: int): "))
                 y = int(input ("Y position(px: int): "))
                 if x < 0 or x > self.canvas.winfo_width() or y < 0 or y > self.canvas.winfo_height():
                     print(Fore.RED + "Error",": Out of Bounds -> x in ", (0, self.canvas.winfo_width()), "y in", (0, self.canvas.winfo_height()))
+                elif x == 000: #random coords
+                    xV = random.randint(0, self.canvas.winfo_width())
+                    yV = random.randint(0, self.canvas.winfo_height())
+                    self.create_new_character(xV, yV, True)
+                    id = self.randmId()
+                    self.CreateTempPosition(id, xV, yV, 'x')
+                    self.CreateCharStasts(id)
                 else:
                     self.create_new_character(x, y, True)
                     id = self.randmId()

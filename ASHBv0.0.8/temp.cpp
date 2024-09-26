@@ -36,8 +36,8 @@ public:
     }
 
     int get_simulation_param(int line) {
-        std::cout << "Tool function definition: get_simulation_param" << std::endl;
-        std::cout << line << std::endl;
+//        std::cout << "Tool function definition: get_simulation_param" << std::endl;
+//        std::cout << line << std::endl;
 
         std::ifstream file("./data/temp/GenTempModule.asb");
         std::string result;
@@ -49,7 +49,7 @@ public:
         } else {
             std::cerr << "Error opening file." << std::endl;
         }
-        std::cout << result << std::endl;
+//        std::cout << result << std::endl;
         return stoi(result);
     }
 
@@ -79,7 +79,7 @@ public:
                 }
             }
         } else {
-            std::cout << "error opening the file" << std::endl;
+//            std::cout << "error opening the file" << std::endl;
         }
     }
 

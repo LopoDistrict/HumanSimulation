@@ -7,7 +7,7 @@ int main() {
     
 
     for (const auto& i : data["inventory"]) {
-        std::cout << i << std::endl;
+//        std::cout << i << std::endl;
     }
 
     return 0;

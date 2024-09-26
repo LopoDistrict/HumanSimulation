@@ -58,22 +58,22 @@ int main() {
                 }
             }
             std::vector<std::string> enemies = {"Project MKA1","raider","cannibal", "immoral butchers", "cultist", "starving waste lander", "tavelling salesman"};
-            std::cout << LatPlayer << std::endl;
-            std::cout << LongPlayer << std::endl;
+//            std::cout << LatPlayer << std::endl;
+//            std::cout << LongPlayer << std::endl;
 
-            std::cout << "start" << std::endl;
+//            std::cout << "start" << std::endl;
             std::remove("ennemy_location.txt");
             std::remove("ennemies_location.lhhd");
 
             std::ofstream file("ennemies_location.lhhd", std::ios::app);
             if (file.is_open()) {
                 for (int x = 0; x < 18; x++) {
-                    std::cout <<  "" << std::endl;
+//                    std::cout <<  "" << std::endl;
                     std::random_device rd;
                     std::default_random_engine generator(rd());
-                    std::cout <<  "new line" << std::endl;
-                    std::cout << "latitude: "<< LatPlayer << " longitude: " << LongPlayer << std::endl;
-                    std::cout << "latitude: " << LatPlayer + std::to_string(doubleRand(generator)).substr(2) << " longitude: " << LongPlayer + std::to_string(doubleRand(generator)).substr(2) << std::endl;
+//                    std::cout <<  "new line" << std::endl;
+//                    std::cout << "latitude: "<< LatPlayer << " longitude: " << LongPlayer << std::endl;
+//                    std::cout << "latitude: " << LatPlayer + std::to_string(doubleRand(generator)).substr(2) << " longitude: " << LongPlayer + std::to_string(doubleRand(generator)).substr(2) << std::endl;
 
                     file << LatPlayer + std::to_string(doubleRand(generator)).substr(2) << ";" << LongPlayer + std::to_string(doubleRand(generator)).substr(2) << ";" << enemies[std::rand() % enemies.size()] << ";" << std::endl;
                 }
@@ -84,6 +84,6 @@ int main() {
             playerPosition.close();
         }
     }
-    std::cout << "process finished" << std::endl;
+//    std::cout << "process finished" << std::endl;
     return 0;
     }

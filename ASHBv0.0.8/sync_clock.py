@@ -24,10 +24,10 @@ def start_clock(tick):
     #TO:DO
     #checker la frequence des ticks : day += 1 => vitesse clock definie par tick 
     #OU day += tick vitesse clock definie par les ticks
-    while 1:
+    while True:
         #print("New cycle started")
         try: 
-            result = subprocess.run(["./clock7_temp.exe"], check=True, capture_output=True, text=True) 
+            result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
             #print("Errors:", result.stderr)    # Print standard error (if any) 
@@ -46,4 +46,4 @@ def start_clock(tick):
 
 
 if __name__ == "__main__":
-    start_clock(4)
+    start_clock(1)

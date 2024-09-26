@@ -25,10 +25,10 @@
 
 
 void update_csv_cell_modified(int row_index, int col_index, const std::string& new_value) {
-        std::cout << "tool function definition: update_csv_cell" << std::endl;
-        std::cout << row_index << std::endl;
-        std::cout << col_index << std::endl;
-        std::cout << new_value << std::endl;
+//        //std::cout << "tool function definition: update_csv_cell" << std::endl;
+//        //std::cout << row_index << std::endl;
+//        //std::cout << col_index << std::endl;
+//        //std::cout << new_value << std::endl;
         // Read the CSV file
         std::ifstream file("./data/TempChar.csv");
         std::vector<std::vector<std::string>> rows;
@@ -63,8 +63,8 @@ void update_csv_cell_modified(int row_index, int col_index, const std::string& n
     }
 
 std::string get_simulation_param(int line) {
-    std::cout << "Tool function definition: get_simulation_param" << std::endl;
-    std::cout << line << std::endl;
+//    //std::cout << "Tool function definition: get_simulation_param" << std::endl;
+//    //std::cout << line << std::endl;
 
     std::ifstream file("./data/temp/GenTempModule.asb");
     std::string result;
@@ -76,20 +76,20 @@ std::string get_simulation_param(int line) {
     } else {
         std::cerr << "Error opening file." << std::endl;
     }
-    std::cout << result << std::endl;
+//    //std::cout << result << std::endl;
     return result;
 }
 
 
 std::string get_random_direction() {
     std::vector<std::string> main_dir = {"NN", "NE", "EE", "SE", "SS", "SO", "OO", "NO"};
-    std::cout << main_dir[num_generator(0, main_dir.size() - 1)] << std::endl;
+//    //std::cout << main_dir[num_generator(0, main_dir.size() - 1)] << std::endl;
     return main_dir[num_generator(0, main_dir.size() - 1)];
 }
 
 
 bool out_of_border(int speed, int height, int width, int positionX, int positionY, const std::string& dir) {
-    std::cout << "tool function: out_of_border" << std::endl;
+//    //std::cout << "tool function: out_of_border" << std::endl;
     
     // Direction map for determining x and y multipliers
     std::unordered_map<std::string, std::string> dir_map{
@@ -110,23 +110,23 @@ bool out_of_border(int speed, int height, int width, int positionX, int position
     int x_factor = (dir_value[0] == '+') ? 1 : -1;
     int y_factor = (dir_value[1] == '+') ? 1 : -1;
 
-    std::cout << "x_factor: " << x_factor << std::endl;
-    std::cout << "y_factor: " << y_factor << std::endl;
+//    //std::cout << "x_factor: " << x_factor << std::endl;
+//    //std::cout << "y_factor: " << y_factor << std::endl;
 
     // Check if the new position after moving would be out of borders
     int new_positionX = positionX + (speed * x_factor);
     int new_positionY = positionY + (speed * y_factor);
 
-    std::cout << "New X: " << new_positionX << " (width: " << width << ")" << std::endl;
-    std::cout << "New Y: " << new_positionY << " (height: " << height << ")" << std::endl;
+//    //std::cout << "New X: " << new_positionX << " (width: " << width << ")" << std::endl;
+//    //std::cout << "New Y: " << new_positionY << " (height: " << height << ")" << std::endl;
 
     bool is_out_of_border = (new_positionX >= width || new_positionY >= height ||
                              new_positionX <= 0 || new_positionY <= 0);
 
     if (is_out_of_border) {
-        std::cout << "Out of border: true" << std::endl;
+//        //std::cout << "Out of border: true" << std::endl;
     } else {
-        std::cout << "Out of border: false" << std::endl;
+//        //std::cout << "Out of border: false" << std::endl;
     }
 
     return is_out_of_border;
@@ -137,7 +137,7 @@ bool out_of_border(int speed, int height, int width, int positionX, int position
 std::string get_majority_direction(const std::string& id) {
     model model_obj;
     Data Data_obj;
-    std::cout << "tool function: get_majority_direction" << std::endl;
+//    //std::cout << "tool function: get_majority_direction" << std::endl;
     std::unordered_map<std::string, int> dic_dir;
 
 
@@ -158,17 +158,17 @@ std::string get_majority_direction(const std::string& id) {
             max = x.second;
         }
     }
-    std::cout << "no error" << std::endl;
+//    //std::cout << "no error" << std::endl;
     std::string l = major_dir.empty() ? "null" : major_dir;
-    std::cout << l << std::endl;
+//    //std::cout << l << std::endl;
     return major_dir.empty() ? "null" : major_dir;
 }
 
 
 
 void modify_model_mov(const std::string& id, const std::string& path, const std::string& value, int l) {
-    std::cout << "Tool function: modify_model_mov" << std::endl;
-    std::cout << "Path: " << path << std::endl;
+//    //std::cout << "Tool function: modify_model_mov" << std::endl;
+//    //std::cout << "Path: " << path << std::endl;
 
     std::ifstream file(path);
     std::vector<std::string> lines;
@@ -200,7 +200,7 @@ void modify_model_mov(const std::string& id, const std::string& path, const std:
 }
 
 void single_char_movement(const std::string& id) {
-    std::cout << "tool function: single_char_movement" << std::endl;
+//    //std::cout << "tool function: single_char_movement" << std::endl;
     model model_obj;
     Data Data_obj;
     std::vector<std::string> close_char = Data_obj.get_neighbour(id);
@@ -209,7 +209,7 @@ void single_char_movement(const std::string& id) {
     std::string climate = get_simulation_param(2);
     int mov = 0;
     int age = std::stoi(Data_obj.get_value_char(id, 1, "./data/CharacterData.csv"));
-    std::cout << "error";
+//    //std::cout << "error";
     std::string dir = "";
 
     if (age <= 35) {
@@ -228,38 +228,38 @@ void single_char_movement(const std::string& id) {
         mov -= num_generator(3, 6);
     }
 
-    std::cout << "error -3" << std::endl;
+//    //std::cout << "error -3" << std::endl;
     if (close_char.empty()) {
-        std::cout << "error -3: nobody" << std::endl;
+//        //std::cout << "error -3: nobody" << std::endl;
         if (model_obj.get_model(id, 2,  "./data/memory/model/" + id + ".dmem") == "mvt=null") {
-            std::cout << "dir-2: " << dir << std::endl;
+//            //std::cout << "dir-2: " << dir << std::endl;
             dir = get_random_direction();
-            std::cout << "error -3: == mvt=null" << std::endl;
+//            //std::cout << "error -3: == mvt=null" << std::endl;
         } else {
 
 
             dir = model_obj.get_value(id, 2,  "./data/memory/model/"+ id + ".dmem").substr(0, 2);
             //on substr == slice car sinon on reprend toute la vitesse et la concatene
             //ici on pveut juste la dir
-            std::cout << "dir0" << dir << std::endl;
-            std::cout << "error -3 ap get_value(id, 2)" << std::endl;
+//            //std::cout << "dir0" << dir << std::endl;
+//            //std::cout << "error -3 ap get_value(id, 2)" << std::endl;
         }
-        std::cout << "error -3 av" << std::endl;
+//        //std::cout << "error -3 av" << std::endl;
         mov += num_generator(5, 11);
-        std::cout << "error -3 ap" << std::endl;
-    std::cout << "error -2" << std::endl;
+//        //std::cout << "error -3 ap" << std::endl;
+//    //std::cout << "error -2" << std::endl;
     } else {
-        std::cout << "dir1: " << dir << std::endl;        
+//        //std::cout << "dir1: " << dir << std::endl;        
         dir = get_majority_direction(id);
-        std::cout << "dir2: " << dir << std::endl;
+//        //std::cout << "dir2: " << dir << std::endl;
         if (dir == "null") {
-            std::cout << "dir3: " << dir << std::endl;
+//            //std::cout << "dir3: " << dir << std::endl;
             dir = get_random_direction();
-            std::cout << "dir4: " << dir << std::endl;
+//            //std::cout << "dir4: " << dir << std::endl;
         }
         mov += num_generator(3, 8);
     }
-    std::cout << "error -1" << std::endl;
+//    //std::cout << "error -1" << std::endl;
 
 
     while (out_of_border(mov, height, width, 
@@ -267,7 +267,7 @@ void single_char_movement(const std::string& id) {
                     std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv")), 
                     dir)) {
         dir = get_random_direction();
-        std::cout << "oob" << std::endl;
+//        std::cout << "oob" << std::endl;
 
         //si l'entité et proche d'une bordure on lui donneun direction autre aléatoir
         //doit changer ce passage prendre en compte que la direction doit 
@@ -278,54 +278,54 @@ void single_char_movement(const std::string& id) {
         //voir la feuille sur les mouvements!!
     }
 
-    std::cout << "no error 0" << std::endl;
+//    //std::cout << "no error 0" << std::endl;
     std::string value = "mvt=" + dir + std::to_string(mov);
-    std::cout << "value: " << value << std::endl;
+//    //std::cout << "value: " << value << std::endl;
     modify_model_mov(id, "./data/memory/model/" + id + ".dmem", value, 2);
-    std::cout << "no error 1" << std::endl;
-    std::cout << "dir: " << dir << std::endl;
-    std::cout << "mov: " << mov << std::endl;
+//    //std::cout << "no error 1" << std::endl;
+//    //std::cout << "dir: " << dir << std::endl;
+//    //std::cout << "mov: " << mov << std::endl;
     if (dir == "NN"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string(mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv"))),"./data/TempChar.csv");
-    //std::cout << "no error 2" << std::endl;,"../data/TempChar.csv"
+//    //std::cout << "no error 2" << std::endl;,"../data/TempChar.csv"
     } else if (dir == "NE"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string(mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv"))),"./data/TempChar.csv");
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string(mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv"))),"./data/TempChar.csv");
-    //std::cout << "no error 3" << std::endl;
+//    //std::cout << "no error 3" << std::endl;
     } else if (dir == "EE"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string(mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv"))),"./data/TempChar.csv");
     }
-    //std::cout << "no error 4" << std::endl;
+//    //std::cout << "no error 4" << std::endl;
       else if (dir == "SE"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv")))),"./data/TempChar.csv");
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string(mov +   std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv"))),"./data/TempChar.csv");
     }
-    //std::cout << "no error 5" << std::endl;
+//    //std::cout << "no error 5" << std::endl;
       else if (dir == "SS"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv")))),"./data/TempChar.csv");
       }
-    //std::cout << "no error 6" << std::endl;
+//    //std::cout << "no error 6" << std::endl;
       else if (dir == "SO"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv")))),"./data/TempChar.csv");
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv")))),"./data/TempChar.csv");
     } 
-    //std::cout << "no error 7" << std::endl;
+//    //std::cout << "no error 7" << std::endl;
     else if (dir == "OO"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv")))),"./data/TempChar.csv");
     }
-    //std::cout << "no error 8" << std::endl;
+//    //std::cout << "no error 8" << std::endl;
       else if (dir == "NO"){
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 2, std::to_string(mov + std::stoi(Data_obj.get_value_char(id, 2, "./data/TempChar.csv"))),"./data/TempChar.csv");
         Data_obj.update_csv_cell(Data_obj.get_index(id, "./data/TempChar.csv"), 1, std::to_string((-mov + std::stoi(Data_obj.get_value_char(id, 1, "./data/TempChar.csv")))),"./data/TempChar.csv");
     }
 }
-
 /*
+
 int main(int argc, char* argv[]){
-    std::cout << "movement.cpp" << std::endl;
+//    std::cout << "movement.cpp" << std::endl;
     std::string id = argv[1];
     //on recupere l'id passer en argument
-    std::cout << "id" << id<< std::endl;
+//    std::cout << "id" << id<< std::endl;
     single_char_movement(id);
     return 0;
 }
@@ -349,20 +349,20 @@ int main(){
     //std::vector<std::string> close_char = Data_obj.get_neighbour(id);
     //Data_obj.print_vector(close_char);
     //std::string l = Data_obj.get_value_char("0kfpdq75", 1, "../data/TempChar.csv");
-    //std::cout << l << std::endl;
+//    //std::cout << l << std::endl;
     //l = Data_obj.get_value_char("0kfpdq75", 2, "../data/TempChar.csv");
-    //std::cout << l << std::endl;
+//    //std::cout << l << std::endl;
     //int l = Data_obj.get_index(id, "../data/TempChar.csv");
-    //std::cout<< "l" << l << std::endl; 
+//    //std::cout<< "l" << l << std::endl; 
     //std::string m = std::to_string(15 + std::stoi(Data_obj.get_value_char(id, 2, "../data/TempChar.csv")));
-    //std::cout << "m"<< m << std::endl;
+//    //std::cout << "m"<< m << std::endl;
     //Data_obj.update_csv_cell(Data_obj.get_index(id, "../data/TempChar.csv"), 2, std::to_string(15 + std::stoi(Data_obj.get_value_char(id, 2, "../data/TempChar.csv"))));
     //std::string l = model_obj.get_value(id, 2,  "../data/memory/model/");
-    //std::cout << l << std::endl;
+//    //std::cout << l << std::endl;
     //l = get_random_direction();
-    //std::cout << l << std::endl;
-    //std::cout << "test " << Data_obj.get_index(id, "../data/TempChar.csv") << std::endl;
-    //std::cout << "test " << 10 + std::stoi(Data_obj.get_value_char(id, 2, "../data/TempChar.csv")) << std::endl;
+//    //std::cout << l << std::endl;
+//    //std::cout << "test " << Data_obj.get_index(id, "../data/TempChar.csv") << std::endl;
+//    //std::cout << "test " << 10 + std::stoi(Data_obj.get_value_char(id, 2, "../data/TempChar.csv")) << std::endl;
     //Data_obj.update_csv_cell(Data_obj.get_index(id, "../data/TempChar.csv"), 2, std::to_string(10 + std::stoi(Data_obj.get_value_char(id, 2, "../data/TempChar.csv"))), "../data/TempChar.csv");
     //Data_obj.update_csv_cell(Data_obj.get_index(id, "../data/TempChar.csv"), 1, std::to_string(10 + std::stoi(Data_obj.get_value_char(id, 1, "../data/TempChar.csv"))), "../data/TempChar.csv");
     return 0;

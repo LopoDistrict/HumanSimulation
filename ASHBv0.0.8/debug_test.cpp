@@ -38,7 +38,7 @@ void start_desire(const std::string& id) {
         if (maille[i].substr(1, 7).find(id)) {
             // Convert maille[i][j] (a char) to string
             std::string current_id(maille[i].substr(9, 8)); // Create a string from the character
-            std::cout << "current_id: " << current_id << std::endl;
+//            std::cout << "current_id: " << current_id << std::endl;
 
             if (obj.get_value_char(current_id, 11) != gender) {
                 // Determine if idA starts desiring idB in its maille
@@ -49,8 +49,8 @@ void start_desire(const std::string& id) {
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
-                    std::cout << "Desire started: " << id << std::endl;
-                    std::cout << maille[i].substr(10, 8) << std::endl;
+//                    std::cout << "Desire started: " << id << std::endl;
+//                    std::cout << maille[i].substr(10, 8) << std::endl;
 
                     // Start a real attraction, so we remember the pointer
                     std::ofstream mem_file("./data/memory/couple.mem", std::ios::app);
