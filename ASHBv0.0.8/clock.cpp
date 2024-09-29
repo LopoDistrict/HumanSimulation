@@ -16,6 +16,8 @@
 #include <tuple>
 #include "collision.h"
 
+/*g++ clock.cpp calculation_software/rand.cpp Data.cpp calculation_software/movement.cpp calculation_software/calculation.cpp calculation_software/reinforcement_intelligence/model.cpp collision.cpp -o clock5*/
+
 
 //check la note en tete movement.cpp
 /*
@@ -89,8 +91,9 @@ void presence() {
 //actuellement en constant à et n'influe sur aucune stats
 //ligne 113
 //Fait :)
+
     bool is_sick(const std::string& id){ 
-//        std::cout << "tool function is_sick" << std::endl;
+        std::cout << "tool function is_sick" << std::endl;
         Data obj;        
         return obj.get_model(id, 1) != "disease=null";
     }
@@ -113,8 +116,6 @@ void presence() {
     }
 
     
-
-
     void ch_mod(const std::string& id, const std::string& value, int l){        
         /*
         string line ;
@@ -122,7 +123,7 @@ void presence() {
         std::getline(model, line);
         std::ofstream model2(std::to_string("data/memory/model") + id + std::to_string(".dmem"));
         model2 << "disease=true" << std::endl;*/
-//        std::cout << "tool function ch_mod" << std::endl;
+        std::cout << "tool function ch_mod" << std::endl;
         std::ifstream file(std::string("./data/memory/model/") + id + std::string(".dmem"));
         std::vector<std::string> data;
         std::string line;
@@ -132,7 +133,7 @@ void presence() {
         file.close();
 
         for (const auto& str : data) {
-//            //std::cout << str << std::endl;
+            std::cout << str << std::endl;
         }
 
         data[l] = value ;
@@ -150,7 +151,7 @@ void presence() {
             if(roll_random(90, 50+(50 - stoi(obj.get_value_char(id, 10))), 370) == true){
                 //disease started
                 ch_mod(id, "disease=true", 1);
-//                std::cout << "infection started: " << id << std::endl;
+                std::cout << "infection started: " << id << std::endl;
             }
         }
     }
@@ -167,29 +168,26 @@ void presence() {
             while (std::getline(ss, word, ',')) {
                 row.push_back(word);
             }
-
-//            //std::cout << row[0] << std::endl;
             //return row[0];
         }
-//        std::cout << "Error: bad id/value" << std::endl;
+        std::cout << "Error: bad id/value" << std::endl;
     }
 
     void immunity(const std::string& id){
         //prepare l'immunité face au maladies
         //TODO: optimize
         model mod_obj;
-//        std::cout << "Tool function: immunity" << std::endl;
+        std::cout << "Tool function: immunity" << std::endl;
         if (is_sick(id)){            
-//            //std::cout << "./data/memory/model/" + id + ".dmem" << std::endl;
-            std::string im_val = mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem");
+            std::string im_val(mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem"));
             if(im_val == "null"){
                 if(roll_random(110, 0, 210)){
-                    ch_mod(id, "immunity=immune", 6);
+                    ch_mod(id, "immune", 6);
                     ch_mod(id, "disease=null", 1);
                 }else{
                     ch_mod(id, std::to_string(num_generator(2, 5)), 6);
                 }
-            }else if (im_val == "immunity=immune"){
+            }else if (im_val == "immune"){
                 if(roll_random(215, 0, 250)){
                     ch_mod(id, "disease=null", 1);
                 }
@@ -210,7 +208,7 @@ void main_loop() {
     std::string time_selection = "play";
     int day = collision.get_param(3);
     int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
-//    std::cout << "clock starting: " << day << std::endl;
+    std::cout << "clock starting: " << day << std::endl;
 
     if (time_selection == "pause") {
         return; // Exit the function if paused
@@ -234,7 +232,7 @@ void main_loop() {
         }
 
         // Process each ID
-//        std::cout << row[0] << std::endl; // Output the first value of the current row
+        std::cout << row[0] << std::endl;
 
         int hap_const = num_generator(7,9);
         
@@ -267,7 +265,6 @@ void main_loop() {
         int result = system(comm_str.c_str());
 
 
-//        //std::cout << "error point" << std::endl;
         // Additional logic for processing each row
         if (is_sick(row[0])) {
             if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
@@ -278,10 +275,10 @@ void main_loop() {
         } else {
             obj.bonheur(row[0], num_generator(7, 13) + hap_const);
         }
-//        //std::cout << "error point2" << std::endl;
+        
         obj.age_update(row[0], day);
         
-//        //std::cout << "error point3" << std::endl;
+        
         if (is_sick(row[0])) {
             obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
             if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
@@ -302,13 +299,10 @@ void main_loop() {
             obj.health(row[0], num_generator(7, 11));
         }
         
-
         if (obj.disease(row[0]) == true) {
             obj.write_logs("this character: " + row[0] + " is now sick");
             ch_mod(row[0], "disease=true", 1);
-        }
-
-        
+        }        
 
         if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
             obj.mentalhealth(row[0], -num_generator(1, 5));
@@ -317,14 +311,14 @@ void main_loop() {
         } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
             obj.mentalhealth(row[0], -num_generator(4, 12));
         }
-//        //std::cout << "error point7" << std::endl;
+        
         
         
 
         
         start_infection(row[0]); //on immunise apres le debut de l'infection
         immunity(row[0]);
-        immunity(row[0]);
+        
 
         obj.solitude(row[0]);
         obj.Hygiene(row[0]);
@@ -343,11 +337,11 @@ void main_loop() {
     }
 
     //day += tick;
-//    std::cout << "actual day " << day << std::endl;
-//    std::cout << "actual tick " << tick << std::endl;
+    std::cout << "actual day " << day << std::endl;
+    std::cout << "actual tick " << tick << std::endl;
 
-//    std::cout << "The clock terminated successfully" << std::endl;
-//    std::cout << "applying the result in the TUI" << std::endl;
+    std::cout << "The clock terminated successfully" << std::endl;
+    std::cout << "applying the result in the TUI" << std::endl;
 }
  
 int main() {    

@@ -25,6 +25,7 @@ def start_clock(tick):
     #checker la frequence des ticks : day += 1 => vitesse clock definie par tick 
     #OU day += tick vitesse clock definie par les ticks
     while True:
+        begin_time = time.time()
         #print("New cycle started")
         try: 
             result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
@@ -41,6 +42,7 @@ def start_clock(tick):
             write_logs(e.stderr)
             write_logs(f"Error occured while running clock.exe: {e.stderr}")
         time.sleep(tick) 
+        print("Execution time: ", time.time() - begin_time)
         day += tick #actualise day avec tick + write dans les param
         app_l("./data/temp/GenTempModule.asb", 4, str(day))
 

@@ -9,7 +9,7 @@ def modifier_ligne_fichier(fichier_chemin, valeur_a_remplacer):
         for ligne in fichier_original:
             # Si la ligne contient la valeur spécifique, on la commente avec //
             if valeur_a_remplacer in ligne.strip():
-                fichier_modifie.write(f"//{ligne}")  # Préfixer la ligne avec //
+                fichier_modifie.write(f"{ligne.replace('//', '')}")  # Préfixer la ligne avec //
             else:
                 fichier_modifie.write(ligne)
     
@@ -43,11 +43,11 @@ def supprimer_fichiers_tmp(dossier_chemin):
                     print(f"Erreur lors de la suppression de {chemin_fichier}: {e}")
 
 ## Exemple d'utilisation
-#dossier_racine = './'  # Remplacez par le chemin de votre dossier
-#supprimer_fichiers_tmp(dossier_racine)
+dossier_racine = './'  # Remplacez par le chemin de votre dossier
+supprimer_fichiers_tmp(dossier_racine)
 
 ## Exemple d'utilisation
 #dossier_racine = './'  # Remplacez par le chemin de votre dossier
 #valeur_a_remplacer = 'std::cout'
-#
+##
 #parcours_dossier_et_modification(dossier_racine, valeur_a_remplacer)

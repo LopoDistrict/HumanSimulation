@@ -15,7 +15,7 @@ class Cellule{
 
     void print_leaf(children){
         if (not children) {
-//            std::cout << value << std::endl;
+            std::cout << value << std::endl;
         }else{
             for(int child=0; child < children.size(); child++){
                 print_leaf(children);

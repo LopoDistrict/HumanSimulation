@@ -8,7 +8,9 @@
 #include "calculation_software/rand.h"
 #include <algorithm>
 #include "Data.h"
-#include <chrono>     
+#include <chrono>
+#include "calculation_software/include/fast_division.h"
+     
 
 //get_value_char + update_csv + get_index
 //nv argu = path -> càd que nous devons changer
@@ -48,7 +50,7 @@ class Cellule{
             id += letters[num_generator(0, 25)];
         }
         }
-//        std::cout << num << std::endl;
+        std::cout << num << std::endl;
         return num;
         
     }
@@ -67,7 +69,7 @@ class Cellule{
 
    void Data::start_desire(const std::string& id) {
     //Data obj; // Assuming Data is a defined class
-//    std::cout << "tool function : start_desire()" << std::endl;
+    std::cout << "tool function : start_desire()" << std::endl;
     std::string gender = get_value_char(id, 11); // Get the character directly
     
     std::ifstream mailleFile("./data/temp/presence.asb");
@@ -82,11 +84,11 @@ class Cellule{
 
     // Check if the id exists in maille
     for (int i = 0; i < maille.size(); ++i) {
-//        //std::cout << maille[i].substr(1, 7) << std::endl;
+        std::cout << maille[i].substr(1, 7) << std::endl;
         if (maille[i].substr(1, 7).find(id)) {
             // Convert maille[i][j] (a char) to string
             std::string current_id(maille[i].substr(9, 8)); // Create a string from the character
-//            //std::cout << "current_id: " << current_id << std::endl;
+            std::cout << "current_id: " << current_id << std::endl;
 
             if (get_value_char(current_id, 11) != gender) {
                 // Determine if idA starts desiring idB in its maille
@@ -97,8 +99,7 @@ class Cellule{
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
-//                    std::cout << "Desire started: " << id << std::endl;
-//                    std::cout << maille[i].substr(10, 8) << std::endl;
+                    std::cout << "Desire started: " << id << std::endl;
 
                     // Start a real attraction, so we remember the pointer
                     std::ofstream mem_file("./data/memory/couple.mem", std::ios::app);
@@ -133,6 +134,8 @@ void Data::eraseFileLine(std::string path, std::string eraseLine) {
     remove(p);
     rename("temp.txt", p);
 }
+
+
 void Data::app_l(const std::string& file_path, int line_number, const std::string& value) {
     // Read the contents of the file
     std::ifstream file(file_path);
@@ -146,7 +149,7 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
 
     // Check if the line number is valid
     if (line_number < 1 || line_number > lines.size()) {
-//        std::cout << "Error: Line number out of range." << std::endl;
+        std::cout << "Error: Line number out of range." << std::endl;
         return;
     }
 
@@ -172,10 +175,10 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
             desire(idB, 4.0, true);
             bonheur(idA, 8.0);  // Note: Changed from bohneur to bonheur
             bonheur(idB, 8.0);
-//            std::cout << "new couple" << idA << "  " << idB << std::endl;
-//            //std::cout << tree_parent << std::endl;
+            std::cout << "new couple" << idA << "  " << idB << std::endl;
+            std::cout << tree_parent << std::endl;
         } else {
-//            std::cout << "Error: not tall enough" << std::endl;
+            std::cout << "Error: not tall enough" << std::endl;
         }
         std::ofstream couple("./data/memory/couple.mem", std::ios::app);
         couple << idA << "-" << idB << stoi(get_desire_single(idA, idB)) + num_generator(4, 9) << std::endl;
@@ -300,7 +303,8 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                     //le desire a marché donc on start un couple
                     start_couple(id, idB);
                 } else {
-                    modify_desire(id, idB, std::to_string(sum_desire/3));
+                    //modify_desire(id, idB, std::to_string(sum_desire 3)); ==
+                    modify_desire(id, idB, std::to_string(fast_division::divide32<3>::quotient(sum_desire)));
                     //ici le test n'as pas marché mais on continue d'augmenter le desir
                 }
             }
@@ -350,7 +354,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 
     void Data::solitude(const std::string& id) {
         // Update solitude stats in the file based on presence
-//        std::cout << "tool function definition: Data::solitude" << std::endl;
+        std::cout << "tool function definition: Data::solitude" << std::endl;
         std::ifstream mailleFile("./data/temp/presence.asb");
         if (!mailleFile.is_open()) {
             std::cerr << "Error opening file." << std::endl;
@@ -369,23 +373,24 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 
         
         float old = stof(get_value_char(id, 7));
-        float new_value = (stoi(get_value_char(id, 3)) / 9) / (stoi(get_value_char(id, 8)) / 6);
-
-//        //std::cout << "Old solitude value: " << old << std::endl;
-//        //std::cout << "New solitude value: " << new_value << std::endl;
-
+        //float new_value = (stoi(get_value_char(id, 3)) / 9) / (stoi(get_value_char(id, 8)) / 6); == 
+        float new_value = fast_division::divide32<fast_division::divide32<9>::quotient(stoi(get_value_char(id, 3)))>::
+        quotient(fast_division::divide32<6>::quotient(stoi(get_value_char(id, 8))));
+        
+        
         float nvstats;
         if (std::find(maille.begin(), maille.end(), id) == maille.end()) {
             nvstats = Fsolitude(old, new_value);
-//            std::cout << "ID not in presence data" << std::endl;
+            std::cout << "ID not in presence data" << std::endl;
         } else {
             int count_id = std::count(maille.begin(), maille.end(), id);
-            nvstats = Fsolitude(old, new_value / count_id);
+            //nvstats = Fsolitude(old, new_value / count_id); ==
+            nvstats = Fsolitude(old, fast_division::divide32<count_id>::quotient(new_value));
         }
 
-//        //std::cout << "New solitude stats: " << std::ceil(nvstats) << std::endl;
+        std::cout << "New solitude stats: " << std::ceil(nvstats) << std::endl;
         int ind = get_index(id);
-//        //std::cout << "Index of ID: " << ind << std::endl;
+        std::cout << "Index of ID: " << ind << std::endl;
         update_csv_cell(ind, 7, std::to_string(std::ceil(nvstats)));
     }
 
@@ -395,7 +400,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 // :) 
 /*
     void desire(const std::string& id ,bool alr=false){
-//        std::cout << id << std::endl;
+        std::cout << id << std::endl;
         float old_s = stof(get_value_char(id, 6));
         
         if (old_s >= 50 && not alr){
@@ -416,7 +421,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                         while (std::getline(f, line)) {
                             if (line != std::to_string(reinterpret_cast<long long>(new Cellule(id, pointed->contenu)))) {
                                 f << line << std::endl;
-//                                std::cout << line << std::endl;
+                                std::cout << line << std::endl;
                             }
                         }
                         f.close();
@@ -433,8 +438,8 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
 */
 
    int Data::get_index(const std::string& id, std::string path) {
-//        std::cout << "tool function definition: get_index" << std::endl;
-//        //std::cout << id << std::endl;
+        std::cout << "tool function definition: get_index" << std::endl;
+
         std::ifstream file(path);
         std::string line;
         int num = 0;
@@ -447,7 +452,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                 row.push_back(word);
             }
             if (row[0] == id) {
-//                std::cout << num-1 << std::endl;
+                std::cout << num-1 << std::endl;
                 return num - 1;
             }
         }
@@ -456,9 +461,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
     }
 
     std::string Data::get_value_char(const std::string& id, int value_ind, std::string path) {
-//        std::cout << "tool function definition: get_value_char" << std::endl;
-//        //std::cout << id << std::endl;
-//        //std::cout << value_ind << std::endl;
+        std::cout << "tool function definition: get_value_char" << std::endl;
         std::ifstream file(path);
         std::string line;
         while (getline(file, line)) {
@@ -469,7 +472,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                 row.push_back(word);
             }
             if (row[0] == id) {
-//                //std::cout << row[value_ind] << std::endl;
+                std::cout << row[value_ind] << std::endl;
                 return row[value_ind];
             }
         }
@@ -531,8 +534,8 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
     // Function to evaluate a string and return a vector of vector of floats
     std::vector<std::vector<float>> Data::eval(const std::string& str) {
-//        std::cout << "tool function definition: eval (matrix)" << std::endl;
-//        //std::cout << str << std::endl;
+        std::cout << "tool function definition: eval (matrix)" << std::endl;
+        std::cout << str << std::endl;
 
         std::vector<std::vector<float>> result;
         std::istringstream stream(str);
@@ -557,7 +560,7 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
 
     float Data::Fbonheur(float c){
-//        //std::cout << "entering function"<< std::endl;
+        std::cout << "entering function"<< std::endl;
         // calcul le bohneur en fonction du precedent
         // calcul le bohneur à partir de 2 valeur 
         // c : constante qui peut affecter le bohneur 
@@ -570,11 +573,11 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         
         if (c <= 0){
             float nv = 0.312 * c;
-//            //std::cout << "calculation.cpp -nv" << nv << std::endl;
+            std::cout << "calculation.cpp -nv" << nv << std::endl;
             return nv;
         } else{
             float nv = 0.223 * c;
-//            //std::cout << "calculation.cpp nv" << nv << std::endl;
+            std::cout << "calculation.cpp nv" << nv << std::endl;
             return nv;
         }
             
@@ -585,8 +588,8 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
    void Data::bonheur(const std::string& id, float constant) {
     float old_s = std::stof(get_value_char(id, 3));  // Ensure this returns a string representation of a float
-//    //std::cout << id << std::endl;
-//    //std::cout << "constant" << constant << std::endl;
+    std::cout << id << std::endl;
+    std::cout << "constant" << constant << std::endl;
     std::ifstream maille("./data/temp/presence.asb");
     std::vector<std::string> maille2;
     print_vector(maille2);
@@ -599,12 +602,12 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
     // Check if id is in maille2
     if (std::find(maille2.begin(), maille2.end(), id) == maille2.end()) {
-//        //std::cout << "not in mesh" << std::endl;
+        std::cout << "not in mesh" << std::endl;
         constant -= 0.2;
         nvstats = old_s + Fbonheur(constant);
-//        //std::cout << "nvstats bonheur: " << nvstats << std::endl;
+        std::cout << "nvstats bonheur: " << nvstats << std::endl;
     } else {
-//        //std::cout << "in mesh" << std::endl;
+        std::cout << "in mesh" << std::endl;
         constant += num_generator(1, 4);
 
         std::ifstream file("./data/temp/presence.asb");
@@ -623,17 +626,17 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
         for (const auto& id_list : result) {
             for (float i : id_list) {
-//                //std::cout << i << std::endl;
+                std::cout << i << std::endl;
                 // Ensure that you are using the correct conversion
                 if (std::to_string(i) != id && std::stoi(get_value_char(std::to_string(i), 3)) >= 60) {
-//                    //std::cout << "good" << std::endl;
+                    std::cout << "good" << std::endl;
                     constant += num_generator(4, 8);
                 }
             }
         }
 
         nvstats = old_s + Fbonheur(constant);
-//        //std::cout << "nvstats bonheur: " << nvstats << std::endl;
+        std::cout << "nvstats bonheur: " << nvstats << std::endl;
     }
 
      update_csv_cell(get_index(id), 3, std::to_string(nvstats));
@@ -645,10 +648,10 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
 
     bool Data::age_update(const std::string& id, int day){ // 365 jours == trop long
         // nouvelle année toute les 30 jours (valeurs a faire varier)
-//        //std::cout << id << std::endl;
-//        //std::cout << day << std::endl;
+        std::cout << id << std::endl;
+        std::cout << day << std::endl;
         std::string current_age = get_value_char(id, 12);
-//        //std::cout << current_age << std::endl;
+        std::cout << current_age << std::endl;
         if (stoi(current_age) * 20 + stoi(get_value_char(id, 1)) >= stoi(current_age) * 20 + day){
             return true;
         }
@@ -656,23 +659,24 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
     }
 
     void Data::stress(const std::string& id, int constant){
-//        //std::cout << id << std::endl;
-//        //std::cout <<  constant << std::endl;
+        std::cout << id << std::endl;
+        std::cout <<  constant << std::endl;
 
         // Sn+1 = (bonheur/santé_mentale + const) * 1.21;
         // augmente rapidement quand la constante est grande
         // constante definie par les maladies 
         float bonheur = stof(get_value_char(id, 3));
-        float nvstats = (bonheur / stof(get_value_char(id, 5)) + constant) * 1.21;   
+        //float nvstats = (bonheur / stof(get_value_char(id, 5)) + constant) * 1.21; ==
+        float nvstats = (fast_division::divide32<stof(get_value_char(id, 5))>::quotient(bonheur) + constant) * 1.21;   
 
-//        //std::cout <<  bonheur << std::endl;         
-//        //std::cout <<   nvstats << std::endl;
+        std::cout <<  bonheur << std::endl;         
+        std::cout <<   nvstats << std::endl;
         update_csv_cell(get_index(id), 4, std::to_string(std::ceil(nvstats)));
     }
     
     void Data::health(const std::string& id, float constant){
-//        //std::cout << id << std::endl;
-//        //std::cout << constant << std::endl;
+        std::cout << id << std::endl;
+        std::cout << constant << std::endl;
         //const maladie + emotion
         // + age (+le char est vieux + il est perd en health)
         if (stoi(get_value_char(id, 1)) >= 50){
@@ -682,25 +686,25 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
     }
 
     void Data::print_vector(const std::vector<std::string>& vec) {
-//        std::cout << "tool function definition: print_vector" << std::endl;
+        std::cout << "tool function definition: print_vector" << std::endl;
         
     if (vec.empty()) {
-//        std::cout << "The vector is empty." << std::endl;
+        std::cout << "The vector is empty." << std::endl;
         return;
     }
 
-//    std::cout << "Vector contents: { ";
+    std::cout << "Vector contents: { ";
     for (size_t i = 0; i < vec.size(); ++i) {
-//        std::cout << vec[i];
+        std::cout << vec[i];
         if (i < vec.size() - 1) {
-//            std::cout << ", "; // Add a comma between elements
+            std::cout << ", ";
         }
     }
-//    std::cout << " }" << std::endl;
+    std::cout << " }" << std::endl;
 }
 
 std::vector<std::string> Data::get_neighbour(const std::string& id) {
-//    std::cout << "tool function definition: get_neighbour" << std::endl;
+    std::cout << "tool function definition: get_neighbour" << std::endl;
     std::ifstream file("./data/temp/presence.asb");
     std::string line;
     std::vector<std::string> result;
@@ -738,9 +742,9 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
     
     std::string Data::get_model(const std::string& id, int line) {
-//        std::cout << "tool function definition: get_model" << std::endl;
-//        //std::cout << id << std::endl;
-//        //std::cout << line << std::endl;
+        std::cout << "tool function definition: get_model" << std::endl;
+        std::cout << id << std::endl;
+        std::cout << line << std::endl;
 
         std::ifstream file("./data/memory/model" + id + ".dmem");
         std::string result;
@@ -755,7 +759,7 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
 
     bool Data::disease(const std::string& id){
-//        //std::cout << id << std::endl;
+        std::cout << id << std::endl;
         //  ??? possibilité d'une constante => si une pop/char a deja été 
         //contaminée donc elle est moins a risque de se faire contaminée        
         //on check si des personne on déja des disease autour de lui
@@ -769,15 +773,15 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
                 multiplicator_contaminated *= 1.13;
             }    
         }   
-//        std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;
+        std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;
         return roll_random(200-multiplicator_contaminated, 0, 800);
         // a checker pour roll
     }
     
 
     void Data::mentalhealth(const std::string& id, float constant){
-//        //std::cout << id << std::endl;
-//        //std::cout << constant << std::endl;
+        std::cout << id << std::endl;
+        std::cout << constant << std::endl;
         // constante definie par les maladies 
         //et par la santé en générale
         //aussi par l'age quand age >= 70 const+= age/15
@@ -791,20 +795,20 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
         }
 
         if (std::find(maille2.begin(), maille2.end(), id) == maille2.end()) {
-//            //std::cout << "not in mesh" << std::endl;
+            std::cout << "not in mesh" << std::endl;
             update_csv_cell(get_index(id), 5, std::to_string(base -= 1.4 + constant));  
         } else {
-//            //std::cout << "in mesh" << std::endl;
+            std::cout << "in mesh" << std::endl;
             update_csv_cell(get_index(id), 5, std::to_string(base -= 0.2 + constant));
         }
     }
 
 
     void Data::update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path) {
-//        std::cout << "tool function definition: update_csv_cell" << std::endl;
-//        //std::cout << row_index << std::endl;
-//        //std::cout << col_index << std::endl;
-//        //std::cout << new_value << std::endl;
+        std::cout << "tool function definition: update_csv_cell" << std::endl;
+        std::cout << row_index << std::endl;
+        std::cout << col_index << std::endl;
+        std::cout << new_value << std::endl;
         // Read the CSV file
         std::ifstream file(path);
         std::vector<std::vector<std::string>> rows;
@@ -842,13 +846,13 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 int main(){
     Data obj;
     obj.bonheur("1cxsns07", 0);
-//    //std::cout << var << std::endl;
+    std::cout << var << std::endl;
     obj.bonheur("1cxsns07", 5);
-//    //std::cout << var << std::endl;
+    std::cout << var << std::endl;
     obj.bonheur("1cxsns07", -5);
-//    //std::cout << var << std::endl;
+    std::cout << var << std::endl;
     obj.bonheur("1cxsns07", 10);
-//    //std::cout << var << std::endl;
+    std::cout << var << std::endl;
     obj.bonheur("1cxsns07", -10);
-//    //std::cout << var << std::endl;
+    std::cout << var << std::endl;
 }*/

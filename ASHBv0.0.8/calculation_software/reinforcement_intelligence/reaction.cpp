@@ -39,13 +39,13 @@ void reaction::get_last_line(const std::string& path) {
         }
     }
 
-//    std::cout << "Total lines: " << lineCount << std::endl;
+    std::cout << "Total lines: " << lineCount << std::endl;
     return 0;
 }
     std::string reaction::get_value_csv(int l, int value_ind, std::string path) {
-//        std::cout << "tool function definition: get_value_char" << std::endl;
-//        std::cout << id << std::endl;
-//        std::cout << value_ind << std::endl;
+        std::cout << "tool function definition: get_value_char" << std::endl;
+        std::cout << id << std::endl;
+        std::cout << value_ind << std::endl;
         std::ifstream file(path);
         std::string line;
         while (getline(file, line)) {
@@ -56,7 +56,7 @@ void reaction::get_last_line(const std::string& path) {
                 row.push_back(word);
             }
             if (row.size()-1 == l) {
-//                std::cout << row[value_ind] << std::endl;
+                std::cout << row[value_ind] << std::endl;
                 return row[value_ind];
             }
         }
@@ -72,13 +72,13 @@ void reaction::murder(const std::string& id){
             //on roll pour savoir si l'entité veut tuer un ament/e
             data_obj.app_l("./data/TempChar.csv", data_obj.get_index(data_obj.get_couple(id)));
             data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(data_obj.get_couple(id)));
-//            std::cout << "Entity: " << data_obj.get_couple(id) << " has been killed by: "<< id << std::endl;
+            std::cout << "Entity: " << data_obj.get_couple(id) << " has been killed by: "<< id << std::endl;
         }
     }else if (data_obj.point(id) != "not"){
         if (roll_random(40, 0, 110)){
             data_obj.app_l("./data/TempChar.csv", data_obj.get_index(data_obj.point(id)));
             data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(data_obj.point(id)));
-//            std::cout << "Entity: " << data_obj.point(id) << " has been killed by: "<< id << std::endl;
+            std::cout << "Entity: " << data_obj.point(id) << " has been killed by: "<< id << std::endl;
         }
     }
     else{
@@ -91,7 +91,7 @@ void reaction::murder(const std::string& id){
 void reaction::suicide(const std::string& id ){
     data_obj.app_l("./data/TempChar.csv", data_obj.get_index(id));
     data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(id));
-//    std::cout << "An entity: " << id << " has commited suicide." << std::endl;
+    std::cout << "An entity: " << id << " has commited suicide." << std::endl;
 }
 
 void reaction::desire(const std::string& id){
@@ -162,13 +162,14 @@ float reaction::result_RI(const std::string& id, float p_stats, int ind, int mul
         try{
             mem_action.insert(std::make_pair(item_map[i], stoi(item_map[i+1])));
         }catch{
-//            std::cout << "finished getting, memory actions" << std::endl;
+            std::cout << "finished getting, memory actions" << std::endl;
         }
     }
     
     if(!mem_action.find(action) == mem_action.end()){ // pas dans la map
         mem_action.insert(std::make_pair(action, new_stats));        
     } 
+
     std::string wback;
     for (const auto& x: mem_action){
         wback += x.first + "," + x.second;
@@ -182,7 +183,6 @@ void reaction::tmp_stats(const std::string& id){
     std::string paction, pstats, sline, is_pp, ac;
     paction(mod_obj.get_value(id, 7, "../../data/memory/model/" + id + ".dmem"));
     
-
     while (std::getline(ss, item, ',')) {
         tokens.push_back(item);
     }
@@ -211,6 +211,7 @@ void reaction::get_value_choosed(const std::string& id){
     return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
 }  
 
+//break loop collision pour presence
 
 void reaction::reinforcement_intelligence(const std::string& id){
     //mettre un moyen permettant de ne pas choisir aucune fonction
