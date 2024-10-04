@@ -289,6 +289,7 @@ void reaction::crazyness(const std::string& id){
     }
 }
 
+
 // declencher par le stress baisse le bonheur et la vie
 void reaction::anxiety(const std::string& id){
     //anxieté se crée vec le stress et le bonheur en baisse

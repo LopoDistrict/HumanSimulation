@@ -49,6 +49,8 @@ public:
     std::string get_couple(const std::string& id);
     void eraseFileLine(std::string path, std::string eraseLine);
     void app_l(const std::string& file_path, int line_number, const std::string& value= "");
+    float fastdiv(float quotient, const float& div);
+    
 };
 
 

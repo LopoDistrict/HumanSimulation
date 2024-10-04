@@ -65,7 +65,8 @@ void start_desire(const std::string& id) {
 
 int main(){
     Data Data_obj;
-    Data_obj.start_desire("2rvueg57");
+    float val = Data_obj.fastdiv(15.0, 2.0);
+    std::cout << val << std::endl;
     return 0;
 }
 

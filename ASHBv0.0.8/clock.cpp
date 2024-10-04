@@ -14,7 +14,9 @@
 //#include "calculation_software/calculation.h"
 #include <cstdlib>
 #include <tuple>
+#include <cmath>
 #include "collision.h"
+//#include "calculation_software/include/fast_division.h"
 
 /*g++ clock.cpp calculation_software/rand.cpp Data.cpp calculation_software/movement.cpp calculation_software/calculation.cpp calculation_software/reinforcement_intelligence/model.cpp collision.cpp -o clock5*/
 
@@ -110,8 +112,8 @@ void presence() {
     void death(const std::string& id){
         Data data_obj;
         if(stoi(data_obj.get_value_char(id, 2)) <=0){
-            data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(id), "");
-            data_obj.app_l("./data/TempChar.csv", data_obj.get_index(id), "");
+            data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(id)+1, "");
+            data_obj.app_l("./data/TempChar.csv", data_obj.get_index(id)+1, "");
         }
     }
 
@@ -146,9 +148,15 @@ void presence() {
     }
 
     void start_infection(const std::string& id){
+        std::cout << "start_infection" << std::endl;
+        collision collision;
         Data obj; 
+        int mpier;
+        if(std::to_string(collision.get_param(2)) == "arid"){mpier = 2;}
+        else if(std::to_string(collision.get_param(2)) == "oceanic"){mpier = 3;}
+        else{mpier = 4;}
         if(std::stoi(obj.get_value_char(id, 10)) <= 20){
-            if(roll_random(90, 50+(50 - stoi(obj.get_value_char(id, 10))), 370) == true){
+            if(roll_random(abs(stoi(obj.get_value_char(id, 10)) * (num_generator(1,3)+mpier)) ,0, 295) == true){
                 //disease started
                 ch_mod(id, "disease=true", 1);
                 std::cout << "infection started: " << id << std::endl;
@@ -156,7 +164,6 @@ void presence() {
         }
     }
     
-        
 
     void get_id(){
         std::ifstream file("./data/CharacterData.csv");
@@ -181,18 +188,18 @@ void presence() {
         if (is_sick(id)){            
             std::string im_val(mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem"));
             if(im_val == "null"){
-                if(roll_random(110, 0, 210)){
-                    ch_mod(id, "immune", 6);
+                if(roll_random(60, 0, 310)){
+                    ch_mod(id, "immunity=immune", 6);
                     ch_mod(id, "disease=null", 1);
                 }else{
-                    ch_mod(id, std::to_string(num_generator(2, 5)), 6);
+                    ch_mod(id, "immunity=" + std::to_string(num_generator(2, 5)), 6);
                 }
             }else if (im_val == "immune"){
                 if(roll_random(215, 0, 250)){
                     ch_mod(id, "disease=null", 1);
                 }
             }else{
-                if(roll_random(110+stoi(im_val)*5, 0, 210)){
+                if(roll_random(70+stoi(im_val), 0, 310)){
                     ch_mod(id, "immunity=immune", 6);
                     ch_mod(id, "disease=null", 1);
                 }
@@ -202,6 +209,7 @@ void presence() {
     
 
 void main_loop() {    
+    std::cout << "2"<< std::endl;
     Data obj; // Create an object of Data
     model mod_obj;
     collision collision;
@@ -213,7 +221,7 @@ void main_loop() {
     if (time_selection == "pause") {
         return; // Exit the function if paused
     }
-
+    std::cout << "3"<< std::endl;
     std::ifstream file("./data/CharacterData.csv");
     std::string line;
 
@@ -266,11 +274,14 @@ void main_loop() {
 
 
         // Additional logic for processing each row
+        
         if (is_sick(row[0])) {
             if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
-                obj.bonheur(row[0], -num_generator(3, 7) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
-            } else {
-                obj.bonheur(row[0], -num_generator(3, 4) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
+                //obj.bonheur(row[0], -num_generator(3, 7) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
+                obj.bonheur(row[0], -num_generator(3, 7) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(9, 12)) + hap_const);
+            } else {                
+                //obj.bonheur(row[0], -num_generator(3, 4) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
+                obj.bonheur(row[0], -num_generator(3, 4) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(9, 12)) + hap_const);
             }
         } else {
             obj.bonheur(row[0], num_generator(7, 13) + hap_const);
@@ -278,19 +289,22 @@ void main_loop() {
         
         obj.age_update(row[0], day);
         
-        
+        immunity(row[0]);
         if (is_sick(row[0])) {
-            obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
+            
+            //obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
+            obj.health(row[0], -num_generator(1, 3) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 19.0));
             if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
-                obj.stress(row[0], num_generator(4, 8) + stoi(obj.get_value_char(row[0], 3)) / 8);
+                //obj.stress(row[0], num_generator(4, 8) + stoi(obj.get_value_char(row[0], 3)) / 8);
+                obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 8.0));
             } else {
-                obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
+                //obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
+                obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 11.0));
             }
         } else {
-            obj.stress(row[0], -(99 - stoi(obj.get_value_char(row[0], 6))) / 10);
+            //obj.stress(row[0], -(99 - stoi(obj.get_value_char(row[0], 6))) / 10);
+            obj.stress(row[0], -(obj.fastdiv(99 - stoi(obj.get_value_char(row[0], 6)), 10.0)));
         }
-
-
         if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
             obj.health(row[0], -num_generator(1, 5));
         } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
@@ -299,7 +313,7 @@ void main_loop() {
             obj.health(row[0], num_generator(7, 11));
         }
         
-        if (obj.disease(row[0]) == true) {
+        if (obj.disease(row[0])) {
             obj.write_logs("this character: " + row[0] + " is now sick");
             ch_mod(row[0], "disease=true", 1);
         }        
@@ -311,13 +325,9 @@ void main_loop() {
         } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
             obj.mentalhealth(row[0], -num_generator(4, 12));
         }
-        
-        
-        
-
-        
+              
         start_infection(row[0]); //on immunise apres le debut de l'infection
-        immunity(row[0]);
+        
         
 
         obj.solitude(row[0]);
@@ -345,6 +355,6 @@ void main_loop() {
 }
  
 int main() {    
-        main_loop();    
+    main_loop();    
     return 0;
 }

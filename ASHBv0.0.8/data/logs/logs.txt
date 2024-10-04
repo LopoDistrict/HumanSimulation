@@ -1,169 +1,533 @@
-<2024-09-28 21:53:56.930456> 
-<2024-09-28 21:53:58.000733> 
-<2024-09-28 21:53:59.080738> 
-<2024-09-28 21:54:00.250518> 
-<2024-09-28 21:54:01.350019> 
-<2024-09-28 21:54:02.450902> 
-<2024-09-28 21:54:03.556342> 
-<2024-09-28 21:54:04.661150> 
-<2024-09-28 21:54:05.762508> 
-<2024-09-28 21:54:06.857084> 
-<2024-09-28 21:54:07.977116> 
-<2024-09-28 21:54:09.072704> 
-<2024-09-28 21:54:10.162452> 
-<2024-09-28 21:54:11.263316> 
-<2024-09-28 21:54:12.386027> 
-<2024-09-28 21:54:13.551853> 
-<2024-09-28 21:54:14.631105> 
-<2024-09-28 21:54:15.724886> 
-<2024-09-28 21:54:16.811025> 
-<2024-09-28 21:54:17.895920> 
-<2024-09-28 21:54:18.989577> 
-<2024-09-28 21:54:20.061334> 
-<2024-09-28 21:54:21.140332> 
-<2024-09-28 21:54:22.229692> 
-<2024-09-28 21:54:23.310752> 
-<2024-09-28 21:54:24.491406> 
-<2024-09-28 21:54:25.565817> 
-<2024-09-28 21:54:26.655330> 
-<2024-09-28 21:54:27.755530> 
-<2024-09-28 21:54:28.855648> 
-<2024-09-28 21:54:30.005482> 
-<2024-09-28 21:54:31.141265> 
-<2024-09-28 21:54:32.311362> 
-<2024-09-28 21:54:33.457081> 
-<2024-09-28 21:54:34.581466> 
-<2024-09-28 21:54:35.730695> 
-<2024-09-28 21:54:36.851634> 
-<2024-09-28 21:54:37.971775> 
-<2024-09-28 21:54:39.116457> 
-<2024-09-28 21:54:40.236687> 
-<2024-09-28 21:54:41.340554> 
-<2024-09-28 21:54:42.536598> 
-<2024-09-28 21:54:43.639736> 
-<2024-09-28 21:54:44.715816> 
-<2024-09-28 21:54:45.851927> 
-<2024-09-28 21:54:47.354187> 
-<2024-09-28 21:54:48.421671> 
-<2024-09-28 21:54:49.522841> 
-<2024-09-28 21:54:50.625688> 
-<2024-09-28 21:54:51.756336> 
-<2024-09-28 21:54:52.851665> 
-<2024-09-28 21:54:54.102956> 
-<2024-09-28 21:54:55.181083> 
-<2024-09-28 21:54:56.311029> 
-<2024-09-28 21:54:57.420591> 
-<2024-09-28 21:54:57.685908> GUI created char: (307, 175, 317, 185)
-<2024-09-28 21:54:57.710418> new character added 2xhucm96
-<Sat Sep 28 21:55:00 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:03.469921> GUI created char: (417, 250, 427, 260)
-<2024-09-28 21:55:03.490103> new character added 3pwpuq23
-<2024-09-28 21:55:03.560658> 
-<2024-09-28 21:55:03.560658> terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:23.707126> New clock triggering
+<2024-10-04 20:21:23.835241> 1
+2
+Tool function definition: get_simulation_param
+3
+0
+clock starting: 0
+3
+actual day 0
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
+
+<2024-10-04 20:21:24.843514> New clock triggering
+<2024-10-04 20:21:24.933528> 1
+2
+Tool function definition: get_simulation_param
+3
+1
+clock starting: 1
+3
+actual day 1
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
+
+<2024-10-04 20:21:25.938209> New clock triggering
+<2024-10-04 20:21:26.003279> 1
+2
+Tool function definition: get_simulation_param
+3
+2
+clock starting: 2
+3
+actual day 2
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
+
+<2024-10-04 20:21:27.007445> New clock triggering
+<2024-10-04 20:21:27.128328> 1
+2
+Tool function definition: get_simulation_param
+3
+3
+clock starting: 3
+3
+actual day 3
+actual tick 4
+The clock terminated successfully
+applying the result in the TUI
+
+<2024-10-04 20:21:27.199676> GUI created char: (130, 407, 140, 417)
+<2024-10-04 20:21:27.293839> new character added 0jbiwy66
+<2024-10-04 20:21:28.475405> New clock triggering
+<Fri Oct  4 20:21:29 2024
+> this character: 0jbiwy66 is now sick
+<2024-10-04 20:21:33.479509> 1
+2
+Tool function definition: get_simulation_param
+3
+4
+clock starting: 4
+3
+0jbiwy66
+tool function definition: get_value_char
+no
+tool function : start_desire()
+tool function definition: get_value_char
+M
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+150
+tool function definition: get_value_char
+80
+80
+tool function definition: get_value_char
+80
+0jbiwy66
+constant-3
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-1.2864
+nvstats bonheur: 78.7136
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+3
+78.713600
+0jbiwy66
+4
+tool function definition: get_value_char
+0
+0
+tool function definition: get_value_char
+15
+Tool function: immunity
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+Tool function definition: get_value
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_line_equivalent
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+tool function ch_mod
+id=0jbiwy66
+disease=null
+mvt=SS15
+ir_target=hap++
+caction=null
+paction=null
+immunity=null
+tmp=null
+mact=null
+tool function ch_mod
+id=0jbiwy66
+disease=null
+mvt=SS15
+ir_target=hap++
+caction=null
+paction=null
+immunity=immune
+tmp=null
+mact=null
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+100
+100
+0jbiwy66
+-8
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+150
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+142.000000
+tool function definition: get_value_char
+78.713600
+tool function definition: get_value_char
+78.713600
+78
+0jbiwy66
+12
+tool function definition: get_value_char
+78.713600
+tool function definition: get_value_char
+100
+79
+78.7136
+14.52
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+4
+15.000000
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+142.000000
+0jbiwy66
+9
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+142.000000
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+151.000000
+tool function disease
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function ch_mod
+id=0jbiwy66
+disease=null
+mvt=SS15
+ir_target=hap++
+caction=null
+paction=null
+immunity=immune
+tmp=null
+mact=null
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+start_infection
+Tool function definition: get_simulation_param
+2
+arid
+
+<2024-10-04 20:21:33.483675> terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<2024-09-28 21:55:03.565450> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:33.488268> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<Sat Sep 28 21:55:04 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:07.410470> 
-<2024-09-28 21:55:07.410470> terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:34.540673> New clock triggering
+<Fri Oct  4 20:21:36 2024
+> this character: 0jbiwy66 is now sick
+<2024-10-04 20:21:38.722985> 1
+2
+Tool function definition: get_simulation_param
+3
+5
+clock starting: 5
+3
+0jbiwy66
+tool function definition: get_value_char
+no
+tool function : start_desire()
+tool function definition: get_value_char
+M
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+151.000000
+tool function definition: get_value_char
+78.713600
+78
+tool function definition: get_value_char
+78.713600
+0jbiwy66
+constant-3
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-1.2864
+nvstats bonheur: 77.4272
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+3
+77.427200
+0jbiwy66
+5
+tool function definition: get_value_char
+0
+0
+tool function definition: get_value_char
+15
+Tool function: immunity
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+Tool function definition: get_value
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_line_equivalent
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+100
+100
+0jbiwy66
+-6
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+151.000000
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+145.000000
+tool function definition: get_value_char
+77.427200
+tool function definition: get_value_char
+77.427200
+77
+0jbiwy66
+13
+tool function definition: get_value_char
+77.427200
+tool function definition: get_value_char
+100
+77
+77.4272
+15.73
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+4
+16.000000
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+145.000000
+0jbiwy66
+8
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+145.000000
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+153.000000
+tool function disease
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function ch_mod
+id=0jbiwy66
+disease=true
+mvt=SS22
+ir_target=hap++
+caction=null
+paction=null
+immunity=immune
+tmp=null
+mact=null
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+start_infection
+Tool function definition: get_simulation_param
+2
+arid
+
+<2024-10-04 20:21:38.722985> terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<2024-09-28 21:55:07.410470> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:38.722985> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<Sat Sep 28 21:55:08 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:10.900966> 
-<2024-09-28 21:55:10.900966> terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:39.743919> New clock triggering
+<Fri Oct  4 20:21:41 2024
+> this character: 0jbiwy66 is now sick
+<2024-10-04 20:21:44.362838> 1
+2
+Tool function definition: get_simulation_param
+3
+6
+clock starting: 6
+3
+0jbiwy66
+tool function definition: get_value_char
+no
+tool function : start_desire()
+tool function definition: get_value_char
+M
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+153.000000
+tool function definition: get_value_char
+77.427200
+77
+tool function definition: get_value_char
+77.427200
+0jbiwy66
+constant-2
+tool function definition: print_vector
+The vector is empty.
+not in mesh
+entering function
+calculation.cpp -nv-0.8844
+nvstats bonheur: 76.5428
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+3
+76.542801
+0jbiwy66
+6
+tool function definition: get_value_char
+0
+0
+tool function definition: get_value_char
+15
+Tool function: immunity
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+Tool function definition: get_value
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_line_equivalent
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+Tool function definition: get_model
+ID: 0jbiwy66
+Line number: 6
+tool function is_sick
+tool function definition: get_model
+0jbiwy66
+1
+tool function definition: get_value_char
+100
+100
+0jbiwy66
+-8
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+153.000000
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+145.000000
+tool function definition: get_value_char
+76.542801
+tool function definition: get_value_char
+76.542801
+76
+0jbiwy66
+14
+tool function definition: get_value_char
+76.542801
+tool function definition: get_value_char
+100
+77
+76.5428
+16.94
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+4
+17.000000
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+100
+tool function definition: get_value_char
+145.000000
+0jbiwy66
+9
+tool function definition: get_value_char
+15
+tool function definition: get_value_char
+145.000000
+tool function definition: get_index
+1
+tool function definition: update_csv_cell
+1
+2
+154.000000
+tool function disease
+tool function definition: get_neighbour
+multiplicator contamination0
+tool function ch_mod
+id=0jbiwy66
+disease=true
+mvt=SS14
+ir_target=hap++
+caction=null
+paction=null
+immunity=immune
+tmp=null
+mact=null
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+tool function definition: get_value_char
+7
+start_infection
+Tool function definition: get_simulation_param
+2
+arid
+
+<2024-10-04 20:21:44.362838> terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<2024-09-28 21:55:10.910748> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
+<2024-10-04 20:21:44.362838> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
   what():  stoi
 
-<Sat Sep 28 21:55:12 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:15.540401> 
-<2024-09-28 21:55:15.544911> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:15.544911> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:16.351060> GUI created char: (316, 234, 326, 244)
-<2024-09-28 21:55:16.370547> new character added 9jarbs41
-<Sat Sep 28 21:55:17 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:21.245531> 
-<2024-09-28 21:55:21.250598> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:21.250598> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<Sat Sep 28 21:55:22 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:24.100421> 
-<2024-09-28 21:55:24.100421> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:24.100421> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<Sat Sep 28 21:55:25 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:28.730574> 
-<2024-09-28 21:55:28.730868> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:28.730868> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<Sat Sep 28 21:55:30 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:32.390351> 
-<2024-09-28 21:55:32.395628> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:32.396546> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:36.576320> 
-<2024-09-28 21:55:36.581270> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:36.581270> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<Sat Sep 28 21:55:38 2024
-> this character: 2xhucm96 is now sick
-<2024-09-28 21:55:42.630575> 
-<2024-09-28 21:55:42.630575> terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<2024-09-28 21:55:42.636380> Error occured while running clock.exe: terminate called after throwing an instance of 'std::invalid_argument'
-  what():  stoi
-
-<Sat Sep 28 21:56:05 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 22:36:50 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 22:51:17 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 22:53:41 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 22:56:17 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 22:59:29 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 23:01:22 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 23:20:08 2024
-> this character: 2xhucm96 is now sick
-<Sat Sep 28 23:20:11 2024
-> this character: 3pwpuq23 is now sick
-<Sat Sep 28 23:20:13 2024
-> this character: 9jarbs41 is now sick
+<2024-10-04 20:21:45.374476> New clock triggering
+<Fri Oct  4 20:21:46 2024
+> this character: 0jbiwy66 is now sick

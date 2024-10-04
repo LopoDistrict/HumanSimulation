@@ -10,6 +10,7 @@
 #include "Data.h"
 #include <chrono>
 #include "calculation_software/include/fast_division.h"
+#include <cmath> 
      
 
 //get_value_char + update_csv + get_index
@@ -55,13 +56,32 @@ class Cellule{
         
     }
 
+
+float Data::fastdiv(float quotient, const float& div) { 
+    int quotientI = static_cast<int>(round(quotient));
+    int divI = static_cast<int>(round(div));  // Calculate at runtime
+
+    std::cout << quotientI << std::endl;
+
+    if ((divI & (divI - 1)) == 0) {  // Check if divI is a power of two
+        int log2_divisor = 31 - __builtin_clz(divI);
+        return (quotientI >> log2_divisor) * 1.0f;  // Fast divide by power of 2
+    }
+
+    uint64_t m = uint64_t(1) << (31 - __builtin_clz(divI) + 32);
+    uint64_t c = m / divI;
+
+    return static_cast<float>((c * quotientI) >> (32 + 31 - __builtin_clz(divI)));
+}
+
+
+
    void Data::Hygiene(const std::string& id){
         float base_hygiene = stof(get_value_char(id, 10));
             if (get_model(id, 1) != "disease=null"){
                 //malade
                 base_hygiene -= 2.15 * (get_neighbour(id).size() * 1.0);
             }else{
-
                 base_hygiene += 4.86;
             }
         update_csv_cell(get_index(id), 10, std::to_string(base_hygiene));
@@ -80,7 +100,7 @@ class Cellule{
     while (std::getline(mailleFile, line)) {
         maille.push_back(line);
     }
-    print_vector(maille); // Assuming print_vector is a defined method
+    //print_vector(maille); // Assuming print_vector is a defined method
 
     // Check if the id exists in maille
     for (int i = 0; i < maille.size(); ++i) {
@@ -95,7 +115,7 @@ class Cellule{
                 std::vector<std::string> lpoint = get_point_list(id);
                 std::vector<std::string> lc = get_couple_list(id);
 
-                if (roll_random(84, 0, 230) && 
+                if (roll_random(94, 0, 250) && 
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
@@ -173,8 +193,8 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
             file_gen << tree_parent << std::endl;
             desire(idA, 4.0, true);
             desire(idB, 4.0, true);
-            bonheur(idA, 8.0);  // Note: Changed from bohneur to bonheur
-            bonheur(idB, 8.0);
+            bonheur(idA, 7.0);  // Note: Changed from bohneur to bonheur
+            bonheur(idB, 7.0);
             std::cout << "new couple" << idA << "  " << idB << std::endl;
             std::cout << tree_parent << std::endl;
         } else {
@@ -241,6 +261,7 @@ std::vector<std::string> Data::get_couple_list(const std::string& id) {
     while (std::getline(file, line)) {
         if (line.substr(0, 8) == id && line[8] == '-') {
             couples.push_back(line.substr(9, 8));
+            
         }
     }
     return couples;
@@ -252,10 +273,13 @@ void Data::modify_desire(const std::string& idA, const std::string& idB, const s
     std::vector<std::string> lines;
 
     while (std::getline(file, line)) {
-        if (line.substr(0, 17) == idA + "-" + idB || line.substr(0, 17) == idB + "-" + idA) {
-            line += constant;
-        } else if (line.substr(0, 17) == idA + ">" + idB || line.substr(0, 17) == idB + ">" + idA) {
-            line += constant;
+        
+        if (line.substr(0, 17) == idA + "-" + idB || line.substr(0, 17) == idA + ">" + idB) {
+            line = idA + line[8] + idB + constant;
+            break;
+        } else if (line.substr(0, 17) == idB + ">" + idA || line.substr(0, 17) == idB + "-" + idA) {
+            line = idB + line[8] + idA + constant;
+            break;
         }
         lines.push_back(line);
     }
@@ -351,7 +375,6 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
     }
 
 
-
     void Data::solitude(const std::string& id) {
         // Update solitude stats in the file based on presence
         std::cout << "tool function definition: Data::solitude" << std::endl;
@@ -374,8 +397,10 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         
         float old = stof(get_value_char(id, 7));
         //float new_value = (stoi(get_value_char(id, 3)) / 9) / (stoi(get_value_char(id, 8)) / 6); == 
-        float new_value = fast_division::divide32<fast_division::divide32<9>::quotient(stoi(get_value_char(id, 3)))>::
-        quotient(fast_division::divide32<6>::quotient(stoi(get_value_char(id, 8))));
+        //float new_value = fast_division::divide32<fast_division::divide32<9>::quotient(stoi(get_value_char(id, 3)))>::
+        //quotient(fast_division::divide32<6>::quotient(stoi(get_value_char(id, 8))));
+
+        float new_value = fastdiv(fastdiv((stoi(get_value_char(id, 3))), 9), fastdiv(stoi(get_value_char(id, 8)), 6));
         
         
         float nvstats;
@@ -385,7 +410,8 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         } else {
             int count_id = std::count(maille.begin(), maille.end(), id);
             //nvstats = Fsolitude(old, new_value / count_id); ==
-            nvstats = Fsolitude(old, fast_division::divide32<count_id>::quotient(new_value));
+            //nvstats = Fsolitude(old, fast_division::divide32<count_id>::quotient(new_value));
+            nvstats = Fsolitude(old, fastdiv(new_value, count_id));
         }
 
         std::cout << "New solitude stats: " << std::ceil(nvstats) << std::endl;
@@ -572,7 +598,7 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         // le bohneur baisse plus lentement qu'il croit
         
         if (c <= 0){
-            float nv = 0.312 * c;
+            float nv = 0.402 * c;
             std::cout << "calculation.cpp -nv" << nv << std::endl;
             return nv;
         } else{
@@ -666,8 +692,9 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         // augmente rapidement quand la constante est grande
         // constante definie par les maladies 
         float bonheur = stof(get_value_char(id, 3));
-        //float nvstats = (bonheur / stof(get_value_char(id, 5)) + constant) * 1.21; ==
-        float nvstats = (fast_division::divide32<stof(get_value_char(id, 5))>::quotient(bonheur) + constant) * 1.21;   
+        //float nvstats = (bonheur / stof(get_value_char(id, 5)) + constant) * 1.21; 
+        //float nvstats = (fast_division::divide32<stof(get_value_char(id, 5))>::quotient(bonheur) + constant) * 1.21; 
+        float nvstats = (fastdiv(bonheur, stof(get_value_char(id, 5))) + constant) *  1.21;
 
         std::cout <<  bonheur << std::endl;         
         std::cout <<   nvstats << std::endl;
@@ -759,7 +786,7 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
 
     bool Data::disease(const std::string& id){
-        std::cout << id << std::endl;
+        std::cout << "tool function disease" << std::endl;
         //  ??? possibilité d'une constante => si une pop/char a deja été 
         //contaminée donc elle est moins a risque de se faire contaminée        
         //on check si des personne on déja des disease autour de lui
@@ -768,9 +795,9 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
         for (int i=0; i < neighbour.size(); i++){
             if (get_model(id, 1) != "disease=null"){
-                multiplicator_contaminated *= 6.3;
+                multiplicator_contaminated *= 3.2;
             }else{
-                multiplicator_contaminated *= 1.13;
+                multiplicator_contaminated *= 0.93;
             }    
         }   
         std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;

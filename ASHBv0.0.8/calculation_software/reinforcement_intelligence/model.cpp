@@ -100,7 +100,7 @@ std::string model::get_value(const std::string& id, int line, const std::string&
 
     } else {
         std::cerr << "Error: Value not found in model" << std::endl;
-        return "Error: Value not found"; // Handle case where value is not found
+        return "Error: Value not found"; // Handle case where value     t found
     }
 }
 

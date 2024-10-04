@@ -283,6 +283,7 @@ class Simulation(tk.Tk):
             csvwriter.writerow(newVal)
         print("[", Fore.GREEN + "+","] ","New character has been added")
         write_logs(f"new character added {id}")
+        
         print(' ')
 
 
@@ -361,13 +362,21 @@ class Simulation(tk.Tk):
         while 1:            
             command = input('>')
             if command == 'nc' or command == "newcharacter":
-                #creation d'un nouveau char artificiellement
-            
-                x = int(input ("X position(px: int): "))
-                y = int(input ("Y position(px: int): "))
+                # Creation of a new character artificially
+                while True:
+                    x = input("X position(px: int): ")
+                    y = input("Y position(px: int): ")
+                    try:
+                        x = int(x)
+                        y = int(y)
+                        break  # Exit the loop if both inputs are valid integers
+                    except ValueError:
+                        print(Fore.RED + "Error:", "wrong input type, integer expected. Please try again.")
+
                 if x < 0 or x > self.canvas.winfo_width() or y < 0 or y > self.canvas.winfo_height():
                     print(Fore.RED + "Error",": Out of Bounds -> x in ", (0, self.canvas.winfo_width()), "y in", (0, self.canvas.winfo_height()))
                 elif x == 000: #random coords
+                    print("random value")
                     xV = random.randint(0, self.canvas.winfo_width())
                     yV = random.randint(0, self.canvas.winfo_height())
                     self.create_new_character(xV, yV, True)
@@ -375,6 +384,7 @@ class Simulation(tk.Tk):
                     self.CreateTempPosition(id, xV, yV, 'x')
                     self.CreateCharStasts(id)
                 else:
+                    
                     self.create_new_character(x, y, True)
                     id = self.randmId()
                     self.CreateTempPosition(id, x, y, 'x')

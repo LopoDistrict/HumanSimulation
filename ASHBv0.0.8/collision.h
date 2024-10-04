@@ -9,6 +9,7 @@
 #include <sstream>
 #include <unordered_set>
 #include <tuple>
+#include <algorithm>
 
 class collision {
 public:

@@ -42,8 +42,8 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
     }
 
     int collision::get_param(int line) {
-//        std::cout << "Tool function definition: get_simulation_param" << std::endl;
-//        std::cout << line << std::endl;
+        std::cout << "Tool function definition: get_simulation_param" << std::endl;
+        std::cout << line << std::endl;
 
         std::ifstream file("./data/temp/GenTempModule.asb");
         std::string result;
@@ -55,7 +55,7 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
         } else {
             std::cerr << "Error opening file." << std::endl;
         }
-//        std::cout << result << std::endl;
+        std::cout << result << std::endl;
         return stoi(result);
     }
 
@@ -85,7 +85,7 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
                 }
             }
         } else {
-//            std::cout << "error opening the file" << std::endl;
+            std::cout << "error opening the file" << std::endl;
         }
     }
 /*
@@ -102,19 +102,19 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
             std::getline(Myfile,line);
             if ((offset = line.find(search, 0)) != string::npos) 
             {
-//                std::cout << "found '" << search << "' in '" << line << "'" << std::endl;
+                std::cout << "found '" << search << "' in '" << line << "'" << std::endl;
                 Myfile.close();
                 return true;
             }
             else
             {
-//                std::cout << "Not found" << std::endl;
+                std::cout << "Not found" << std::endl;
             }
         }
         Myfile.close();
     }
     else
-//        std::cout << "Unable to open this file." << std::endl;
+        std::cout << "Unable to open this file." << std::endl;
 
     return false;
 }*/
@@ -153,18 +153,14 @@ void collision::presence() {
                 if (std::stoi(csvRow[1]) >= cell[0] && std::stoi(csvRow[1]) <= cell[1] &&
                     std::stoi(csvRow[2]) >= cell[2] && std::stoi(csvRow[2]) <= cell[3]) {
                     
-                    // Check if the entry already exists in existing entries
+                    // Check if the entry already exists
                     if (existingEntries.find(csvRow[0]) == existingEntries.end()) {
-                        // Check if the entry is already in tempChar
-                        if (std::find(tempChar.begin(), tempChar.end(), csvRow[0]) == tempChar.end()) {
-                            tempChar.push_back(csvRow[0]);
-                            num++;
-                        }
+                        tempChar.push_back(csvRow[0]);
+                        num++;
                     }
                 }
             }
-            // Only add tempChar to presence if it has unique entries
-            if (!tempChar.empty()) {
+            if (tempChar.size() > 1) {
                 presence.push_back(tempChar);
             }
             tempChar.clear();
@@ -173,13 +169,8 @@ void collision::presence() {
     }
 
     temp_csv_file.close();
-
-    // Write to the file only if we have new presence data
-    if (!presence.empty()) {
-        tempWrite("./data/temp/presence", presence);
-    }
+    tempWrite("./data/temp/presence", presence);
 }
-
 
 
 /*

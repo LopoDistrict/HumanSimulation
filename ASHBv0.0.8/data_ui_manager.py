@@ -34,3 +34,26 @@ def app_l(file_path, line_number, value):
     # Write the modified contents back to the file
     with open(file_path, 'w') as file:
         file.writelines(lines)
+
+
+def get_line_equivalent(id, line):
+    lineFile = str(get_model(id, line))
+    path = "./data/temp/GenTempModule.asb"
+    value = ""    
+    for i in lineFile:
+        if i == "=":
+            return value
+        value += i
+
+
+def get_model(id, line):
+    path = "./data/temp/GenTempModule.asb"    
+    result = ""
+    with open(path) as file:
+        return file.readlines()[line]
+
+
+def get_value(id, line):
+    value = get_line_equivalent(id, line)
+    model = get_model(id, line)
+    return model[len(value)+1:] 
