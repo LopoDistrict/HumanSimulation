@@ -116,6 +116,9 @@ void presence() {
             data_obj.app_l("./data/TempChar.csv", data_obj.get_index(id)+1, "");
         }
     }
+        
+
+    
 
     
     void ch_mod(const std::string& id, const std::string& value, int l){        
@@ -152,8 +155,8 @@ void presence() {
         collision collision;
         Data obj; 
         int mpier;
-        if(std::to_string(collision.get_param(2)) == "arid"){mpier = 2;}
-        else if(std::to_string(collision.get_param(2)) == "oceanic"){mpier = 3;}
+        if(collision.get_param(2) == "arid"){mpier = 2;}
+        else if(collision.get_param(2) == "oceanic"){mpier = 3;}
         else{mpier = 4;}
         if(std::stoi(obj.get_value_char(id, 10)) <= 20){
             if(roll_random(abs(stoi(obj.get_value_char(id, 10)) * (num_generator(1,3)+mpier)) ,0, 295) == true){
@@ -163,7 +166,9 @@ void presence() {
             }
         }
     }
-    
+  
+
+
 
     void get_id(){
         std::ifstream file("./data/CharacterData.csv");
@@ -188,7 +193,8 @@ void presence() {
         if (is_sick(id)){            
             std::string im_val(mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem"));
             if(im_val == "null"){
-                if(roll_random(60, 0, 310)){
+                if(roll_random(50, 0, 310)){
+                    std::cout << "entity immune"<< id << std::endl;
                     ch_mod(id, "immunity=immune", 6);
                     ch_mod(id, "disease=null", 1);
                 }else{
@@ -214,7 +220,7 @@ void main_loop() {
     model mod_obj;
     collision collision;
     std::string time_selection = "play";
-    int day = collision.get_param(3);
+    int day = stoi(collision.get_param(3));
     int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
     std::cout << "clock starting: " << day << std::endl;
 
@@ -289,7 +295,7 @@ void main_loop() {
         
         obj.age_update(row[0], day);
         
-        immunity(row[0]);
+        
         if (is_sick(row[0])) {
             
             //obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
@@ -313,10 +319,7 @@ void main_loop() {
             obj.health(row[0], num_generator(7, 11));
         }
         
-        if (obj.disease(row[0])) {
-            obj.write_logs("this character: " + row[0] + " is now sick");
-            ch_mod(row[0], "disease=true", 1);
-        }        
+      
 
         if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
             obj.mentalhealth(row[0], -num_generator(1, 5));
@@ -327,7 +330,13 @@ void main_loop() {
         }
               
         start_infection(row[0]); //on immunise apres le debut de l'infection
-        
+
+        immunity(row[0]);
+
+        if (obj.disease(row[0])) {            
+            obj.write_logs("this character: " + row[0] + " is now sick");
+            ch_mod(row[0], "disease=true", 1);
+        }  
         
 
         obj.solitude(row[0]);
@@ -335,8 +344,8 @@ void main_loop() {
         //std::string coll = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\collision.exe ";
         //int r = system(coll.c_str());
         
-        collision.width =  collision.get_param(0);
-        collision.height = collision.get_param(1);
+        collision.width =  stoi(collision.get_param(0));
+        collision.height = stoi(collision.get_param(1));
     
         collision.separate();
         collision.presence();

@@ -20,7 +20,7 @@ public:
     collision(); // Constructor
     void tempWrite(std::string file, const std::tuple<std::string, std::string, std::string, std::string>& values);
     void tempWrite(std::string file, const std::vector<std::vector<std::string>>& presence);
-    int get_param(int line);
+    std::string get_param(int line);
     //bool CheckWord(char* filename, char* search);
     void separate();
     void presence();

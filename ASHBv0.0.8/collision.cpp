@@ -41,8 +41,8 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
         }
     }
 
-    int collision::get_param(int line) {
-        std::cout << "Tool function definition: get_simulation_param" << std::endl;
+    std::string collision::get_param(int line) {
+        std::cout << "Tool function definition: get_param" << std::endl;
         std::cout << line << std::endl;
 
         std::ifstream file("./data/temp/GenTempModule.asb");
@@ -56,7 +56,7 @@ void collision::tempWrite(std::string file, const std::tuple<std::string, std::s
             std::cerr << "Error opening file." << std::endl;
         }
         std::cout << result << std::endl;
-        return stoi(result);
+        return result;
     }
 
 
