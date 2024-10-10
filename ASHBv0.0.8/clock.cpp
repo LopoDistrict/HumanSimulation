@@ -121,34 +121,36 @@ void presence() {
     
 
     
-    void ch_mod(const std::string& id, const std::string& value, int l){        
-        /*
-        string line ;
-        std::ifstream model(std::to_string("data/memory/model") + id + std::to_string("".dmem"));
-        std::getline(model, line);
-        std::ofstream model2(std::to_string("data/memory/model") + id + std::to_string(".dmem"));
-        model2 << "disease=true" << std::endl;*/
-        std::cout << "tool function ch_mod" << std::endl;
-        std::ifstream file(std::string("./data/memory/model/") + id + std::string(".dmem"));
-        std::vector<std::string> data;
-        std::string line;
-        while (std::getline(file, line)) {
-            data.push_back(line);
-        }
-        file.close();
+void chmod(const std::string& id, const std::string& value, int l) {
+    std::cout << "Tool function: modify_model_mov" << std::endl;
+    
 
-        for (const auto& str : data) {
-            std::cout << str << std::endl;
-        }
+    std::ifstream file("./data/memory/model/" + id + ".dmem");
+    std::vector<std::string> lines;
+    std::string line;
 
-        data[l] = value ;
-
-        std::ofstream outFile(std::string("./data/memory/model/") +id + std::string(".dmem"));
-        for (const auto& str : data) {
-            outFile << str << std::endl;
-        }        
-        outFile.close();
+    // Read all lines from the file
+    while (std::getline(file, line)) {
+        lines.push_back(line);
     }
+    file.close();
+
+    // Check if the line index is valid
+    if (l < 0 || l >= lines.size()) {
+        std::cerr << "Error: Line index " << l << " is out of range." << std::endl;
+        return;
+    }
+    // Overwrite the specified line with the new value
+    lines[l] = value;
+    std::ofstream filew("./data/memory/model/" + id + ".dmem");
+    for (size_t i = 0; i < lines.size(); ++i) {
+        filew << lines[i];
+        if (i < lines.size() - 1) {
+            filew << std::endl; // Add newline for all lines except the last one
+        }
+    }
+    filew.close();
+}
 
     void start_infection(const std::string& id){
         std::cout << "start_infection" << std::endl;
@@ -161,7 +163,7 @@ void presence() {
         if(std::stoi(obj.get_value_char(id, 10)) <= 20){
             if(roll_random(abs(stoi(obj.get_value_char(id, 10)) * (num_generator(1,3)+mpier)) ,0, 295) == true){
                 //disease started
-                ch_mod(id, "disease=true", 1);
+                chmod(id, "disease=true", 1);
                 std::cout << "infection started: " << id << std::endl;
             }
         }
@@ -185,6 +187,13 @@ void presence() {
         std::cout << "Error: bad id/value" << std::endl;
     }
 
+    void implem_reaction(const std::string& id, int day){
+        //Le processus du machine learning doit prendre plusieurs jours et 
+        //ne s'exec donc pas tt les jours
+
+        
+    }
+
     void immunity(const std::string& id){
         //prepare l'immunité face au maladies
         //TODO: optimize
@@ -193,21 +202,21 @@ void presence() {
         if (is_sick(id)){            
             std::string im_val(mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem"));
             if(im_val == "null"){
-                if(roll_random(50, 0, 310)){
+                if(roll_random(40, 0, 310)){
                     std::cout << "entity immune"<< id << std::endl;
-                    ch_mod(id, "immunity=immune", 6);
-                    ch_mod(id, "disease=null", 1);
+                    chmod(id, "immunity=immune", 6);
+                    chmod(id, "disease=null", 1);
                 }else{
-                    ch_mod(id, "immunity=" + std::to_string(num_generator(2, 5)), 6);
+                    chmod(id, "immunity=" + std::to_string(num_generator(2, 5)), 6);
                 }
             }else if (im_val == "immune"){
                 if(roll_random(215, 0, 250)){
-                    ch_mod(id, "disease=null", 1);
+                    chmod(id, "disease=null", 1);
                 }
             }else{
                 if(roll_random(70+stoi(im_val), 0, 310)){
-                    ch_mod(id, "immunity=immune", 6);
-                    ch_mod(id, "disease=null", 1);
+                    chmod(id, "immunity=immune", 6);
+                    chmod(id, "disease=null", 1);
                 }
             }
         }
@@ -215,14 +224,14 @@ void presence() {
     
 
 void main_loop() {    
-    std::cout << "2"<< std::endl;
+    
     Data obj; // Create an object of Data
     model mod_obj;
     collision collision;
     std::string time_selection = "play";
     int day = stoi(collision.get_param(3));
     int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
-    std::cout << "clock starting: " << day << std::endl;
+    std::cout << "clock starting, day: " << day << std::endl;
 
     if (time_selection == "pause") {
         return; // Exit the function if paused
@@ -307,9 +316,14 @@ void main_loop() {
                 //obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
                 obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 11.0));
             }
+            immunity(row[0]);
         } else {
             //obj.stress(row[0], -(99 - stoi(obj.get_value_char(row[0], 6))) / 10);
             obj.stress(row[0], -(obj.fastdiv(99 - stoi(obj.get_value_char(row[0], 6)), 10.0)));
+            if (obj.disease(row[0])) {            
+                chmod(row[0], "disease=true", 1);                     
+            }  
+            //immunity(row[0]);
         }
         if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
             obj.health(row[0], -num_generator(1, 5));
@@ -330,13 +344,6 @@ void main_loop() {
         }
               
         start_infection(row[0]); //on immunise apres le debut de l'infection
-
-        immunity(row[0]);
-
-        if (obj.disease(row[0])) {            
-            obj.write_logs("this character: " + row[0] + " is now sick");
-            ch_mod(row[0], "disease=true", 1);
-        }  
         
 
         obj.solitude(row[0]);
@@ -353,7 +360,10 @@ void main_loop() {
 
         obj.desire(row[0], num_generator(3,9), true);
         death(row[0]);
+        
     }
+
+
 
     //day += tick;
     std::cout << "actual day " << day << std::endl;

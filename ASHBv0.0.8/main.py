@@ -199,10 +199,10 @@ class Simulation(tk.Tk):
 
     def create_new_character(self,posx, posy, cmd, event=None):
         try:
-            self.canvas.create_oval(posx, posy, posx+10, posy+10, fill="white", outline="red")
+            self.canvas.create_oval(posx, posy, posx+6, posy+6, fill="white", outline="red")
             if cmd == True:
                 print("[", Fore.GREEN + "+","] ", "Character artifiaclly created sucessfully")
-                write_logs(f"GUI created char: {posx, posy, posx+10, posy+10}")
+                write_logs(f"GUI created char: {posx, posy, posx+6, posy+6}")
         
         except:
             print(Fore.RED + 'Error', ': Artificial char. creation failed')
@@ -263,7 +263,9 @@ class Simulation(tk.Tk):
         model.write('paction=null' + '\n') #5
         model.write('immunity=null' + '\n') #6
         model.write('tmp=null' + '\n') #7
-        model.write('mact=null' + '\n') #8
+        model.write('mem_act=null' + '\n') #8
+        model.write('angconn=null' + '\n') #9
+        model.write('goodconn=null' + '\n') #10
         #si il ya diff val dans une ligne on les sépare par _
          
         model.close()
