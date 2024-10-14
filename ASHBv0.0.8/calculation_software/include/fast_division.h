@@ -2,7 +2,7 @@
 #ifndef FAST_DIVISION_H
 #define FAST_DIVISION_H
 
-#include <cstdint>
+
 #include <iostream>
 
 namespace fast_division {

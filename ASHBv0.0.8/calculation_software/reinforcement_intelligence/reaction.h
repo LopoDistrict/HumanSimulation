@@ -12,12 +12,12 @@
 #include "model.h"
 #include "../movement.h"
 #include <unordered_map>
-
+#include <bitset>
+#include <cstdint>
 
 
 class reaction {
 public:
-
     reaction();
     std::string get_last_line(const std::string& path);
     std::string get_value_csv(int l, int value_ind, std::string path);
@@ -39,7 +39,8 @@ public:
     void discrimination(const std::string& id);
     void ang_social_conn(const std::string& id);
     void good_social_conn(const std::string& id);
-
+    std::unordered_map<std::string, std::string> modval_to_umap(const std::string& id, int line);
+    void w_unmap_model(const std::string& id, std::unordered_map<std::string, std::string> umap, int l);
 };
 
 #endif //REACTION_H

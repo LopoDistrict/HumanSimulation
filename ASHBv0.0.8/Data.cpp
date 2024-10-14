@@ -157,7 +157,7 @@ void Data::eraseFileLine(std::string path, std::string eraseLine) {
 
 
 void Data::app_l(const std::string& file_path, int line_number, const std::string& value) {
-    // Read the contents of the file
+    // ajoute une valeur a une ligne a un fichier
     std::ifstream file(file_path);
     std::vector<std::string> lines;
     std::string line;
@@ -275,10 +275,11 @@ void Data::modify_desire(const std::string& idA, const std::string& idB, const s
     while (std::getline(file, line)) {
         
         if (line.substr(0, 17) == idA + "-" + idB || line.substr(0, 17) == idA + ">" + idB) {
-            line = idA + line[8] + idB + constant;
+            line = idA + line[8] + idB + std::to_string(stoi(constant) + stoi(line.substr(17, line.size()-17)));;
+            //incroyabklement compliqué pour rien au final 
             break;
         } else if (line.substr(0, 17) == idB + ">" + idA || line.substr(0, 17) == idB + "-" + idA) {
-            line = idB + line[8] + idA + constant;
+            line = idB + line[8] + idA + std::to_string(stoi(constant) + stoi(line.substr(17, line.size()-17)));
             break;
         }
         lines.push_back(line);

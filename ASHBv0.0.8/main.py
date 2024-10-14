@@ -266,6 +266,7 @@ class Simulation(tk.Tk):
         model.write('mem_act=null' + '\n') #8
         model.write('angconn=null' + '\n') #9
         model.write('goodconn=null' + '\n') #10
+        model.write('unconcious=null' + '\n') #11
         #si il ya diff val dans une ligne on les sépare par _
          
         model.close()
