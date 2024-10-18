@@ -181,10 +181,8 @@ void modify_model_mov(const std::string& id, const std::string& path, const std:
         std::cerr << "Error: Line index " << l << " is out of range." << std::endl;
         return;
     }
-
     // Overwrite the specified line with the new value
     lines[l] = value;
-
     std::ofstream filew(path);
     for (size_t i = 0; i < lines.size(); ++i) {
         filew << lines[i];

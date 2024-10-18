@@ -17,7 +17,7 @@
 //nv argu = path -> càd que nous devons changer
 //dans ce fichier tout les appels de fonctions liées à ces trois méthodes en 
 //ajoutant leur path (ou checker si le path est bon car argument constant
-//prédefini -> faire une compilation et un run :)mo )
+//prédefini -> faire une compilation et un run mo 
 
 
 Data::Data() {
@@ -131,28 +131,59 @@ float Data::fastdiv(float quotient, const float& div) {
     }
 }    
 
-void Data::eraseFileLine(std::string path, std::string eraseLine) {
+
+/*
+void Data::eraseFileLine(std::string path, std::string erased_line, int l) {
+    
+    //prend en argument un nom de ligne specifique ex: id=47896 ou un numero de ligne
     std::string line;
     std::ifstream fin;
-    
     fin.open(path);
-    // contents of path must be copied to a temp file then
-    // renamed back to the path file
     std::ofstream temp;
     temp.open("temp.txt");
-
+    int c_temp = 0;
     while (getline(fin, line)) {
-        // write all lines to temp other than the line marked for erasing
-        if (line != eraseLine)
-            temp << line << std::endl;
+        //si le premier est faux alors c'est un num de ligne et pas ligne specifique
+        temp << line << std::endl;
+        c_temp ++;
     }
 
     temp.close();
     fin.close();
-    // required conversion for remove and rename functions
     const char * p = path.c_str();
     remove(p);
     rename("temp.txt", p);
+}*/
+
+void Data::eraseFileLine(std::string path, std::string erased_line, int l){
+    //si line = null sonc c'est une ligne - l null 00
+    std::ifstream file(path);
+    std::vector<std::string> lines;
+    std::string line;
+    int c_temp = 0;
+    while (std::getline(file, line)) {
+        if(c_temp != l && erased_line != line){
+            lines.push_back(line);
+        }
+        c_temp+=1;
+        
+    }
+    file.close();
+    /*
+    // Check if the line number is valid
+    if (line_number < 1 || line_number > lines.size()) {
+        std::cout << "Error: Line number out of range." << std::endl;
+        return;
+    }*/
+
+    // Append the value to the specified line
+
+    // Write the modified contents back to the file
+    std::ofstream out_file(path);
+    for (const auto& l : lines) {
+        out_file << l << std::endl;
+    }
+    out_file.close();
 }
 
 
@@ -209,7 +240,7 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
             if (line.substr(0, 8) + '>' + line.substr(9, 8) == idA + ">" + idB
                 || line.substr(0, 8) + '>' + line.substr(9, 8) == idB + ">" + idA) {
                 
-                eraseFileLine("./data/memory/couple.mem", line);
+                eraseFileLine("./data/memory/couple.mem", line, 00);
                 //on rmeove la line ou il flirt
             }
         }

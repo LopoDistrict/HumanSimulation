@@ -15,6 +15,7 @@
 #include <bitset>
 #include <cstdint>
 
+//g++ reaction.cpp model.cpp ../movement.cpp ../../Data.cpp ../rand.cpp -o debbug_reaction
 
 //dans ce fichier nous definissons tout les actions possibles
 //que les entitées peuvent realiser pour faire avancer leur intelligence
@@ -25,7 +26,7 @@
 
 
 //fonction conscientes déclenchées par L'IA
-_int8 reaction::get_last_line(const std::string& path) {
+int reaction::get_last_line(const std::string& path) {
     //To do redo
     boost::iostreams::mapped_file mmap("input.txt", boost::iostreams::mapped_file::readonly);
     const char* f = mmap.const_data();
@@ -267,22 +268,22 @@ void reaction::murder(const std::string& id){
             //on roll pour savoir si l'entité veut tuer un ament/e
             //data_obj.app_l("./data/TempChar.csv", data_obj.get_index(data_obj.get_couple(id)));
             //data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(data_obj.get_couple(id)));
-            data_obj.eraseFileLine("./data/TempChar.csv", data_obj.get_index(data_obj.get_couple(id)))
-            data_obj.eraseFileLine("./data/CharacterData.csv", data_obj.get_index(data_obj.get_couple(id)))
+            data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(data_obj.get_couple(id)))
+            data_obj.eraseFileLine("./data/CharacterData.csv","null", data_obj.get_index(data_obj.get_couple(id)))
             std::cout << "Entity: " << data_obj.get_couple(id) << " has been killed by: "<< id << std::endl;
 
         }
     }else if (data_obj.point(id) != "not"){
         if (roll_random(40, 0, 110)){
-            data_obj.eraseFileLine("./data/TempChar.csv", std::to_string(data_obj.get_index(data_obj.point(id))));
-            data_obj.eraseFileLine("./data/CharacterData.csv", std::to_string(data_obj.get_index(data_obj.point(id))));
+            data_obj.eraseFileLine("./data/TempChar.csv", "null", std::to_string(data_obj.get_index(data_obj.point(id))));
+            data_obj.eraseFileLine("./data/CharacterData.csv", "null", std::to_string(data_obj.get_index(data_obj.point(id))));
             std::cout << "Entity: " << data_obj.point(id) << " has been killed by: "<< id << std::endl;
         }
     }
     else{
         std::string killed = get_value_csv(num_generator(1, get_last_line("./data/TempChar.csv")));
-        data_obj.eraseFileLine("./data/TempChar.csv", killed);
-        data_obj.eraseFileLine("./data/CharacterData.csv", killed);
+        data_obj.eraseFileLine("./data/TempChar.csv", killed, 00);
+        data_obj.eraseFileLine("./data/CharacterData.csv", killed, 00);
     }
 }
 
@@ -341,8 +342,8 @@ void reaction::discrimination(const std::string& id){
         for (const auto& x: angconn){
             if(roll_random(35 + stoi(x.second), 0, 110)){
                 std::string killed = get_value_csv(data_obj.get_index(std::to_string(x.first)), 1, "./data/CharacterData.csv");
-                data_obj.eraseFileLine("./data/TempChar.csv", killed);
-                data_obj.eraseFileLine("./data/CharacterData.csv", killed);
+                data_obj.eraseFileLine("./data/TempChar.csv", killed, 00);
+                data_obj.eraseFileLine("./data/CharacterData.csv", killed, 00);
             }
         }
     }else{

@@ -19,7 +19,7 @@
 class reaction {
 public:
     reaction();
-    std::string get_last_line(const std::string& path);
+    int get_last_line(const std::string& path);
     std::string get_value_csv(int l, int value_ind, std::string path);
     void murder(const std::string& id);
     void suicide(const std::string& id );

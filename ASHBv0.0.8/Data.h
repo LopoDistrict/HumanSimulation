@@ -47,7 +47,7 @@ public:
     void write_logs(const std::string& val);
     std::vector<std::string> get_point_list(const std::string&);
     std::string get_couple(const std::string& id);
-    void eraseFileLine(std::string path, std::string eraseLine);
+    void eraseFileLine(std::string path, std::string erased_line, int l);
     void app_l(const std::string& file_path, int line_number, const std::string& value= "");
     float fastdiv(float quotient, const float& div);
     

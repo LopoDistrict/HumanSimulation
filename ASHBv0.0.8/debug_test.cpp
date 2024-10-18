@@ -55,8 +55,7 @@ void start_desire(const std::string& id) {
                     // Start a real attraction, so we remember the pointer
                     std::ofstream mem_file("./data/memory/couple.mem", std::ios::app);
                     mem_file << id << ">" << current_id << "0" << num_generator(2, 7) << std::endl;
-                    obj.update_csv_cell(obj.get_index(id), 13, "yes"); // Update CSV cell
-                }
+                 }
             }
         }
     }
@@ -65,8 +64,10 @@ void start_desire(const std::string& id) {
 
 int main(){
     Data Data_obj;
-    float val = Data_obj.fastdiv(15.0, 2.0);
-    std::cout << val << std::endl;
+    Data_obj.eraseFileLine("./data/memory/model/test.txt", "2", 00);
+    //std::cout << val << std::endl;
     return 0;
 }
 
+      //obj.update_csv_cell(obj.get_index(id), 13, "yes"); // Update CSV cell
+             

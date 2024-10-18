@@ -9,6 +9,7 @@ import datetime
 import time
 import subprocess 
 from data_ui_manager import *
+import ctypes
 
 
 
@@ -19,16 +20,34 @@ def increase_tick_rate(new_tick):
 
 def start_clock(tick):
     day = 0
+    while True:
+        try:            
+            mylib = ctypes.CDLL('./mylib.dll')  # For Windows
+            
+            # Specify the argument and return types of the functions
+            mylib.add.argtypes = [ctypes.c_double, ctypes.c_double]
+            mylib.add.restype = ctypes.c_double
+
+            mylib.multiply.argtypes = [ctypes.c_double, ctypes.c_double]
+            mylib.multiply.restype = ctypes.c_double
+
+            restult = mylib.main_loop()
+            
+        except:
+            write_logs("An Error occured")
+        
+def start_clock(tick):
+    day = 0
     #clock.cpp ne tourne qu'une seule fois
     #c'est dans ce fichier que nous devons le faire tourner au rythme souhaité
     #TO:DO
     #checker la frequence des ticks : day += 1 => vitesse clock definie par tick 
     #OU day += tick vitesse clock definie par les ticks
     while True:
-        #begin_time = time.time()
+        begin_time = time.time()
         #print("New cycle started")
         try: 
-            write_logs("New clock triggering")
+            write_logs("New clock triggering, day: "+day)
             result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
@@ -43,7 +62,7 @@ def start_clock(tick):
             write_logs(e.stderr)
             write_logs(f"Error occured while running clock.exe: {e.stderr}")
         time.sleep(tick) 
-        #write_logs("Execution time: " + time.time() - begin_time)
+        write_logs("Execution time: " + time.time() - begin_time)
         day += tick #actualise day avec tick + write dans les param
         app_l("./data/temp/GenTempModule.asb", 4, str(day))
 

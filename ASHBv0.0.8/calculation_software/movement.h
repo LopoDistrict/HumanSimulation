@@ -16,7 +16,6 @@
 #include "calculation.h"
 
     
-    
 void single_char_movement(const std::string& id);
 std::string get_simulation_param(int line);    
 std::string get_majority_direction(const std::string& id);
