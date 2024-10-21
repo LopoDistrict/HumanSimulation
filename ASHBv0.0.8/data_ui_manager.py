@@ -16,6 +16,10 @@ def print_logs():
 def write_logs(val):
     with open('./data/logs/logs.txt', "a") as logsFile:
         logsFile.write(f"<{datetime.datetime.now()}> {val}"+"\n")
+    
+def write_main_logs(val):
+    with open('./data/logs/main_logs.txt', "a") as logsFile:
+        logsFile.write(f"<{datetime.datetime.now()}> {val}"+"\n")
 
 
 def app_l(file_path, line_number, value):

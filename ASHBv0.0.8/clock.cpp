@@ -118,13 +118,10 @@ extern "C" {
             if(stoi(data_obj.get_value_char(id, 2)) <=0){
                 data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(id)+1, "");
                 data_obj.app_l("./data/TempChar.csv", data_obj.get_index(id)+1, "");
+                write_main_logs("entity died: " + id);
             }
         }
             
-
-        
-
-        
     void chmod(const std::string& id, const std::string& value, int l) {
         std::cout << "Tool function: modify_model_mov" << std::endl;
         
@@ -169,6 +166,7 @@ extern "C" {
                     //disease started
                     chmod(id, "disease=true", 1);
                     std::cout << "infection started: " << id << std::endl;
+                    write_main_logs("infection started with: " + id);
                 }
             }
         }

@@ -25,7 +25,9 @@
 // - non provoquées
 
 
-//fonction conscientes déclenchées par L'IA
+//fonction conscientes considérée et pouvant être déclencher par lIA par L'IA
+
+/*
 int reaction::get_last_line(const std::string& path) {
     //To do redo
     boost::iostreams::mapped_file mmap("input.txt", boost::iostreams::mapped_file::readonly);
@@ -41,6 +43,18 @@ int reaction::get_last_line(const std::string& path) {
     }
     std::cout << "Total lines: " << lineCount << std::endl;
     return lineCount;
+}
+*/
+
+int reaction::get_last_line(const std::string& path){
+    int count = 0;
+    std::ifstream file(path);
+    std::string item;
+
+    while(getline(file, item)){
+        count ++;
+    }
+    return count;
 }
 
 
@@ -86,7 +100,7 @@ float reaction::result_RI(const std::string& id, float p_stats, int ind, int mul
     //resultat juge si une action/reaction a été efficaces
     float new_stats = (std::stof(data_obj.get_value_char(id, ind))-p_stats)/ (5 + mult_const); //score evaluation 110 - 100 10/10
     //mult_const = une constante qu'on ajoute pour les stats voulu en ++
-    std::unordered_map<std::string, int> mem_action;
+    std::unordered_map<std::string, std::string> mem_action;
     std::string mem_map = mod_obj.get_value(id, 8, "../../data/memory/model/" + id + ".dmem");
     std::string item_map;
     std::stringstream ssmap(mem_map);
@@ -99,9 +113,10 @@ float reaction::result_RI(const std::string& id, float p_stats, int ind, int mul
         temp.push_back(item_map);
     }
 
-    for(int i=1; i<item_map.size(); i+=2){
-        mem_action.insert(std::make_pair(item_map[i-1], item_map[i]));
+    for(int i=1; i<temp.size(); i+=2){
+        mem_action.insert(std::make_pair(temp[i-1], temp[i]));
     }
+
     /* Obsolete nv-^^
     for(int i=0;i<item_map.size();i++){
         try{
@@ -112,8 +127,8 @@ float reaction::result_RI(const std::string& id, float p_stats, int ind, int mul
         }
     }*/
     
-    if(!mem_action.find(action) == mem_action.end()){ // pas dans la map
-        mem_action.insert(std::make_pair(action, new_stats));        
+    if(mem_action.find(action) != mem_action.end()){ // pas dans la map
+        mem_action.insert(std::make_pair(action, std::to_string(new_stats)));        
     } 
 
     std::string wback;
@@ -158,10 +173,11 @@ bool reaction::is_sup_attended(const std::string& id){
 
 std::string reaction::get_value_choosed(const std::string& id){
     model mod_obj;
+    std::string value_choosed = mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
     if (is_sup_attended(id)){
-        return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem") - "++";
+        return value_choosed.substr(value_choosed.size()-2); // return - "++"
     }
-    return mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
+    return value_choosed;
 }
 
 //break loop collision pour presence
@@ -171,24 +187,27 @@ void reaction::reinforcement_intelligence(const std::string& id){
     
     //mettre un moyen permettant de ne pas choisir aucune fonction
     //et agir en ne faisant rien de special. C'est a l'entité de choisir ce qu'il veut
-        std::unordered_map<std::string, std::string> target_map{
-        {"hap", "3"}, {"hea", 2}, {"meH", 5}, {"ang", 9}, {"hyg", 10}};
+        std::unordered_map<std::string, int> target_map{
+            {"hap", 3}, {"hea", 2}, 
+            {"meH", 5}, {"ang", 9}, 
+            {"hyg", 10} };
+
     std::string get_action = mod_obj.get_value(id, 4, "../../data/memory/model/" + id + ".dmem");
     std::string get_searched_stats = mod_obj.get_value(id, 3, "../../data/memory/model/" + id + ".dmem");
     std::vector<std::string> action = {"murder", "discrimination", "suicide", "breeding",
     "desir", "isolation", "upmov", "goodconn", "angconn", "anxiety"};
 
 
-    int old_stats = get_old_stats(id, stoi(target_map[get_value_choosed(id)])); //prend la value actuelle qui sera l'ancienne 
+    int old_stats = get_old_stats(id, target_map[get_value_choosed(id)]); //prend la value actuelle qui sera l'ancienne 
     bool is_pp = is_sup_attended(id);
 
     //save dans temp l'ancienne stats, ligne dans le csv, si pp, et l'action 
     //mov.modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "tmp="+old_stats + "," + target_map[get_value_choosed(id)] + "," + is_pp + "," + get_action, 7);  
-    modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "paction="+std::to_string(old_stats) + "," + target_map[get_value_choosed(id)] + "," + std::to_string(is_pp) + "," + get_action, 5);  
+    modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "paction="+std::to_string(old_stats) + "," + std::to_string(target_map[get_value_choosed(id)]) + "," + std::to_string(is_pp) + "," + get_action, 5);  
     //dans une place temp on save toute les actions
     //avant d'en associer de nouvelles
     modify_model_mov(id, "../../data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4);    
-    int const_action = mod_obj.get_value(id, "../../data/memory/model/" + id + ".dmem", 4)
+    int const_action = stoi(mod_obj.get_value(id, 4, "../../data/memory/model/" + id + ".dmem"));
     if (mod_obj.get_value(id, 4, "../../data/memory/model/" + id + ".dmem") != "null"){ //roll influencer par le nb action presente #8
         if (roll_random(90+const_action, 0, 135)){
             //on role pour savoir si nous reprenons l'action precedente
@@ -268,20 +287,20 @@ void reaction::murder(const std::string& id){
             //on roll pour savoir si l'entité veut tuer un ament/e
             //data_obj.app_l("./data/TempChar.csv", data_obj.get_index(data_obj.get_couple(id)));
             //data_obj.app_l("./data/CharacterData.csv", data_obj.get_index(data_obj.get_couple(id)));
-            data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(data_obj.get_couple(id)))
-            data_obj.eraseFileLine("./data/CharacterData.csv","null", data_obj.get_index(data_obj.get_couple(id)))
+            data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(data_obj.get_couple(id)));
+            data_obj.eraseFileLine("./data/CharacterData.csv","null", data_obj.get_index(data_obj.get_couple(id)));
             std::cout << "Entity: " << data_obj.get_couple(id) << " has been killed by: "<< id << std::endl;
 
         }
     }else if (data_obj.point(id) != "not"){
         if (roll_random(40, 0, 110)){
-            data_obj.eraseFileLine("./data/TempChar.csv", "null", std::to_string(data_obj.get_index(data_obj.point(id))));
-            data_obj.eraseFileLine("./data/CharacterData.csv", "null", std::to_string(data_obj.get_index(data_obj.point(id))));
+            data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(data_obj.point(id)));
+            data_obj.eraseFileLine("./data/CharacterData.csv", "null", data_obj.get_index(data_obj.point(id)));
             std::cout << "Entity: " << data_obj.point(id) << " has been killed by: "<< id << std::endl;
         }
     }
     else{
-        std::string killed = get_value_csv(num_generator(1, get_last_line("./data/TempChar.csv")));
+        std::string killed = get_value_csv(num_generator(1, get_last_line("./data/TempChar.csv")), 0, "./data/TempChar.csv");
         data_obj.eraseFileLine("./data/TempChar.csv", killed, 00);
         data_obj.eraseFileLine("./data/CharacterData.csv", killed, 00);
     }
@@ -290,8 +309,8 @@ void reaction::murder(const std::string& id){
 void reaction::suicide(const std::string& id ){
     //action of entity: suicide
     Data data_obj;
-    data_obj.eraseFileLine("./data/TempChar.csv", std::to_string(data_obj.get_index(id)));
-    data_obj.eraseFileLine("./data/CharacterData.csv", std::to_string(data_obj.get_index(id)));
+    data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(id));
+    data_obj.eraseFileLine("./data/CharacterData.csv", "null", data_obj.get_index(id));
     std::cout << "An entity: " << id << " has commited suicide." << std::endl;
 }
 
@@ -341,54 +360,77 @@ void reaction::discrimination(const std::string& id){
     if(roll_random(45, 0, 235)){
         for (const auto& x: angconn){
             if(roll_random(35 + stoi(x.second), 0, 110)){
-                std::string killed = get_value_csv(data_obj.get_index(std::to_string(x.first)), 1, "./data/CharacterData.csv");
+                std::string killed = get_value_csv(data_obj.get_index(x.first), 1, "./data/CharacterData.csv");
                 data_obj.eraseFileLine("./data/TempChar.csv", killed, 00);
                 data_obj.eraseFileLine("./data/CharacterData.csv", killed, 00);
             }
         }
     }else{
-        for (const auto& x: angconn){
-            x.second -= std::to_string(num_generator(4, 11));
-        }
+        for (auto& x : angconn) {
+            try {
+                int original_value = std::stoi(x.second);
+                original_value -= num_generator(4, 11);
+                x.second = std::to_string(original_value);
+            } catch (const std::invalid_argument& e) {
+                std::cerr << "Error: Invalid argument for string to int conversion in pair: " 
+                        << x.first << " -> " << x.second << std::endl;
+            } catch (const std::out_of_range& e) {
+                std::cerr << "Error: Out of range during string to int conversion in pair: " 
+                        << x.first << " -> " << x.second << std::endl;
+            }
+    }
         w_unmap_model(id, angconn, 10);
     }
 }
 void reaction::w_unmap_model(const std::string& id, std::unordered_map<std::string, std::string> umap, int l){
     //write umap to model_file
-    std::string conv;
+    model mod_obj;
+    std::string conv = mod_obj.get_line_equivalent(id, l, "./data/memory/model/"+id+".dmem") + "=";
+
     for(const auto& x: umap){
-        conv += x.first + "," + x.second ;
+        conv += x.first + "," + x.second + ",";
     }
     //conv += "}";
-    modify_model_mov(id, "./data/memory/model/"+ id + ".dmem", conv, 10);
+    modify_model_mov(id, "./data/memory/model/"+ id + ".dmem", conv, 1);
 }
+
 
 std::unordered_map<std::string, std::string> reaction::modval_to_umap(const std::string& id, int line){
     //va chercher val dans model pour le place dans un umap
     model mod_obj;
     std::string mod_value = mod_obj.get_value(id, line, "./data/memory/model/"+id+".dmem");
-    std::istringstream iss(mod_value);
-    std::vector<std::string> result;
-    std::string word;
     std::unordered_map<std::string, std::string> umap;
+    std::vector<std::string> temp_split;
+    std::string item;
+    std::stringstream ss(mod_value);
 
-    while (iss >> word) {
-        result.push_back(word);
+    while(std::getline(ss, item, ',')){
+        temp_split.push_back(item);
     }
-    for(int i=1; i<result.size(); i+=2){
-        umap.insert(std::make_pair(result[i-1], result[i]));
+
+    for(int i=1; i<temp_split.size(); i+=2){
+        umap.insert(std::make_pair(temp_split[i-1], temp_split[i]));
     }
     //loop en prenant les val 2 par 2, puis associer dans umap
     return umap;
 }
 
-void reaction::ang_social_conn(const std::string& id){
-    //les liens sociaux commencent à se faire à partir du jour 30
+void reaction::ang_social_conn(const std::string& id) {
     model mod_obj;
     std::unordered_map<std::string, std::string> angconn = modval_to_umap(id, 10);
-        //to check err: string dans unordored map
-    for(const auto& x: angconn){
-        x.second -= num_generator(2, 9);
+
+    for (auto& x : angconn) {
+        try {
+            int original_value = std::stoi(x.second);
+            original_value -= num_generator(2, 9);
+            x.second = std::to_string(original_value);
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Error: Invalid argument for string to int conversion in pair: " 
+                      << x.first << " -> " << x.second << std::endl;
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Error: Out of range during string to int conversion in pair: " 
+                      << x.first << " -> " << x.second << std::endl;
+        }
     }
     w_unmap_model(id, angconn, 10);
 }
@@ -399,9 +441,22 @@ void reaction::good_social_conn(const std::string& id){
     
     std::unordered_map<std::string, std::string> goodconn = 
     modval_to_umap(id, 9);
-    for(const auto& x: goodconn){
-        x.second += std::to_string(num_generator(2, 9));
+    for (auto& x : goodconn) {
+        try {
+            int original_value = std::stoi(x.second);
+            original_value -= num_generator(2, 9);
+            x.second = std::to_string(original_value);
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Error: Invalid argument for string to int conversion in pair: " 
+                      << x.first << " -> " << x.second << std::endl;
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Error: Out of range during string to int conversion in pair: " 
+                      << x.first << " -> " << x.second << std::endl;
+        }
     }
     w_unmap_model(id, goodconn, 9);
 }
 
+int main(){
+    return 0;
+}

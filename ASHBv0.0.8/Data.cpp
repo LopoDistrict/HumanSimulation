@@ -124,6 +124,7 @@ float Data::fastdiv(float quotient, const float& div) {
                     // Start a real attraction, so we remember the pointer
                     std::ofstream mem_file("./data/memory/couple.mem", std::ios::app);
                     mem_file << id << ">" << current_id << "0" << num_generator(2, 7) << std::endl;
+                    write_main_logs("Desire_created" + id + ">" + current_id);
                     update_csv_cell(get_index(id), 13, "yes"); // Update CSV cell
                 }
             }
@@ -228,6 +229,7 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
             bonheur(idB, 7.0);
             std::cout << "new couple" << idA << "  " << idB << std::endl;
             std::cout << tree_parent << std::endl;
+            write_main_logs("couple:" + idA + " : " + idB );
         } else {
             std::cout << "Error: not tall enough" << std::endl;
         }
@@ -370,7 +372,18 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
     }
 
     void Data::write_logs(const std::string& val) {
+        //write every types of logs -> more for debug
         std::ofstream logsFile("./data/logs/logs.txt", std::ios::app);
+        if (logsFile.is_open()) {
+            auto now = std::chrono::system_clock::now();
+            std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+            logsFile << "<" << std::ctime(&now_c) << "> " << val << "\n";
+        }
+    }
+
+    void Data::write_main_logs(const std::string& val) {
+        //write importants logs
+        std::ofstream logsFile("./data/logs/main_logs.txt", std::ios::app);
         if (logsFile.is_open()) {
             auto now = std::chrono::system_clock::now();
             std::time_t now_c = std::chrono::system_clock::to_time_t(now);
@@ -395,6 +408,8 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                     if (roll_random(140+const_breeding, 0, 200) == true){
                         //la procreation a reussi
                         desire(id, 7.0, true);
+                        write_logs("Proreation sucess" + line.substr(8,16));
+                        write_main_logs("Proreation sucess" + line.substr(8,16));
                         return true;
                     }else{
                         return false;

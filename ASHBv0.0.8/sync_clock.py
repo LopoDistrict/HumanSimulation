@@ -48,6 +48,7 @@ def start_clock(tick):
         #print("New cycle started")
         try: 
             write_logs("New clock triggering, day: "+day)
+            write_main_logs("New clock triggering, day: "+day)
             result = subprocess.run(["./clock5.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
@@ -68,4 +69,4 @@ def start_clock(tick):
 
 
 if __name__ == "__main__":
-    start_clock(1)
+    start_clock(2)
