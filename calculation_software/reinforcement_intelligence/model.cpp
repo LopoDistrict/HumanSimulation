@@ -10,10 +10,6 @@
     model::model(){
         
     }
-    
-#include <iostream>
-#include <fstream>
-#include <string>
 
 std::string model::get_model(const std::string& id, int line, const std::string& path2) {
     std::cout << "Tool function definition: get_model" << std::endl;
@@ -44,7 +40,6 @@ std::string model::get_model(const std::string& id, int line, const std::string&
 }
 
 
-
 std::string model::get_line_equivalent(const std::string& id, int line, const std::string& path2) {
     std::cout << "Tool function definition: get_line_equivalent" << std::endl;
     std::cout << "ID: " << id << std::endl;
@@ -65,7 +60,6 @@ std::string model::get_line_equivalent(const std::string& id, int line, const st
         }
         value += i;
     }
-
     // If no '=' found, return the entire line or handle error
     std::cerr << "Error: No '=' character found in the line" << std::endl;
     return "Error: No '=' found in line";
@@ -90,6 +84,7 @@ std::string model::get_value(const std::string& id, int line, const std::string&
         std::cerr << "Error: Model is empty" << std::endl;
         return "Error: Model not found"; // Handle empty model case
     }
+    
 
     // Search for the value in the model
     size_t pos = model.find(value + "=");
@@ -100,10 +95,12 @@ std::string model::get_value(const std::string& id, int line, const std::string&
             std::cerr << "Error: Resulting substring is empty" << std::endl;
             return "Error: Value found, but result is empty";
         }
+        
         return result;
+
     } else {
         std::cerr << "Error: Value not found in model" << std::endl;
-        return "Error: Value not found"; // Handle case where value is not found
+        return "Error: Value not found"; // Handle case where value     t found
     }
 }
 
@@ -113,11 +110,11 @@ int main(){
     std::string v;
     v = obj.get_model("0kfpdq75", 2);
     std::cout << "VALUE---" << v << std::endl;
-    ////std::cout << "end model" << std::endl;
+    std::cout << "end model" << std::endl;
     //v = obj.get_line_equivalent("0kfpdq75", 2);
-    //std::cout << "VALUE---" << v << std::endl;
-    //////std::cout << "end line" << std::endl;
+    std::cout << "VALUE---" << v << std::endl;
+    std::cout << "end line" << std::endl;
     //v = obj.get_value("0kfpdq75", 2);
     std::cout << "VALUE---" << v << std::endl;
-    //std::cout << "end value" << std::endl;
+    std::cout << "end value" << std::endl;
 }*/

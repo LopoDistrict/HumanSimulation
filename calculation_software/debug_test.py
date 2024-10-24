@@ -143,7 +143,7 @@ def modify_model_mov(id, path, value, l):
 
 
 modify_model_mov('0kfpdq75',  "../data/memory/model/0kfpdq75"  + ".dmem", "mvt=NE15" , 2)
-"""
+
 import os
 import random
 
@@ -202,4 +202,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
 
+l = "val"
+v = 14
+print(type(l))
+print(type(v))
+if type(v) == int:
+    print('l') 

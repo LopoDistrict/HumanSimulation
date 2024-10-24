@@ -55,4 +55,9 @@ void sample_initVector()
 
     }
 
+    float fl_gene(){
+        int value = num_generator(0, 99);
+        return value * 1.0;
+    }
+
 
