@@ -11,6 +11,7 @@
 #include <chrono>
 #include "calculation_software/include/fast_division.h"
 #include <cmath> 
+#include "calculation_software/reinforcement_intelligence/model.h"
      
 
 //get_value_char + update_csv + get_index
@@ -77,12 +78,15 @@ float Data::fastdiv(float quotient, const float& div) {
 
 
    void Data::Hygiene(const std::string& id){
+    model mod_obj;
         float base_hygiene = stof(get_value_char(id, 10));
             if (get_model(id, 1) != "disease=null"){
                 //malade
-                base_hygiene -= 2.15 * (get_neighbour(id).size() * 1.0);
+                base_hygiene -= 1.12 * (get_neighbour(id).size() * 1.0);
+            }else if (stoi(get_value_char(id, 10)) < 0 && mod_obj.get_value(id, 6, "./data/memory/model/"+id+".dmem") == "immune"){
+                base_hygiene += num_generator(9, 19);
             }else{
-                base_hygiene += 4.86;
+                base_hygiene += num_generator(7, 15);
             }
         update_csv_cell(get_index(id), 10, std::to_string(base_hygiene));
    }

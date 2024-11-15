@@ -180,7 +180,9 @@ class Simulation(tk.Tk):
         # Bind the configure event to the create_grid method
         self.bind('<Configure>', self.create_grid)
 
-        subprocess.Popen(['python', 'sync_clock.py']) #remove shell=true 
+        subprocess.Popen(['python', 'sync_clock.py']) 
+        #IMPORTANT if you have a gpu change sync_clock.py to sync_clock_gpu.py
+        #the simulation will run faster and you will have tick improvment with the time
         
         if args[3] == "Y" or args[3] == "y":
             subprocess.Popen(['start', 'cmd', '/k', 'python', 'data/logs_cmd.py'], shell=True) 
@@ -206,19 +208,22 @@ class Simulation(tk.Tk):
         #self.setup(self.edit, self.start_clock)
 
 
+    def random_hex(self):
+        return '#' + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)])
+
     def create_new_character(self,posx, posy, cmd, event=None):
         try:
-            self.canvas.create_oval(posx, posy, posx+6, posy+6, fill="white", outline="red")
+            self.canvas.create_oval(posx, posy, posx+8, posy+8, fill=self.random_hex(), outline=self.random_hex())
             if cmd == True:
                 print("[", Fore.GREEN + "+","] ", "Character artifiaclly created sucessfully")
                 write_logs(f"GUI created char: {posx, posy, posx+6, posy+6}")
         
-        except:
-            print(Fore.RED + 'Error', ': Artificial char. creation failed')
+        except Exception as e:
+            print(Fore.RED + 'Error', ': ' + e)
     
     def start_background_task(self):
         thread = threading.Thread(target=self.movement)
-        thread.daemon = True  # Daemonize thread to exit when main program exits
+        thread.daemon = True  
         thread.start()
 
     def randmId(self):
@@ -417,28 +422,48 @@ class Simulation(tk.Tk):
             elif command == 'mvt' : #debug
                 self.movement(4)
             
-
+            
             elif command == "save":
-                save_folder = "./saves/save-"+ str(datetime.datetime.now().strftime("%x")) +self.randmId()
+                #ISO-8601
+                date = datetime.datetime.now().strftime("%Y-%m-%d·%H-%M-%S")
+                save_folder = "./saves/save-" + date + "-" + self.randmId()
                 os.mkdir(save_folder)
-                files = ("/logs/logs.txt", "/logs/main_logs.txt", "/temp/precense.asb", "/temp/GenTempModule.asb", 
-                "/temp/tempSeparation.asb", "/memory/couple.mem", "/memory/gen.mem")
                 
-                print("saving files...")
+                files = [
+                    "/logs/logs.txt", 
+                    "/logs/main_logs.txt", 
+                    "/temp/presence.asb", 
+                    "/temp/GenTempModule.asb", 
+                    "/temp/tempSeparation.asb", 
+                    "/memory/couple.mem", 
+                    "/memory/gen.mem",
+                    "/TempChar.csv",
+                    "/CharacterData.csv"
+                ]
+
+                print("Saving files...")
                 for i in files:
                     try:
-                        shutil.copyfile("./data"+i, save_folder)
-                        print("saving : ./data"+i)
-                    except:
-                        print("an error occured, cannot save: ./data"+i)
-                for j in os.walk("./data/memory/model"):
-                    try:
-                        shutil.copyfile(j, save_folder)
-                        print("saving : "+i)
-                    except:
-                        print("an error occured, cannot save: "+i)
-                print("data saved at "+save_folder)
-                    
+                        shutil.copy("./data" + i, save_folder)
+                        print("Saving: ./data" + i)
+                    except Exception as e:
+                        print(f"An error occurred, cannot save: ./data{i}. Error: {e}")
+
+            
+                for root, dirs, files in os.walk("./data/memory/model"):
+                    for file in files:
+                        file_path = os.path.join(root, file)
+                        try:
+                            shutil.copy(file_path, save_folder)
+                            print("Saving:", file_path)
+                        except Exception as e:
+                            print(f"An error occurred, cannot save: {file_path}. Error: {e}")
+
+                print("Data saved at", save_folder)
+                #on récupère tout les values
+                #-.asb extenstion => ./data/temp/
+                #-.dmem extension => ./data/memory/model/
+                #-.csv extension => ./ //fichier racine de data
 
                 
             elif command == "exit":

@@ -36,7 +36,7 @@ def start_clock(tick):
     app_l("./data/temp/GenTempModule.asb", 4, str(day))    
 
 """
-
+@jit(target_backend='cuda')
 def start_clock(tick):
     day = 0
     #clock.cpp ne tourne qu'une seule fois

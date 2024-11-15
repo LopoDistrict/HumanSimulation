@@ -12,13 +12,13 @@
 #include <string_view>
 #include "calculation_software/reinforcement_intelligence/model.h"
 #include "calculation_software/reinforcement_intelligence/reaction.h"
-//#include "calculation_software/calculation.h"
 #include <cstdlib>
 #include <tuple>
 #include <cmath>
 #include "collision.h"
 #include <sys/stat.h>
 #include <unistd.h>
+#include <thread>
 
 //#include "calculation_software/include/fast_division.h"
 
@@ -115,6 +115,8 @@ void presence() {
             }
         }
 
+
+
         void death(const std::string& id){
             Data data_obj;
             if(stoi(data_obj.get_value_char(id, 2)) <=0){
@@ -124,6 +126,8 @@ void presence() {
             }
         }
             
+
+
     void chmod(const std::string& id, const std::string& value, int l) {
         std::cout << "Tool function: modify_model_mov" << std::endl;
         std::ifstream file("./data/memory/model/" + id + ".dmem");
@@ -197,8 +201,16 @@ void presence() {
             //Le processus du machine learning doit prendre plusieurs jours et 
             //ne s'exec donc pas tt les jours
             reaction react_obj;
+            model mod_obj;
 
-            react_obj.reinforcement_intelligence(id);
+            //décalage de 10 jours entre chaque decision => a faire varier close to 10 jours 
+            //car toute les entités vont tous des comportements differents à un même moment donné
+
+            if (stoi(mod_obj.get_value(id, 7, "./data/memory/model/" + id + ".dmem"))+num_generator(8, 12) >= day){
+                react_obj.tmp_stats(id); //ce nom de fonction est contre intuitif et stupide xd
+                react_obj.reinforcement_intelligence(id);
+            }
+            
         }
 
         void immunity(const std::string& id){
@@ -209,7 +221,7 @@ void presence() {
             if (is_sick(id)){            
                 std::string im_val(mod_obj.get_value(id, 6, "./data/memory/model/" + id + ".dmem"));
                 if(im_val == "null"){
-                    if(roll_random(40, 0, 370)){
+                    if(roll_random(40, 0, 470)){
                         std::cout << "entity immune"<< id << std::endl;
                         chmod(id, "immunity=immune", 6);
                         chmod(id, "disease=null", 1);
@@ -217,11 +229,11 @@ void presence() {
                         chmod(id, "immunity=" + std::to_string(num_generator(2, 5)), 6);
                     }
                 }else if (im_val == "immune"){
-                    if(roll_random(215, 0, 290)){
+                    if(roll_random(215, 0, 390)){
                         chmod(id, "disease=null", 1);
                     }
                 }else{
-                    if(roll_random(70+stoi(im_val), 0, 370)){
+                    if(roll_random(70+stoi(im_val), 0, 470)){
                         chmod(id, "immunity=immune", 6);
                         chmod(id, "disease=null", 1);
                     }
@@ -230,13 +242,182 @@ void presence() {
         }
         
 
+    //Multi threading
+    void colli_presence_cl(){
+        collision collision;
+        model mod_obj;
+        Data obj;
+        std::ifstream file("./data/CharacterData.csv");
+        std::string line;
+        if (getline(file, line)) {
+           
+        }
+
+        while (getline(file, line)) {
+            std::vector<std::string> row;
+            std::string word;
+            std::stringstream ss(line);
+            while (std::getline(ss, word, ',')) {
+                row.push_back(word);
+            }
+
+            std::cout << row[0] << std::endl;
+            if (is_sick(row[0])) {
+                
+                //obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
+                obj.health(row[0], -num_generator(1, 3) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 17.0));
+                if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
+                    //obj.stress(row[0], num_generator(4, 8) + stoi(obj.get_value_char(row[0], 3)) / 8);
+                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 6.0));
+                } else {
+                    //obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
+                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 11.0));
+                }
+                immunity(row[0]);
+            } else {
+                //obj.stress(row[0], -(99 - stoi(obj.get_value_char(row[0], 6))) / 10);
+                obj.stress(row[0], -(obj.fastdiv(99 - stoi(obj.get_value_char(row[0], 6)), 10.0)));
+                if (obj.disease(row[0])) {            
+                    chmod(row[0], "disease=true", 1);                     
+                }                  
+            }
+            if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
+                obj.health(row[0], -num_generator(0, 4));
+            } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
+                obj.health(row[0], -num_generator(3, 7));
+            }else if (stoi(obj.get_value_char(row[0], 2)) <= 150){
+                obj.health(row[0], num_generator(7, 10));
+            }
+            
+        
+
+            if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
+                obj.mentalhealth(row[0], -num_generator(1, 7));
+            } else if (stoi(obj.get_value_char(row[0], 7)) >= 50) {
+                obj.mentalhealth(row[0], -num_generator(3, 9));
+            } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
+                obj.mentalhealth(row[0], -num_generator(4, 13));
+            }
+                
+            start_infection(row[0]); //on immunise apres le debut de l'infection
+            
+
+            obj.solitude(row[0]);
+            obj.Hygiene(row[0]);
+            //std::string coll = "C:\\Users\\LordN\\Desktop\\code\\ASHB\\HumanSimulation\\ASHBv0.0.8\\collision.exe ";
+            //int r = system(coll.c_str());
+            
+
+            
+            obj.start_desire(row[0]); // on test quand m si on peut start un desire
+
+            obj.desire(row[0], num_generator(3,9), true);
+            death(row[0]);
+            
+            collision.width =  stoi(collision.get_param(0));
+            collision.height = stoi(collision.get_param(1));            
+            
+            if (!file_exist("./data/temp/tempSeparation.asb")){
+                collision.separate();             
+            }
+            collision.presence();
+        }
+    }
+
+    
+
+    void stats_cl(){
+        Data obj; 
+        std::ifstream file("./data/CharacterData.csv");
+        std::string line;
+        int day = stoi(collision.get_param(3));
+        int tick = 4; 
+        if (getline(file, line)) {
+           
+        }
+
+        while (getline(file, line)) {
+            std::vector<std::string> row;
+            std::string word;
+            std::stringstream ss(line);
+            while (std::getline(ss, word, ',')) {
+                row.push_back(word);
+            }
+            std::cout << row[0] << std::endl;
+             int hap_const = num_generator(8,10);
+
+
+            //car de toute facon une entité peut develop des liens avec d'autres
+            //m si il est deja en couple
+            if (obj.get_value_char(row[0], 13) == "no") {
+                obj.start_desire(row[0]);
+            } else {                
+                std::string idB = obj.get_couple(row[0]);
+                std::vector<std::string> couples_list;
+                if (obj.point(row[0]) != "not") {
+                    obj.modify_desire(row[0], idB, std::to_string(-num_generator(2, 9)));
+                    hap_const = -num_generator(4, 13);
+                } else if (obj.get_couple_list(row[0]).size() > 1) {
+                    couples_list = obj.get_couple_list(row[0]);
+                    for (int i = 0; i < couples_list.size(); i++) {
+                        obj.modify_desire(row[0], couples_list[i], std::to_string(-num_generator(2, 11) - (couples_list.size())));
+                    }
+                    hap_const = -num_generator(5, 12) - (couples_list.size());
+                } else {
+                    if (obj.procreation(row[0])) {
+                        hap_const = num_generator(25, 37);
+                        CreateTempPosition(obj.randmId(), stoi(obj.get_value_char(row[0], 1, "./data/TempChar.csv")) + num_generator(3, 5),
+                                        stoi(obj.get_value_char(row[0], 2, "./data/TempChar.csv")) + num_generator(3, 5), row[0]);
+                    }
+                }
+            }
+            if (is_sick(row[0])) {
+                if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
+                    //obj.bonheur(row[0], -num_generator(3, 7) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
+                    obj.bonheur(row[0], -num_generator(3, 6) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(8, 11)) + hap_const);
+                } else {                
+                    //obj.bonheur(row[0], -num_generator(3, 4) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
+                    obj.bonheur(row[0], -num_generator(2, 4) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(8, 11)) + hap_const);
+                }
+            } else {
+                obj.bonheur(row[0], num_generator(8, 13) + hap_const);
+            }
+            obj.age_update(row[0], day);
+
+            
+        }
+    }
+
+
+    void movement_cl(){
+        std::ifstream file("./data/CharacterData.csv");
+        std::string line;
+        if (getline(file, line)) {
+           
+        }
+
+        while (getline(file, line)) {
+            std::vector<std::string> row;
+            std::string word;
+            std::stringstream ss(line);
+            while (std::getline(ss, word, ',')) {
+                row.push_back(word);
+            }
+
+            std::cout << row[0] << std::endl;
+            std::string comm_str = "calculation_software\\movement5.exe " + row[0];
+            int result = system(comm_str.c_str());
+        }
+    }
+
     void main_loop() {    
-        Data obj; // Create an object of Data
+        Data obj; 
         model mod_obj;
         collision collision;
         std::string time_selection = "play";
         int day = stoi(collision.get_param(3));
         int tick = 4; // Ensure tick is initialized, or prompt the user to initialize.
+
         std::cout << "clock starting, day: " << day << std::endl;
 
         if (time_selection == "pause") {
@@ -262,7 +443,7 @@ void presence() {
             // Process each ID
             std::cout << row[0] << std::endl;
 
-            int hap_const = num_generator(7,9);
+            int hap_const = num_generator(8,10);
 
 
             //car de toute facon une entité peut develop des liens avec d'autres
@@ -274,21 +455,22 @@ void presence() {
                 std::vector<std::string> couples_list;
                 if (obj.point(row[0]) != "not") {
                     obj.modify_desire(row[0], idB, std::to_string(-num_generator(2, 9)));
-                    hap_const = -num_generator(5, 14);
+                    hap_const = -num_generator(4, 13);
                 } else if (obj.get_couple_list(row[0]).size() > 1) {
                     couples_list = obj.get_couple_list(row[0]);
                     for (int i = 0; i < couples_list.size(); i++) {
                         obj.modify_desire(row[0], couples_list[i], std::to_string(-num_generator(2, 11) - (couples_list.size())));
                     }
-                    hap_const = -num_generator(5, 13) - (couples_list.size());
+                    hap_const = -num_generator(5, 12) - (couples_list.size());
                 } else {
                     if (obj.procreation(row[0])) {
-                        hap_const = num_generator(23, 35);
+                        hap_const = num_generator(25, 37);
                         CreateTempPosition(obj.randmId(), stoi(obj.get_value_char(row[0], 1, "./data/TempChar.csv")) + num_generator(3, 5),
                                         stoi(obj.get_value_char(row[0], 2, "./data/TempChar.csv")) + num_generator(3, 5), row[0]);
                     }
                 }
             }
+            //sep1
             
             std::string comm_str = "calculation_software\\movement5.exe " + row[0];
             int result = system(comm_str.c_str());
@@ -298,30 +480,30 @@ void presence() {
             //implementaton renforcment learning
 
 
-            // Additional logic for processing each row
+            //sep2
             
             if (is_sick(row[0])) {
                 if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
                     //obj.bonheur(row[0], -num_generator(3, 7) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
-                    obj.bonheur(row[0], -num_generator(3, 7) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(9, 12)) + hap_const);
+                    obj.bonheur(row[0], -num_generator(3, 6) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(8, 11)) + hap_const);
                 } else {                
                     //obj.bonheur(row[0], -num_generator(3, 4) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
-                    obj.bonheur(row[0], -num_generator(3, 4) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(9, 12)) + hap_const);
+                    obj.bonheur(row[0], -num_generator(2, 4) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(8, 11)) + hap_const);
                 }
             } else {
-                obj.bonheur(row[0], num_generator(7, 13) + hap_const);
+                obj.bonheur(row[0], num_generator(8, 13) + hap_const);
             }
-            
             obj.age_update(row[0], day);
+            //sep1
             
             
             if (is_sick(row[0])) {
                 
                 //obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
-                obj.health(row[0], -num_generator(1, 3) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 19.0));
+                obj.health(row[0], -num_generator(1, 3) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 17.0));
                 if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
                     //obj.stress(row[0], num_generator(4, 8) + stoi(obj.get_value_char(row[0], 3)) / 8);
-                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 8.0));
+                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 6.0));
                 } else {
                     //obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
                     obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 11.0));
@@ -335,21 +517,21 @@ void presence() {
                 }                  
             }
             if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
-                obj.health(row[0], -num_generator(1, 5));
+                obj.health(row[0], -num_generator(0, 4));
             } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
-                obj.health(row[0], -num_generator(3, 9));
+                obj.health(row[0], -num_generator(3, 7));
             }else if (stoi(obj.get_value_char(row[0], 2)) <= 150){
-                obj.health(row[0], num_generator(7, 11));
+                obj.health(row[0], num_generator(7, 10));
             }
             
         
 
             if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
-                obj.mentalhealth(row[0], -num_generator(1, 5));
+                obj.mentalhealth(row[0], -num_generator(1, 7));
             } else if (stoi(obj.get_value_char(row[0], 7)) >= 50) {
-                obj.mentalhealth(row[0], -num_generator(3, 8));
+                obj.mentalhealth(row[0], -num_generator(3, 9));
             } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
-                obj.mentalhealth(row[0], -num_generator(4, 12));
+                obj.mentalhealth(row[0], -num_generator(4, 13));
             }
                 
             start_infection(row[0]); //on immunise apres le debut de l'infection
@@ -374,22 +556,30 @@ void presence() {
                 collision.separate();             
             }
             collision.presence();
-            
+            // sep3
             
         }
+    }
+    
+    int main() {    
+        int day = stoi(collision.get_param(3));
+        int tick = 4; 
+        std::thread thread1(movement_cl);
+        std::thread thread2(colli_presence_cl);
+        std::thread thread3(stats_cl);
+
+        thread1.join();
+        thread2.join();
+        thread3.join();
 
 
-
-        //day += tick;
         std::cout << "actual day " << day << std::endl;
         std::cout << "actual tick " << tick << std::endl;
 
         std::cout << "The clock terminated successfully" << std::endl;
         std::cout << "applying the result in the TUI" << std::endl;
-    }
-    
-    int main() {    
-        main_loop();    
+
+        //main_loop();    
         return 0;
     }
 

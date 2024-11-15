@@ -166,7 +166,6 @@ void collision::presence() {
                     presence.push_back(tempChar);
                 }
                 tempChar.clear();
-		
                 num = 0;
             }
         }

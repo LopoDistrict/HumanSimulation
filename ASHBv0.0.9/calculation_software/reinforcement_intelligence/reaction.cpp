@@ -248,7 +248,10 @@ void reaction::reinforcement_intelligence(const std::string& id){
         }
     }else if(!c){ //si il n'y a pas d'action en memoire ou si elle n'as pas étét choisi
             modify_model_mov(id, "./data/memory/model/"+id+".dmem", "caction="+action[num_generator(0, 10)], 4);
-        }
+    }
+    
+    modify_model_mov(id, "./data/memory/model/"+id+".dmem", "temp="+get_simulation_param(3), 7);
+    //on garde le jour pour une certaine frequence
     std::cout << "main tool function reinforcement_intelligence end" << std::endl;
     
     
@@ -285,6 +288,7 @@ void reaction::Depression(const std::string& id){
         }
         if(roll_random(35 ,0 ,200 + multiplier + 100 - stoi(data_obj.get_value_char(id, 3)))){
             modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=depression", 11);
+            //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=depression", 4);
         }
     }
 }
@@ -302,6 +306,7 @@ void reaction::plain_joy(const std::string& id){
     }
      if(roll_random(35, 0,200 + multiplier/neigh.size() + stoi(data_obj.get_value_char(id, 3)))){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=joy", 11);
+        //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=joy", 4);
     }
 }
 
@@ -312,6 +317,7 @@ void reaction::crazyness(const std::string& id){
     Data Data_obj;
     if(roll_random(25, 0, 200 + 120-stoi(Data_obj.get_value_char(id, 5)) + stoi(Data_obj.get_value_char(id, 7)))){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=crazyness", 11);
+        //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=crazyness", 4);
     }
 }
 
@@ -323,6 +329,7 @@ void reaction::anxiety(const std::string& id){
     Data Data_obj;
     if (roll_random(50, 0, 200 + stoi(Data_obj.get_value_char(id, 4)) + 100 - stoi(Data_obj.get_value_char(id, 3)))){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=anxiety", 11);
+        //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=anxiety", 4);
     }
 }
 
