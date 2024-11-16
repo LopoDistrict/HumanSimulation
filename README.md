@@ -8,6 +8,8 @@ I added a lot of new features to the projet, when I will finish debugging the ma
 The main idea is to create a simulation of humans and population.
 Inspired by Conway's Game of Life, I'm trying to make an artificial simulation of all the behaviors a human (character) can have in a population.
 
+Reconstructing a human mind with all the behaviors that can result from it is difficult to reproduce, and there's a whole scientific field called neuroscience (very interesting) devoted to it. So I can't say that it will reproduce every little detail perfectly - there could be problems, bugs and inconsistencies.  
+
 
 # Exemple of 3D entity rendering using OpenGL
 https://github.com/user-attachments/assets/28e5fc58-88b2-4121-bd8d-0b422cd757c0
@@ -36,6 +38,12 @@ every cost
 
 # Update
 I started working on an AI, for every entities. This ai will not be advanced and his model his close to machine learning (reinforcment intelligence more precisly) because of the fast and hug usage of ressources that could cause. At this point, the AI have some issues that I will fix, but this is not the most important. For now, optimization and adjustment on calculation and constant value need to be made. The more there is ticks and entities the more the simulation have trouble making it's job in time, that lead to some unexplicated behaviour, lags, bugs and sometimes crash (probably due to memory leak)
+
+# V0.0.9
+This version opens the alpha, the project should (and I mean should) be fully functional, now that reinforcement learning is implemented the entities are now able to “think” for themselves. I haven't provided a ready-made model, so the first version you use might be a mess, but after letting it run in the background for a while (maybe 100 days), the entities might start acting more and more like humans.
+- I also added few commands for UI and data management so you don't have to search throught files to see various entities datas.
+- there is an option of running the main clock (the system that coordinates the calculation_software with the main simulation and data) on your GPU, to activate this option you have to replace this line "subprocess.Popen(['python', 'sync_clock.py'])"(l.190) in ./ASHBv0.0.9/main.py to (subprocess.Popen(['python', 'sync_clock_gpu.py']) -> i will add a command to make this automatically (if you have trouble to launch or the simulation is not working, it might be the problem of this file)
+
 
 # Project
 I may not finish this project entirely, it all came from an idea with a friend, but as a side project I could work on it. 
