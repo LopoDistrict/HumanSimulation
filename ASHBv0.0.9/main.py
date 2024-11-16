@@ -10,6 +10,7 @@ import time
 from subprocess import Popen, CREATE_NEW_CONSOLE
 from data_ui_manager import *
 #from sync_clock import *
+
 import shutil
 import threading
 from multiprocessing import Process
@@ -38,8 +39,8 @@ def begin_param():
     
     # tropical (hot), arid (hot+dry), oceanic (fresh), continental (cold + freezing)
 
-    
-    print('v0.0.9-ASHB Build test')
+    version = "0.9.9-Build"
+    print(version)
     print(Fore.GREEN + "loading into the simulation...")
     print(' ')
     print('Parameters')
@@ -98,6 +99,7 @@ def begin_param():
     genFile.write(str(width) + "\n")
     genFile.write(str(climateCondition) + "\n")
     genFile.write("0" + "\n")#days
+    genFile.write(version)
 
     char = open('./data/TempChar.csv','w',  newline='')
     print('./data/TempChar.csv')
@@ -165,6 +167,10 @@ class Simulation(tk.Tk):
         super().__init__()
         self.title("DebugVersion0.0.9")
         self.resizable(False, False)
+
+        small_icon = tk.PhotoImage(file="icon-16.png")
+        large_icon = tk.PhotoImage(file="icon-32.png")
+        root.iconphoto(False, large_icon, small_icon)
         
         self.day = 0
         self.time = 1 
@@ -372,15 +378,16 @@ class Simulation(tk.Tk):
 
         runInParallel(func1, func2)
 
-    
 
     def edit(self):     
         
         while 1:            
-            command = input('>')
+            command = input('§')
+            
             if command == 'nc' or command == "newcharacter":
                 # Creation of a new character artificially
                 while True:
+
                     x = input("X position(px: int): ")
                     y = input("Y position(px: int): ")
                     try:
@@ -422,49 +429,23 @@ class Simulation(tk.Tk):
             elif command == 'mvt' : #debug
                 self.movement(4)
             
+            #data generation command
+            elif command == "ent_data":
+                id = ""
+                id = input("id: ")
+                data_csv_entity_data(id)
+            
+            elif command == "a_ent_data":
+                all_csv_data()
+            
+            elif command == "ent_pos":
+                pos_ent_all()
+
+            elif command == "debbug" or command == "menu":
+                debbug_screen()
             
             elif command == "save":
-                #ISO-8601
-                date = datetime.datetime.now().strftime("%Y-%m-%d·%H-%M-%S")
-                save_folder = "./saves/save-" + date + "-" + self.randmId()
-                os.mkdir(save_folder)
-                
-                files = [
-                    "/logs/logs.txt", 
-                    "/logs/main_logs.txt", 
-                    "/temp/presence.asb", 
-                    "/temp/GenTempModule.asb", 
-                    "/temp/tempSeparation.asb", 
-                    "/memory/couple.mem", 
-                    "/memory/gen.mem",
-                    "/TempChar.csv",
-                    "/CharacterData.csv"
-                ]
-
-                print("Saving files...")
-                for i in files:
-                    try:
-                        shutil.copy("./data" + i, save_folder)
-                        print("Saving: ./data" + i)
-                    except Exception as e:
-                        print(f"An error occurred, cannot save: ./data{i}. Error: {e}")
-
-            
-                for root, dirs, files in os.walk("./data/memory/model"):
-                    for file in files:
-                        file_path = os.path.join(root, file)
-                        try:
-                            shutil.copy(file_path, save_folder)
-                            print("Saving:", file_path)
-                        except Exception as e:
-                            print(f"An error occurred, cannot save: {file_path}. Error: {e}")
-
-                print("Data saved at", save_folder)
-                #on récupère tout les values
-                #-.asb extenstion => ./data/temp/
-                #-.dmem extension => ./data/memory/model/
-                #-.csv extension => ./ //fichier racine de data
-
+                save()
                 
             elif command == "exit":
                 confirmation = input("Are you sure you want to quit (nothing will be saved) (Y/N): ")
@@ -478,7 +459,7 @@ class Simulation(tk.Tk):
 
 
 if __name__ == "__main__":
-    os.system('cls')    
+    #os.system('cls')    
     print('@Author: Komodo')
     time.sleep(0.2)
     print('Artificial Simulation')

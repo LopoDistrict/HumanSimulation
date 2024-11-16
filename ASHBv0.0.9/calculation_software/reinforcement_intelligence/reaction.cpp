@@ -156,7 +156,7 @@ float reaction::result_RI(const std::string& id, float p_stats, int ind, int mul
     return 0.0;
 }
 
-void reaction::tmp_stats(const std::string& id){ // est appelé 10j plus tard
+void reaction::recup_compare(const std::string& id){ // est appelé 10j plus tard
     //recup les anciennes Stats de temp et les compare pour l'IA
     std::cout << "tool function: tmp_stats" << std::endl;
     model mod_obj;
@@ -220,7 +220,7 @@ void reaction::reinforcement_intelligence(const std::string& id){
     std::string get_action = mod_obj.get_value(id, 4, "./data/memory/model/" + id + ".dmem");
     std::string get_searched_stats = mod_obj.get_value(id, 3, "./data/memory/model/" + id + ".dmem");
     std::vector<std::string> action = {"murder", "discrimination", "suicide", "breeding",
-    "desir", "isolation", "upmov", "goodconn", "angconn", "anxiety"};
+    "desir", "goodconn", "angconn", "anxiety"};
 
     //std::cout << "target_map[get_value_choosed( id)] " << target_map[get_value_choosed(id)] << std::endl;
     int old_stats = get_old_stats(id, target_map[get_value_choosed(id)]);
@@ -233,7 +233,8 @@ void reaction::reinforcement_intelligence(const std::string& id){
     modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "paction="+std::to_string(old_stats) + "," + std::to_string(target_map[get_value_choosed(id)]) + "," + std::to_string(is_pp) + "," + get_action, 5);  
     //dans une place temp on save toute les actions
     //avant d'en associer de nouvelles
-    modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction="+action[num_generator(0,4)], 4);    
+    int action_choice = num_generator(0,action.size());
+    modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction="+action[action_choice], 4);    
     //int const_action = stoi(mod_obj.get_value(id, 4, "./data/memory/model/" + id + ".dmem"));
     bool c = false;
     if (mod_obj.get_value(id, 8, "./data/memory/model/"+id+".dmem") != "null"){
@@ -252,7 +253,27 @@ void reaction::reinforcement_intelligence(const std::string& id){
     
     modify_model_mov(id, "./data/memory/model/"+id+".dmem", "temp="+get_simulation_param(3), 7);
     //on garde le jour pour une certaine frequence
-    std::cout << "main tool function reinforcement_intelligence end" << std::endl;
+
+    switch(action_choice){ //appelle de la fonction adapté
+        case 0:
+            murder();break;
+        case 1:
+            discrimination();break;
+        case 2:
+            suicide();break;
+        case 3:
+            breeding();break;
+        case 4:
+            desir();break;
+        case 5:
+            goodconn();break;
+        case 6:
+            angconn();break;
+        case 7:
+            anxiety();break;
+    }
+
+    std::cout << "main tool function reinforcement_intelligence started" << std::endl;
     
     
     /* INUTILE 

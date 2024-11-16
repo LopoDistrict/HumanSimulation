@@ -35,7 +35,7 @@ public:
     void plain_joy(const std::string& id);
     void crazyness(const std::string& id);
     void anxiety(const std::string& id);
-    void tmp_stats(const std::string& id);
+    void recup_compare(const std::string& id);
     void discrimination(const std::string& id);
     void ang_social_conn(const std::string& id);
     void good_social_conn(const std::string& id);

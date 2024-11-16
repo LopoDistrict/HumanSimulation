@@ -193,8 +193,8 @@ void presence() {
         }
 
         inline bool file_exist (const std::string& name) {
-        struct stat buffer;   
-        return (stat (name.c_str(), &buffer) == 0); 
+            struct stat buffer;   
+            return (stat (name.c_str(), &buffer) == 0); 
         }
 
         void implem_reaction(const std::string& id, int day){
@@ -205,10 +205,15 @@ void presence() {
 
             //décalage de 10 jours entre chaque decision => a faire varier close to 10 jours 
             //car toute les entités vont tous des comportements differents à un même moment donné
-
-            if (stoi(mod_obj.get_value(id, 7, "./data/memory/model/" + id + ".dmem"))+num_generator(8, 12) >= day){
-                react_obj.tmp_stats(id); //ce nom de fonction est contre intuitif et stupide xd
+            if (mod_obj.get_value(id, 7, "./data/memory/model/"+ id + ".dmem") == "null"){
+                //le cycle a été fini l214 ou il n'a pas été encore fait
                 react_obj.reinforcement_intelligence(id);
+                //l'action est apelé dans reaction.cpp
+            }
+            if (stoi(mod_obj.get_value(id, 7, "./data/memory/model/" + id + ".dmem"))+num_generator(8, 12) >= day){
+                react_obj.recup_compare(id); //ce nom de fonction est contre intuitif et stupide xd
+                
+                modify_model_mov(id, "./data/memory/model/"+id+".dmem", "temp=null", 7);                
             }
             
         }
