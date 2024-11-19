@@ -79,16 +79,23 @@ float Data::fastdiv(float quotient, const float& div) {
 
    void Data::Hygiene(const std::string& id){
     model mod_obj;
-        float base_hygiene = stof(get_value_char(id, 10));
-            if (get_model(id, 1) != "disease=null"){
+        float base_hygiene;
+        if (stoi(get_value_char(id, 10))  >= -50){
+            if (get_model(id, 1) == "disease=true"){
                 //malade
-                base_hygiene -= 1.12 * (get_neighbour(id).size() * 1.0);
-            }else if (stoi(get_value_char(id, 10)) < 0 && mod_obj.get_value(id, 6, "./data/memory/model/"+id+".dmem") == "immune"){
-                base_hygiene += num_generator(9, 19);
+                base_hygiene -= 1.02 * get_neighbour(id).size();
+
+            }else if (stoi(get_value_char(id, 10)) <= 0 || mod_obj.get_value(id, 6, "./data/memory/model/"+id+".dmem") == "immune"){
+                base_hygiene += num_generator(5, 9);
             }else{
-                base_hygiene += num_generator(7, 15);
+                base_hygiene += num_generator(2, 7);
             }
-        update_csv_cell(get_index(id), 10, std::to_string(base_hygiene));
+            
+        }else if (stoi(get_value_char(id, 10))  >= 150){
+            base_hygiene -= num_generator(0,20);
+        }
+        update_csv_cell(get_index(id), 10, std::to_string(stof(get_value_char(id, 10)) + base_hygiene));
+        
    }
 
    void Data::start_desire(const std::string& id) {
@@ -119,7 +126,7 @@ float Data::fastdiv(float quotient, const float& div) {
                 std::vector<std::string> lpoint = get_point_list(id);
                 std::vector<std::string> lc = get_couple_list(id);
 
-                if (roll_random(94, 0, 250) && 
+                if (roll_random(94, 0, 395) && 
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
@@ -224,15 +231,15 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
     void Data::start_couple(const std::string& idA, const std::string& idB) {
         // Combine the values and convert to float
         float average = stof((get_value_char(idA, 1) + get_value_char(idB, 1))) / 2.0;
-        if (average >= 17) { 
+        if (average >= 14) { 
             std::string tree_parent = "TreeNode('X', TreeNode([" + idA + ", " + idB + "], []))";
             std::ofstream file_gen("./data/memory/gen.mem", std::ios::app);  // Use double quotes for string literals
             file_gen << tree_parent << std::endl;
-            desire(idA, 4.0, true);
-            desire(idB, 4.0, true);
+            desire(idA, 14.0, true);
+            desire(idB, 14.0, true);
             bonheur(idA, 7.0);  // Note: Changed from bohneur to bonheur
             bonheur(idB, 7.0);
-            std::cout << "new couple" << idA << "  " << idB << std::endl;
+            std::cout << "new couple " << idA << "  " << idB << std::endl;
             std::cout << tree_parent << std::endl;
             write_main_logs("couple:" + idA + " : " + idB );
         } else {
@@ -258,7 +265,9 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
 }
 
 std::string Data::point(const std::string& id) {
+    
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return "not";}
     std::string line;
     while (std::getline(file, line)) {
         if (line.substr(0, 8) == id && line[8] == '>') {
@@ -270,6 +279,7 @@ std::string Data::point(const std::string& id) {
 
 std::vector<std::string> Data::get_point_list(const std::string& id) {
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return {};}
     std::string line;
     std::vector<std::string> point_list;
     while (std::getline(file, line)) {
@@ -281,8 +291,9 @@ std::vector<std::string> Data::get_point_list(const std::string& id) {
     return point_list;
 }
 
-std::string Data::get_couple(const std::string& id) {
+std::string Data::get_couple(const std::string& id) {    
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return "not";}
     std::string line;
     while (std::getline(file, line)) {
         if (line.substr(0, 8) == id && line[8] == '-') {
@@ -292,8 +303,9 @@ std::string Data::get_couple(const std::string& id) {
     return "not";
 }
 
-std::vector<std::string> Data::get_couple_list(const std::string& id) {
+std::vector<std::string> Data::get_couple_list(const std::string& id) {    
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return {};}
     std::string line;
     std::vector<std::string> couples;
     while (std::getline(file, line)) {
@@ -329,8 +341,9 @@ void Data::modify_desire(const std::string& idA, const std::string& idB, const s
     }
 }
 
-std::string Data::get_desire_couple(const std::string& idA, const std::string& idB) {
+std::string Data::get_desire_couple(const std::string& idA, const std::string& idB) {    
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return "";}
     std::string line;
     while (std::getline(file, line)) {
         if (line.find(idA) != std::string::npos && line.find(idB) != std::string::npos) {
@@ -341,7 +354,9 @@ std::string Data::get_desire_couple(const std::string& idA, const std::string& i
 }
 
 std::string Data::get_desire_single(const std::string& idA, const std::string& idB) {
+    std::cout << "main tool function: get_desire_single" << std::endl;
     std::ifstream file("./data/memory/couple.mem");
+    //if (is_empty(file)){return "";}
     std::string line;
     while (std::getline(file, line)) {
         if (line.substr(0, 17) == idA + ">" + idB) {
@@ -354,8 +369,8 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
     void Data::desire(const std::string& id, float constant, bool alr){
         //alr: si deja un couple -> n'a pas besoin de tester si doit
         //start_couple
+        std::cout << "tool function definition: desire" << std::endl;
         std::vector<std::string> point_lst = get_point_list(id);
-        
         for(int i = 0 ; i<point_lst.size() ;i++){
 
             std::string idB = point_lst[i];
@@ -392,11 +407,10 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
         if (logsFile.is_open()) {
             auto now = std::chrono::system_clock::now();
             std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+            logsFile << std::endl;
             logsFile << "<" << std::ctime(&now_c) << "> " << val << "\n";
         }
     }
-
-
 
     bool Data::procreation(const std::string& id, float const_breeding){
         //a finir avec la nv methode de procreation
@@ -410,7 +424,7 @@ std::string Data::get_desire_single(const std::string& idA, const std::string& i
                 std::string second_id = line.substr(8, 16);
                 if (stoi(get_desire_couple(id, second_id)) + num_generator(0, 25) >= 65){
                     //ils ont un taux de désir assez pour procréer
-                    if (roll_random(140+const_breeding, 0, 200) == true){
+                    if (roll_random(160+const_breeding, 0, 200) == true){
                         //la procreation a reussi
                         desire(id, 7.0, true);
                         write_logs("Proreation sucess" + line.substr(8,16));
@@ -815,7 +829,6 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
             }
         }
     }
-
     return result;
 }
 
@@ -847,13 +860,13 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
 
         for (int i=0; i < neighbour.size(); i++){
             if (get_model(id, 1) != "disease=null"){
-                multiplicator_contaminated *= 3.2;
+                multiplicator_contaminated *= 2.6;
             }else{
-                multiplicator_contaminated *= 0.93;
+                multiplicator_contaminated *= 1.034;
             }    
         }   
         std::cout << "multiplicator contamination" << multiplicator_contaminated << std::endl;
-        return roll_random(200-multiplicator_contaminated, 0, 800);
+        return roll_random(100 + multiplicator_contaminated, 0, 800);
         // a checker pour roll
     }
     
@@ -882,6 +895,9 @@ std::vector<std::string> Data::get_neighbour(const std::string& id) {
         }
     }
 
+    bool Data::is_empty(std::ifstream& pFile){
+        return pFile.peek() == std::ifstream::traits_type::eof();
+    }
 
     void Data::update_csv_cell(int row_index, int col_index, const std::string& new_value, std::string path) {
         std::cout << "tool function definition: update_csv_cell" << std::endl;

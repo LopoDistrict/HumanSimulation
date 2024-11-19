@@ -181,31 +181,6 @@ void reaction::recup_compare(const std::string& id){ // est appelé 10j plus tar
     }
 }
 
-bool reaction::is_sup_attended(const std::string& id){
-    //check si c'est une action en ++ 
-    std::cout << "tool function: is_sup_attended" << std::endl;
-    model mod_obj;
-    std::string ent_val = mod_obj.get_value(id, 3, "./data/memory/model/" + id + ".dmem");
-    return ent_val.substr(ent_val.size() - 2) == "++";
-}
-
-
-std::string reaction::get_value_choosed(const std::string& id){
-    //ancienne reaction de celle qui est choisi
-    std::cout << "tool function: get_value_choosed" << std::endl;
-
-    model mod_obj;
-    std::string value_choosed = mod_obj.get_value(id, 3, "./data/memory/model/" + id + ".dmem");
-    if (is_sup_attended(id)){
-        //std::cout << "value choosed : " << value_choosed.substr(0, value_choosed.size()-2) << std::endl;
-        return value_choosed.substr(0, value_choosed.size()-2); // return - "++"
-    }
-    //std::cout << "value choosed no sup: " << value_choosed << std::endl;
-    return value_choosed;
-}
-
-//break loop collision pour presence
-
 void reaction::reinforcement_intelligence(const std::string& id){
     std::cout << "tool function: reinforcment_intelligence" << std::endl;
     model mod_obj;
@@ -256,25 +231,24 @@ void reaction::reinforcement_intelligence(const std::string& id){
 
     switch(action_choice){ //appelle de la fonction adapté
         case 0:
-            murder();break;
+            murder(id);break;
         case 1:
-            discrimination();break;
+            discrimination(id);break;
         case 2:
-            suicide();break;
+            suicide(id);break;
         case 3:
-            breeding();break;
+            breeding(id);break;
         case 4:
-            desir();break;
+            desire(id);break;
         case 5:
-            goodconn();break;
+            good_social_conn(id);break;
         case 6:
-            angconn();break;
+            ang_social_conn(id);break;
         case 7:
-            anxiety();break;
+            anxiety(id);break;
     }
 
     std::cout << "main tool function reinforcement_intelligence started" << std::endl;
-    
     
     /* INUTILE 
     if (mod_obj.get_value(id, 4, "./data/memory/model/" + id + ".dmem") != "null"){ //roll influencer par le nb action presente #8
@@ -294,6 +268,34 @@ void reaction::reinforcement_intelligence(const std::string& id){
 //il faudra les prendres en compte et agir avec clock.cpp 
 //ou utiliser une fonction ici qui prend en compte tout les cas et applique
 //les nv stats
+
+
+bool reaction::is_sup_attended(const std::string& id){
+    //check si c'est une action en ++ 
+    std::cout << "tool function: is_sup_attended" << std::endl;
+    model mod_obj;
+    std::string ent_val = mod_obj.get_value(id, 3, "./data/memory/model/" + id + ".dmem");
+    return ent_val.substr(ent_val.size() - 2) == "++";
+}
+
+
+std::string reaction::get_value_choosed(const std::string& id){
+    //ancienne reaction de celle qui est choisi
+    std::cout << "tool function: get_value_choosed" << std::endl;
+
+    model mod_obj;
+    std::string value_choosed = mod_obj.get_value(id, 3, "./data/memory/model/" + id + ".dmem");
+    if (is_sup_attended(id)){
+        //std::cout << "value choosed : " << value_choosed.substr(0, value_choosed.size()-2) << std::endl;
+        return value_choosed.substr(0, value_choosed.size()-2); // return - "++"
+    }
+    //std::cout << "value choosed no sup: " << value_choosed << std::endl;
+    return value_choosed;
+}
+
+//break loop collision pour presence
+
+
 void reaction::Depression(const std::string& id){
     std::cout << "tool function: Depression" << std::endl;
     Data data_obj;
@@ -312,6 +314,7 @@ void reaction::Depression(const std::string& id){
             //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=depression", 4);
         }
     }
+    data_obj.write_main_logs("RL " + id + " : Depression");
 }
 
 
@@ -329,6 +332,7 @@ void reaction::plain_joy(const std::string& id){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=joy", 11);
         //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=joy", 4);
     }
+    data_obj.write_main_logs("RL " + id + " : plain_joy");
 }
 
 void reaction::crazyness(const std::string& id){
@@ -340,6 +344,7 @@ void reaction::crazyness(const std::string& id){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=crazyness", 11);
         //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=crazyness", 4);
     }
+    Data_obj.write_main_logs("RL " + id + " : crazyness");
 }
 
 
@@ -352,6 +357,7 @@ void reaction::anxiety(const std::string& id){
         modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "unconcious=anxiety", 11);
         //modify_model_mov(id, "./data/memory/model/" + id + ".dmem", "caction=anxiety", 4);
     }
+    Data_obj.write_main_logs("RL " + id + " : anxiety");
 }
 
 void reaction::murder(const std::string& id){
@@ -382,6 +388,7 @@ void reaction::murder(const std::string& id){
         data_obj.eraseFileLine("./data/TempChar.csv", killed, 00);
         data_obj.eraseFileLine("./data/CharacterData.csv", killed, 00);
     }
+    data_obj.write_main_logs("RL " + id + " : murder");
 }
 
 void reaction::suicide(const std::string& id ){
@@ -391,6 +398,7 @@ void reaction::suicide(const std::string& id ){
     data_obj.eraseFileLine("./data/TempChar.csv", "null", data_obj.get_index(id));
     data_obj.eraseFileLine("./data/CharacterData.csv", "null", data_obj.get_index(id));
     std::cout << "An entity: " << id << " has commited suicide." << std::endl;
+    data_obj.write_main_logs("RL " + id + " : suicide");
 }
 
 void reaction::desire(const std::string& id){
@@ -405,7 +413,7 @@ void reaction::desire(const std::string& id){
         for (int j=0; j<list_couple.size();j++){
         data_obj.modify_desire(id, list_couple[j], std::to_string(num_generator(3, 9))); 
     }
-
+    data_obj.write_main_logs("RL " + id + " : desire");
 }
 
 void reaction::breeding(const std::string& id){
@@ -414,6 +422,7 @@ void reaction::breeding(const std::string& id){
     //on provoque (ou on augmente les chances) la procreation
      //des entitées encouple avec l'entité désigné
     data_obj.procreation(id, 20);
+    data_obj.write_main_logs("RL " + id + " : breeding");
 }
 
 
@@ -463,7 +472,10 @@ void reaction::discrimination(const std::string& id){
     }
         w_unmap_model(id, angconn, 10);
     }
+    data_obj.write_main_logs("RL " + id + " : discrimination");
 }
+
+
 void reaction::w_unmap_model(const std::string& id, std::unordered_map<std::string, std::string> umap, int l){
     std::cout << "tool function: w_unmap_model" << std::endl;
     //write umap to model_file
@@ -503,7 +515,7 @@ void reaction::ang_social_conn(const std::string& id) {
     std::cout << "tool function: ang_social_conn" << std::endl;
     model mod_obj;
     std::unordered_map<std::string, std::string> angconn = modval_to_umap(id, 10);
-
+    Data data_obj;
     for (auto& x : angconn) {
         try {
             int original_value = std::stoi(x.second);
@@ -518,13 +530,14 @@ void reaction::ang_social_conn(const std::string& id) {
         }
     }
     w_unmap_model(id, angconn, 10);
+    data_obj.write_main_logs("RL " + id + " : ang_social_conn");
 }
 
 void reaction::good_social_conn(const std::string& id){
     std::cout << "tool function: good_social_conn" << std::endl;
     //les liens sociaux commencent à se faire à partir du jour 30
     model mod_obj;
-    
+    Data data_obj;
     std::unordered_map<std::string, std::string> goodconn = 
     modval_to_umap(id, 9);
     for (auto& x : goodconn) {
@@ -541,7 +554,11 @@ void reaction::good_social_conn(const std::string& id){
         }
     }
     w_unmap_model(id, goodconn, 9);
+    data_obj.write_main_logs("RL " + id + " : good_social_conn");
 }
+
+
+
 /*
 int main(){    
     reaction obj;

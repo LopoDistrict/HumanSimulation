@@ -168,9 +168,9 @@ class Simulation(tk.Tk):
         self.title("DebugVersion0.0.9")
         self.resizable(False, False)
 
-        small_icon = tk.PhotoImage(file="icon-16.png")
-        large_icon = tk.PhotoImage(file="icon-32.png")
-        root.iconphoto(False, large_icon, small_icon)
+        #small_icon = tk.PhotoImage(file="icon-16.png")
+        #large_icon = tk.PhotoImage(file="icon-32.png")
+        #root.iconphoto(False, large_icon, small_icon)
         
         self.day = 0
         self.time = 1 
@@ -382,9 +382,16 @@ class Simulation(tk.Tk):
     def edit(self):     
         
         while 1:            
-            command = input('§')
-            
-            if command == 'nc' or command == "newcharacter":
+            command = input('>')
+            if command == 'ncr' or command == 'new_caracter_rand':
+                x = random.randint(0, self.canvas.winfo_height()-10)
+                y = random.randint(0, self.canvas.winfo_width()-10)
+                self.create_new_character(x, y, True)
+                id = self.randmId()
+                self.CreateTempPosition(id, x, y, 'x')
+                self.CreateCharStasts(id)
+
+            elif command == 'nc' or command == "newcharacter":
                 # Creation of a new character artificially
                 while True:
 
@@ -400,7 +407,7 @@ class Simulation(tk.Tk):
                 if x < 0 or x > self.canvas.winfo_width() or y < 0 or y > self.canvas.winfo_height():
                     print(Fore.RED + "Error",": Out of Bounds -> x in ", (0, self.canvas.winfo_width()), "y in", (0, self.canvas.winfo_height()))
                 elif x == 000: #random coords
-                    print("random value")
+                    print("char: random coordinates")
                     xV = random.randint(0, self.canvas.winfo_width())
                     yV = random.randint(0, self.canvas.winfo_height())
                     self.create_new_character(xV, yV, True)

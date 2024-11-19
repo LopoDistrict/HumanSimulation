@@ -51,6 +51,7 @@ public:
     void app_l(const std::string& file_path, int line_number, const std::string& value= "");
     float fastdiv(float quotient, const float& div);
     void write_main_logs(const std::string& val);
+    bool is_empty(std::ifstream& pFile);
 };
 
 
