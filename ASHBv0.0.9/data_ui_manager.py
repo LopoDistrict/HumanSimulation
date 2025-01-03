@@ -142,9 +142,8 @@ def get_value_char(id, value_ind):
 def data_csv_entity_data(id):
     x = ['id',"age", 'health', 'happiness', 'stress', 'mentalHealth', 'desire',
      'loneliness', 'boredom', 'anger', 'hygiene', 'sex', 'bday', 'couple']
-    with open("./data/CharacterData.csv", "r") as csvfile:
-        lines = csv.read_csv(csvfile, delimiter=",")
-        for row in lines:
+    with open("./data/CharacterData.csv") as csvfile:
+        for row in csvfile:
             if row[0] == id:
                 print("")
                 print(x)
@@ -156,10 +155,8 @@ def data_csv_entity_data(id):
 def all_csv_data():
     x = ['id',"age", 'health', 'happiness', 'stress', 'mentalHealth', 'desire',
      'loneliness', 'boredom', 'anger', 'hygiene', 'sex', 'bday', 'couple']
-    with open("./data/CharacterData.csv", "r") as csvfile:
-        lines = csv.read_csv(csvfile, delimiter=",")
-        csvfile.seek(0)
-        for row in lines:
+    with open("./data/CharacterData.csv") as csvfile:
+        for row in csvfile:
             print("")
             print(x)
             print("All Entities Data")
@@ -168,12 +165,10 @@ def all_csv_data():
 
 
 def print_pos_ent(id):
-    with open("./data/TempChar.csv", "r") as csv_file:
-        lines = csv.read_csv(csvfile, delimiter=",")
-        for row in lines:
+    with open("./data/TempChar.csv") as csv_file:
+        for row in csv_file:
             if row[0] == id:
                 print("")
-                print(x)
                 print("Entity Position: " + id)
                 print("x: "+row[1] + "\t" + "y: "+row[2])
                 print("")
@@ -182,15 +177,31 @@ def print_pos_ent(id):
 def pos_ent_all():
     with open("./data/TempChar.csv", "r") as csv_file:
         csvfile.seek(0)
-        lines = csv.read_csv(csvfile, delimiter=",")
+        lines = csv.reader(csvfile, delimiter=",")
         for row in lines:
             print("")
-            print(x)
             print("All Position")
             print("x="+row[1] + "\t" + "y="+row[2])
             print("")
             
+
+
+def real_time_stats():
+    with open("./data/CharacterData.csv", "r") as stats_file:
+        with open("./data/TempChar.csv", "r") as pos_file:
+            stats_lines = csv.reader(stats_file, delimiter=",")
+            pos_lines = csv.reader(pos_file, delimiter=",")
+            for i in stats_lines:
+                print(stats[i] + " | ", end=" ")
+            print("x | y")
+
+            #for l,j in stats_lines,pos_lines:
+                
+
+
+
 def debbug_screen():
+    print(" ")
     print("<- debbug_menu -> ")
     #client information
     print(platform.machine())
@@ -223,3 +234,4 @@ def debbug_screen():
         for row in csv_file:
             c+=1
         print(f"Ent: {c}")
+    print(" ")

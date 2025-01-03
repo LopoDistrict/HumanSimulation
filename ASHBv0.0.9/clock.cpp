@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -5,20 +6,20 @@
 #include <cmath>
 #include <sstream>
 #include "calculation_software/rand.h"
-#include <algorithm>
+//#include <algorithm>
 #include "Data.h"
 #include "calculation_software/movement.h"
-#include "calculation_software/calculation.h"
-#include <string_view>
+//#include "calculation_software/calculation.h"
+//#include <string_view>
 #include "calculation_software/reinforcement_intelligence/model.h"
 #include "calculation_software/reinforcement_intelligence/reaction.h"
 #include <cstdlib>
-#include <tuple>
+//#include <tuple>
 #include <cmath>
 #include "collision.h"
 #include <sys/stat.h>
 #include <unistd.h>
-#include <thread>
+//#include <thread>
 
 //#include "calculation_software/include/fast_division.h"
 
@@ -102,8 +103,8 @@ void presence() {
 
         bool is_sick(const std::string& id){ 
             std::cout << "tool function is_sick" << std::endl;
-            Data obj;        
-            return obj.get_model(id, 1) != "disease=null";
+            Data obj;
+            return obj.get_model(id, 1) == "disease=null";
         }
 
 
@@ -123,7 +124,8 @@ void presence() {
                 data_obj.eraseFileLine("./data/CharacterData.csv", "null",data_obj.get_index(id)+1);
                 data_obj.eraseFileLine("./data/TempChar.csv", "null",data_obj.get_index(id)+1);
                 data_obj.write_main_logs("entity died: " + id);
-            }
+                std::cout << id << "has died" << std::endl;
+            } 
         }
             
 
@@ -166,7 +168,7 @@ void presence() {
             else if(collision.get_param(2) == "oceanic"){mpier = 3;}
             else{mpier = 4;}
             if(std::stoi(obj.get_value_char(id, 10)) <= 20){
-                if(roll_random(abs(stoi(obj.get_value_char(id, 10)) + (num_generator(5,9)*mpier)) ,0, 410) == true){
+                if(roll_random(abs(stoi(obj.get_value_char(id, 10)) + (num_generator(5,9)*mpier)) ,0, 460) == true){
                     //disease started
                     chmod(id, "disease=true", 1);
                     std::cout << "infection started: " << id << std::endl;
@@ -175,9 +177,7 @@ void presence() {
             }
         }
     
-
-
-        
+  
         void get_id(){
             std::ifstream file("./data/CharacterData.csv");
             std::string line;
@@ -245,8 +245,6 @@ void presence() {
                 }
             }
         }
-        
-
 
 // 
     void main_loop() {    
@@ -279,7 +277,7 @@ void presence() {
                 row.push_back(word);
             }
 
-            int hap_const = num_generator(4,9);
+            int hap_const = num_generator(0,4);
 
             //car de toute facon une entité peut develop des liens avec d'autres
             //m si il est deja en couple
@@ -290,16 +288,17 @@ void presence() {
                 std::vector<std::string> couples_list;
                 if (obj.point(row[0]) != "not") {
                     obj.modify_desire(row[0], idB, std::to_string(-num_generator(2, 9)));
-                    hap_const = -num_generator(4, 13);
+                    hap_const = -num_generator(5, 11);
                 } else if (obj.get_couple_list(row[0]).size() > 1) {
                     couples_list = obj.get_couple_list(row[0]);
                     for (int i = 0; i < couples_list.size(); i++) {
                         obj.modify_desire(row[0], couples_list[i], std::to_string(-num_generator(2, 11) - (couples_list.size())));
                     }
-                    hap_const = -num_generator(5, 12) - (couples_list.size());
+                    hap_const = -num_generator(6, 10) - (couples_list.size());
                 } else {
                     if (obj.procreation(row[0])) {
-                        hap_const = num_generator(25, 37);
+                        hap_const = num_generator(24, 47);
+                        // les 2 entités deviennent parents donc ++++
                         CreateTempPosition(obj.randmId(), stoi(obj.get_value_char(row[0], 1, "./data/TempChar.csv")) + num_generator(3, 5),
                                         stoi(obj.get_value_char(row[0], 2, "./data/TempChar.csv")) + num_generator(3, 5), row[0]);
                     }
@@ -309,40 +308,37 @@ void presence() {
             
             std::string comm_str = "calculation_software\\movement5.exe " + row[0];
             int result = system(comm_str.c_str());
+
             //solution temporaire
-            
             //implem_reaction(row[0], day);
             //implementaton renforcment learning
 
-
-            //sep2
+            //sep
             
             if (is_sick(row[0])) {
                 if (stoi(obj.get_value_char(row[0], 2)) <= 65) {
                     //obj.bonheur(row[0], -num_generator(3, 7) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
-                    obj.bonheur(row[0], -num_generator(3, 6) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(8, 11)) + hap_const);
+                    obj.bonheur(row[0], -num_generator(3, 6) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 1.0 * num_generator(6, 9)) + hap_const);
                 } else {                
                     //obj.bonheur(row[0], -num_generator(3, 4) - stoi(obj.get_value_char(row[0], 3)) / num_generator(9, 12) + hap_const);
-                    obj.bonheur(row[0], -num_generator(2, 4) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(8, 11)) + hap_const);
+                    obj.bonheur(row[0], -num_generator(3, 5) - obj.fastdiv(stoi(obj.get_value_char(row[0], 3)),1.0 * num_generator(6, 9)) + hap_const);
                 }
             } else {
-                obj.bonheur(row[0], num_generator(8, 13) + hap_const);
+                obj.bonheur(row[0], num_generator(2, 7) + hap_const);
             }
             obj.age_update(row[0], day);
             //sep1
             
-            
             if (is_sick(row[0])) {
-                
                 //obj.health(row[0], -num_generator(1, 3) - (99 - stoi(obj.get_value_char(row[0], 5))) / 19);
-                obj.health(row[0], -num_generator(1, 3) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 8.0));
+                obj.health(row[0], -num_generator(5, 14) - obj.fastdiv(stoi(obj.get_value_char(row[0], 5)), 3.6));
 
                 if (stoi(obj.get_value_char(row[0], 3)) <= 40) {
                     //obj.stress(row[0], num_generator(4, 8) + stoi(obj.get_value_char(row[0], 3)) / 8);
-                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 6.0));
+                    obj.stress(row[0], num_generator(4, 11) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 5.3));
                 } else {
                     //obj.stress(row[0], num_generator(3, 9) + stoi(obj.get_value_char(row[0], 3)) / 11);
-                    obj.stress(row[0], num_generator(4, 8) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 11.0));
+                    obj.stress(row[0], num_generator(3, 11) + obj.fastdiv(stoi(obj.get_value_char(row[0], 3)), 10.0));
                 }
                 immunity(row[0]);
             } else {
@@ -353,24 +349,27 @@ void presence() {
                 }                  
             }
             if (stoi(obj.get_value_char(row[0], 10)) <= 30) {
-                obj.health(row[0], -num_generator(3, 6));
+                obj.health(row[0], -num_generator(4, 8));
 
             } else if (stoi(obj.get_value_char(row[0], 10)) <= 0) {
-                obj.health(row[0], -num_generator(1, 3));
+                obj.health(row[0], -num_generator(6, 8));
 
+            // on suppose que la guérison est rapide
             }else if (stoi(obj.get_value_char(row[0], 2)) <= 40){
-                obj.health(row[0], num_generator(8, 11));
+                obj.health(row[0], num_generator(9, 14));
 
             }else if (stoi(obj.get_value_char(row[0], 2)) <= 120){
-                obj.health(row[0], num_generator(5, 12));
+                obj.health(row[0], num_generator(2, 3));
             }
 
+            obj.health(row[0], num_generator(-10, 5));
+
             if (stoi(obj.get_value_char(row[0], 7)) >= 25) {
-                obj.mentalhealth(row[0], -num_generator(1, 7));
+                obj.mentalhealth(row[0], -num_generator(2, 7));
             } else if (stoi(obj.get_value_char(row[0], 7)) >= 50) {
-                obj.mentalhealth(row[0], -num_generator(3, 9));
+                obj.mentalhealth(row[0], -num_generator(5, 11));
             } else if (stoi(obj.get_value_char(row[0], 7)) >= 70) {
-                obj.mentalhealth(row[0], -num_generator(4, 13));
+                obj.mentalhealth(row[0], -num_generator(6, 12));
             }
 
             start_infection(row[0]); //on immunise apres le debut de l'infection
@@ -383,17 +382,23 @@ void presence() {
             
             obj.start_desire(row[0]); // on test quand m si on peut start un desire
 
-            obj.desire(row[0], num_generator(3,9), false);
+            try{
+                //somehow desire cannot work sometimes :/
+                obj.desire(row[0], num_generator(2,8), false);
+            } catch (const std::exception& e){
+                std::cout << e.what() << std::endl;
+            }
+            
             death(row[0]);
 
-            std::vector<std::string> point_lst = obj.get_point_list(row[0]);
-            for (int i=0;i<point_lst.size();i++){
-                if(roll_random(stoi(obj.get_desire_single(row[0], point_lst[i])), 0, 225)){
-                    obj.start_couple(row[0], point_lst[i]);
-                }else{
-                    obj.modify_desire(row[0], point_lst[i], std::to_string(num_generator(1,4)));
-                }                    
-            }
+            //std::vector<std::string> point_lst = obj.get_point_list(row[0]);
+            //for (int i=0;i<point_lst.size();i++){
+            //    if(roll_random(stoi(obj.get_desire_single(row[0], point_lst[i])), 0, 225)){
+            //        obj.start_couple(row[0], point_lst[i]);
+            //    }else{
+            //        obj.modify_desire(row[0], point_lst[i], std::to_string(num_generator(1,4)));
+            //    }                    
+            //}
             
             collision.width =  stoi(collision.get_param(0));
             collision.height = stoi(collision.get_param(1));            

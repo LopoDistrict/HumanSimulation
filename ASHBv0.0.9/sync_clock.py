@@ -49,7 +49,7 @@ def start_clock(tick):
         try: 
             write_logs("New clock triggering, day: "+ str(day))
             write_main_logs(str(day))
-            result = subprocess.run(["./clock6.exe"], check=True, capture_output=True, text=True) 
+            result = subprocess.run(["./clock6_debbug.exe"], check=True, capture_output=True, text=True) 
             #print("Output:", result.stdout)  # Print standard output 
             write_logs(result.stdout)
             #print("Errors:", result.stderr)    # Print standard error (if any) 

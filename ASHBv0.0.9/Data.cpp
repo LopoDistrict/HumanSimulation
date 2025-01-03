@@ -83,16 +83,16 @@ float Data::fastdiv(float quotient, const float& div) {
         if (stoi(get_value_char(id, 10))  >= -50){
             if (get_model(id, 1) == "disease=true"){
                 //malade
-                base_hygiene -= 1.02 * get_neighbour(id).size();
+                base_hygiene -= 1.79 * get_neighbour(id).size();
 
             }else if (stoi(get_value_char(id, 10)) <= 0 || mod_obj.get_value(id, 6, "./data/memory/model/"+id+".dmem") == "immune"){
-                base_hygiene += num_generator(5, 9);
+                base_hygiene += num_generator(2, 5);
             }else{
-                base_hygiene += num_generator(2, 7);
+                base_hygiene += num_generator(1, 3);
             }
             
         }else if (stoi(get_value_char(id, 10))  >= 150){
-            base_hygiene -= num_generator(0,20);
+            base_hygiene -= num_generator(14,25);
         }
         update_csv_cell(get_index(id), 10, std::to_string(stof(get_value_char(id, 10)) + base_hygiene));
         
@@ -126,7 +126,7 @@ float Data::fastdiv(float quotient, const float& div) {
                 std::vector<std::string> lpoint = get_point_list(id);
                 std::vector<std::string> lc = get_couple_list(id);
 
-                if (roll_random(94, 0, 395) && 
+                if (roll_random(94, 0, 410) && 
                     (std::find(lpoint.begin(), lpoint.end(), current_id) == lpoint.end()) &&
                     (std::find(lc.begin(), lc.end(), current_id) == lc.end())) {    
                     
@@ -135,8 +135,7 @@ float Data::fastdiv(float quotient, const float& div) {
                     // Start a real attraction, so we remember the pointer
                     std::ofstream mem_file("./data/memory/couple.mem", std::ios::app);
                     mem_file << id << ">" << current_id << "0" << num_generator(2, 7) << std::endl;
-                    write_main_logs("Desire_created" + id + ">" + current_id);
-                    update_csv_cell(get_index(id), 13, "yes"); // Update CSV cell
+                    write_main_logs("Desire_created" + id + ">" + current_id);                    
                 }
             }
         }
@@ -242,6 +241,8 @@ void Data::app_l(const std::string& file_path, int line_number, const std::strin
             std::cout << "new couple " << idA << "  " << idB << std::endl;
             std::cout << tree_parent << std::endl;
             write_main_logs("couple:" + idA + " : " + idB );
+            update_csv_cell(get_index(idA), 13, "yes"); // Update CSV cell
+            update_csv_cell(get_index(idB), 13, "yes"); // Update CSV cell
         } else {
             std::cout << "Error: not tall enough" << std::endl;
         }
@@ -355,7 +356,9 @@ std::string Data::get_desire_couple(const std::string& idA, const std::string& i
 
 std::string Data::get_desire_single(const std::string& idA, const std::string& idB) {
     std::cout << "main tool function: get_desire_single" << std::endl;
+
     std::ifstream file("./data/memory/couple.mem");
+    if (is_empty(file)){return "";}
     //if (is_empty(file)){return "";}
     std::string line;
     while (std::getline(file, line)) {
@@ -664,11 +667,11 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         // le bohneur baisse plus lentement qu'il croit
         
         if (c <= 0){
-            float nv = 0.402 * c;
+            float nv = 0.481 * c;
             std::cout << "calculation.cpp -nv" << nv << std::endl;
             return nv;
         } else{
-            float nv = 0.223 * c;
+            float nv = 0.213 * c;
             std::cout << "calculation.cpp nv" << nv << std::endl;
             return nv;
         }
@@ -695,12 +698,12 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
     // Check if id is in maille2
     if (std::find(maille2.begin(), maille2.end(), id) == maille2.end()) {
         std::cout << "not in mesh" << std::endl;
-        constant -= 0.2;
+        constant -= 0.33;
         nvstats = old_s + Fbonheur(constant);
         std::cout << "nvstats bonheur: " << nvstats << std::endl;
     } else {
         std::cout << "in mesh" << std::endl;
-        constant += num_generator(1, 4);
+        constant += num_generator(1, 3);
 
         std::ifstream file("./data/temp/presence.asb");
         std::string presence_data_str;
@@ -728,7 +731,7 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         }
 
         nvstats = old_s + Fbonheur(constant);
-        std::cout << "nvstats bonheur: " << nvstats << std::endl;
+        //std::cout << "nvstats bonheur: " << nvstats << std::endl;
     }
 
      update_csv_cell(get_index(id), 3, std::to_string(nvstats));
@@ -772,10 +775,15 @@ std::string get_value_char(const std::string& id, int ind, const std::string& pa
         std::cout << constant << std::endl;
         //const maladie + emotion
         // + age (+le char est vieux + il est perd en health)
+        float mental_health = std::stoi((get_value_char(id, 5)));
+        constant -= fastdiv(mental_health, 8.6);
+        
         if (stoi(get_value_char(id, 1)) >= 50){
-            update_csv_cell(get_index(id), 2, std::to_string(stoi(get_value_char(id, 2)) + constant));            
+            update_csv_cell(get_index(id), 2, std::to_string(stoi(get_value_char(id, 2)) + constant - num_generator(-10, -1)));            
+        }else { 
+            update_csv_cell(get_index(id), 2, std::to_string(stof(get_value_char(id, 2)) + constant));
         }
-        update_csv_cell(get_index(id), 2, std::to_string(stof(get_value_char(id, 2)) + constant));
+        update_csv_cell(get_index(id), 2, std::to_string(stoi(get_value_char(id, 2)) + constant ));
     }
 
     void Data::print_vector(const std::vector<std::string>& vec) {

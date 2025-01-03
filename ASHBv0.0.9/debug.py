@@ -1,4 +1,5 @@
 import os
+import os.path, time
 
 def modifier_ligne_fichier(fichier_chemin, valeur_a_remplacer):
     # Fichier temporaire pour écrire les modifications
@@ -25,8 +26,10 @@ def parcours_dossier_et_modification(dossier_chemin, valeur_a_remplacer):
             fichier_chemin_complet = os.path.join(dossier_racine, fichier)
             # On vérifie si c'est un fichier texte avant de tenter de le modifier
             try:
-                modifier_ligne_fichier(fichier_chemin_complet, valeur_a_remplacer)
+                #modifier_ligne_fichier(fichier_chemin_complet, valeur_a_remplacer)
                 print(f"Modifié : {fichier_chemin_complet}")
+                
+                print(time.ctime(os.path.getmtime(fichier_chemin_complet)))
             except Exception as e:
                 print(f"Erreur avec le fichier {fichier_chemin_complet}: {e}")
 
@@ -45,7 +48,7 @@ def supprimer_fichiers_tmp(dossier_chemin):
 
 ## Exemple d'utilisation
 dossier_racine = './'  # Remplacez par le chemin de votre dossier
-supprimer_fichiers_tmp(dossier_racine)
+parcours_dossier_et_modification(dossier_racine, "ur_mom")
 
 ## Exemple d'utilisation
 #dossier_racine = './'  # Remplacez par le chemin de votre dossier
